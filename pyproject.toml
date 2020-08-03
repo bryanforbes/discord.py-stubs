@@ -5,7 +5,12 @@ description = "discord.py stubs"
 authors = ["Bryan Forbes <bryan@reigndropsfall.net>"]
 license = "BSD-3-Clause"
 packages = [
-	{ include = "discord-stubs" }
+  { include = "discord-stubs" }
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Typing :: Typed"
 ]
 
 [tool.poetry.dependencies]
