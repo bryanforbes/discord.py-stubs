@@ -35,10 +35,9 @@ jobs:
     - name: Install dependencies
       run: |
         poetry install -v
-    - name: Lint with flake8, mypy, stubtest, and isort
+    - name: Lint with flake8, mypy, and isort
       run: |
         poetry run flake8 discord-stubs
         ln -s discord-stubs discord
         poetry run mypy discord
-        poetry run stubtest --whitelist stubtest-whitelist.txt discord
         poetry run isort --check-only discord-stubs
