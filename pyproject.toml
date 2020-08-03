@@ -1,0 +1,48 @@
+[tool.poetry]
+name = "discord.py-stubs"
+version = "1.3.4+0"
+description = "discord.py stubs"
+authors = ["Bryan Forbes <bryan@reigndropsfall.net>"]
+license = "BSD-3-Clause"
+packages = [
+	{ include = "discord-stubs" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.6.1"
+mypy = "^0.782"
+typing-extensions = "^3.7.4"
+
+[tool.poetry.dev-dependencies]
+black = "^19.10b0"
+"discord.py" = "^1.3.4"
+flake8 = "^3.8.3"
+flake8-pyi = "^20.5.0"
+isort = "^5.2.2"
+pre-commit = "^2.6.0"
+
+[tool.black]
+line-length = 88
+target-version = ["py36", "py37", "py38"]
+skip-string-normalization = true
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.venv
+  | external
+)/
+'''
+
+[tool.isort]
+extra_standard_library = ["typing_extensions"]
+virtual_env = ".venv"
+profile = "black"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+

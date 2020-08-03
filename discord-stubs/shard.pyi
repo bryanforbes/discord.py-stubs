@@ -1,0 +1,71 @@
+import asyncio
+from typing import Any, List, Optional, Tuple, Union, overload
+
+import aiohttp
+
+from .activity import BaseActivity
+from .client import Client
+from .enums import Status
+from .guild import Guild
+
+class Shard:
+    @property
+    def id(self) -> int: ...
+    def is_pending(self) -> bool: ...
+    def complete_pending_reads(self) -> None: ...
+    def launch_pending_reads(self) -> None: ...
+    def wait(self) -> Optional[asyncio.Future[None]]: ...
+    async def poll(self) -> None: ...
+    def get_future(self) -> asyncio.Future[None]: ...
+
+class AutoShardedClient(Client):
+    shard_ids: Optional[Union[List[int], Tuple[int]]]
+    @overload
+    def __init__(
+        self,
+        *args: Any,
+        loop: Optional[asyncio.AbstractEventLoop] = ...,
+        shard_ids: Union[List[int], Tuple[int]] = ...,
+        shard_count: int = ...,
+        connector: aiohttp.BaseConnector = ...,
+        proxy: Optional[str] = ...,
+        proxy_auth: Optional[aiohttp.BasicAuth] = ...,
+        max_messages: Optional[int] = ...,
+        fetch_offline_members: bool = ...,
+        status: Optional[Status] = ...,
+        activity: Optional[BaseActivity] = ...,
+        heartbeat_timeout: float = ...,
+        **kwargs: Any,
+    ) -> None: ...
+    @overload
+    def __init__(
+        self,
+        *args: Any,
+        loop: Optional[asyncio.AbstractEventLoop] = ...,
+        shard_count: Optional[int] = ...,
+        connector: aiohttp.BaseConnector = ...,
+        proxy: Optional[str] = ...,
+        proxy_auth: Optional[aiohttp.BasicAuth] = ...,
+        max_messages: Optional[int] = ...,
+        fetch_offline_members: bool = ...,
+        status: Optional[Status] = ...,
+        activity: Optional[BaseActivity] = ...,
+        heartbeat_timeout: float = ...,
+        **kwargs: Any,
+    ) -> None: ...
+    @property
+    def latency(self) -> float: ...
+    @property
+    def latencies(self) -> List[Tuple[int, float]]: ...
+    async def request_offline_members(self, *guilds: Guild) -> None: ...
+    async def launch_shard(self, gateway: str, shard_id: int) -> None: ...
+    async def launch_shards(self) -> None: ...
+    async def close(self) -> None: ...
+    async def change_presence(
+        self,
+        *,
+        activity: Optional[BaseActivity] = ...,
+        status: Optional[Status] = ...,
+        afk: bool = ...,
+        shard_id: Optional[int] = ...,
+    ) -> None: ...

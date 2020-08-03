@@ -1,0 +1,16 @@
+from typing import BinaryIO, Iterator, Tuple
+
+from .errors import DiscordException
+
+class OggError(DiscordException): ...
+
+class OggPage:
+    segtable: bytes
+    data: bytes
+    def __init__(self, stream: BinaryIO) -> None: ...
+    def iter_packets(self) -> Iterator[Tuple[bytes, bool]]: ...
+
+class OggStream:
+    stream: BinaryIO
+    def __init__(self, stream: BinaryIO) -> None: ...
+    def iter_packets(self) -> Iterator[bytes]: ...
