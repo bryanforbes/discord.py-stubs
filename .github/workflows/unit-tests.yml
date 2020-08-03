@@ -1,0 +1,44 @@
+name: Unit tests
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Poetry
+      uses: dschep/install-poetry-action@v1.3
+      with:
+        version: 1.0.9
+        create_virtualenvs: true
+    - name: Cache Poetry virtualenv
+      uses: actions/cache@v2
+      env:
+        cache-name: poetry-cache
+      with:
+        path: ~/.cache/pypoetry
+        key: poetry-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+        restore-keys: |
+          poetry-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+          poetry-${{ matrix.python-version }}-
+    - name: Install dependencies
+      run: |
+        poetry install -v
+    - name: Lint with flake8, mypy, stubtest, and isort
+      run: |
+        poetry run flake8 discord-stubs
+        ln -s discord-stubs discord
+        poetry run mypy discord
+        poetry run stubtest --whitelist stubtest-whitelist.txt discord
+        poetry run isort --check-only discord-stubs
