@@ -2,6 +2,7 @@
 name = "discord.py-stubs"
 version = "1.3.4.0"
 description = "discord.py stubs"
+homepage = "https://github.com/bryanforbes/discord.py-stubs"
 authors = ["Bryan Forbes <bryan@reigndropsfall.net>"]
 license = "BSD-3-Clause"
 packages = [
