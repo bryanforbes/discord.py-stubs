@@ -2,7 +2,7 @@ from inspect import Parameter
 from typing import Any, List, Optional, Tuple, Union
 
 from discord import Permissions, abc
-from discord.errors import DiscordException
+from discord.errors import ClientException, DiscordException
 
 from .cooldowns import BucketType, Cooldown
 
@@ -116,3 +116,7 @@ class ExtensionFailed(ExtensionError):
 class ExtensionNotFound(ExtensionError):
     original: ImportError
     def __init__(self, name: str, original: Optional[ImportError] = ...) -> None: ...
+
+class CommandRegistrationError(ClientException):
+    alias_conflict: bool
+    def __init__(self, name: str, *, alias_conflict: bool = ...) -> None: ...

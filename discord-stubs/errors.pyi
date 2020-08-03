@@ -1,7 +1,6 @@
 from typing import Any, Dict, Optional, Union
 
 import aiohttp
-import websockets
 
 class DiscordException(Exception): ...
 class ClientException(DiscordException): ...
@@ -29,8 +28,5 @@ class ConnectionClosed(ClientException):
     reason: str
     shard_id: Optional[int]
     def __init__(
-        self,
-        original: websockets.exceptions.ConnectionClosed,
-        *,
-        shard_id: Optional[int],
+        self, socket: aiohttp.ClientWebSocketResponse, *, shard_id: Optional[int]
     ) -> None: ...

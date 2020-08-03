@@ -1,11 +1,11 @@
-from .bot import AutoShardedBot as AutoShardedBot  # noqa
-from .bot import Bot as Bot  # noqa
-from .bot import when_mentioned as when_mentioned  # noqa
-from .bot import when_mentioned_or as when_mentioned_or  # noqa
-from .cog import *  # noqa
-from .context import Context as Context  # noqa
-from .converter import *  # noqa
-from .cooldowns import *  # noqa
-from .core import *  # noqa
-from .errors import *  # noqa
-from .help import *  # noqa
+from .bot import AutoShardedBot as AutoShardedBot  # noqa: F401
+from .bot import Bot as Bot  # noqa: F401
+from .bot import when_mentioned as when_mentioned  # noqa: F401
+from .bot import when_mentioned_or as when_mentioned_or  # noqa: F401
+from .cog import *  # noqa: F401
+from .context import Context as Context  # noqa: F401
+from .converter import *  # noqa: F401
+from .cooldowns import *  # noqa: F401
+from .core import *  # noqa: F401
+from .errors import *  # noqa: F401
+from .help import *  # noqa: F401

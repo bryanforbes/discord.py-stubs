@@ -8,6 +8,7 @@ from .asset import Asset
 from .channel import DMChannel, GroupChannel, VoiceChannel
 from .colour import Colour
 from .enums import DefaultAvatar, Status
+from .flags import PublicUserFlags
 from .guild import Guild
 from .message import Message
 from .permissions import Permissions
@@ -40,6 +41,8 @@ class Member(discord.abc.Messageable, discord.abc.User):
     avatar: Optional[str]
     bot: bool
     system: bool
+    @property
+    def public_flags(self) -> PublicUserFlags: ...
     @property
     def avatar_url(self) -> Asset: ...
     def is_avatar_animated(self) -> bool: ...

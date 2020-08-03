@@ -69,6 +69,7 @@ class VerificationLevel(Enum):
     table_flip: int
     extreme: int
     double_table_flip: int
+    very_high: int
 
 class ContentFilter(Enum):
     disabled: int
@@ -187,6 +188,9 @@ class UserFlags(Enum):
     early_supporter: int
     team_user: int
     system: int
+    bug_hunter_level_2: int
+    verified_bot: int
+    verified_bot_developer: int
 
 class ActivityType(Enum):
     unknown: int
@@ -213,3 +217,9 @@ class TeamMembershipState(Enum):
 class WebhookType(Enum):
     incoming: int
     channel_follower: int
+
+class ExpireBehaviour(Enum):
+    remove_role: int
+    kick: int
+
+ExpireBehavior = ExpireBehaviour

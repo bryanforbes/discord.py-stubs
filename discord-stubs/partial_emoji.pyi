@@ -19,7 +19,7 @@ class PartialEmoji(_EmojiTag):
         state: Any,
         *,
         name: Optional[str],
-        animated: bool,
+        animated: bool = ...,
         id: Optional[int] = ...,
     ) -> _PE: ...
     def __eq__(self, other: Any) -> bool: ...

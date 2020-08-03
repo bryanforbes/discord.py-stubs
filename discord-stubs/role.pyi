@@ -1,5 +1,5 @@
 import datetime
-from typing import Any, List, Optional, overload
+from typing import Any, List, Optional, Union, overload
 
 from .colour import Colour
 from .guild import Guild
@@ -38,7 +38,7 @@ class Role(Hashable):
         *,
         name: str = ...,
         permissions: Permissions = ...,
-        colour: int = ...,
+        colour: Union[Colour, int] = ...,
         hoist: bool = ...,
         mentionable: bool = ...,
         position: int = ...,
@@ -50,7 +50,7 @@ class Role(Hashable):
         *,
         name: str = ...,
         permissions: Permissions = ...,
-        color: int = ...,
+        color: Union[Colour, int] = ...,
         hoist: bool = ...,
         mentionable: bool = ...,
         position: int = ...,

@@ -11,6 +11,7 @@ from .guild import Guild
 from .invite import Invite
 from .iterators import HistoryIterator
 from .member import Member
+from .mentions import AllowedMentions
 from .message import Message
 from .permissions import PermissionOverwrite, Permissions
 from .role import Role
@@ -133,6 +134,7 @@ class Messageable(metaclass=abc.ABCMeta):
         files: Optional[List[File]] = ...,
         delete_after: Optional[float] = ...,
         nonce: Optional[int] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
     ) -> Message: ...
     async def trigger_typing(self) -> None: ...
     def typing(self) -> Typing: ...

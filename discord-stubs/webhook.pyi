@@ -27,6 +27,7 @@ from .enums import WebhookType
 from .file import File
 from .guild import Guild
 from .http import _WebhookDict
+from .mentions import AllowedMentions
 from .message import Message
 from .mixins import Hashable
 from .state import ConnectionState
@@ -42,8 +43,8 @@ class WebhookAdapter:
         payload: Optional[Dict[str, Any]] = ...,
         multipart: Optional[Dict[str, Any]] = ...,
     ) -> Any: ...
-    def delete_webhook(self) -> Any: ...
-    def edit_webhook(self, **payload: Any) -> Any: ...
+    def delete_webhook(self, *, reason: Optional[str] = ...) -> Any: ...
+    def edit_webhook(self, *, reason: Optional[str] = ..., **payload: Any) -> Any: ...
     def handle_execution_response(self, data: Any, *, wait: bool) -> Any: ...
     def execute_webhook(
         self,
@@ -66,6 +67,7 @@ class AsyncWebhookAdapter(WebhookAdapter):
         multipart: Optional[Dict[str, Any]] = ...,
         *,
         files: Optional[Iterable[File]] = ...,
+        reason: Optional[str] = ...,
     ) -> Any: ...
     async def handle_execution_response(
         self, response: Any, *, wait: bool
@@ -82,6 +84,7 @@ class RequestsWebhookAdapter(WebhookAdapter):
         multipart: Optional[Dict[str, Any]] = ...,
         *,
         files: Optional[Iterable[File]] = ...,
+        reason: Optional[str] = ...,
     ) -> Any: ...
     def handle_execution_response(self, response: Any, *, wait: bool) -> Message: ...
 
@@ -118,9 +121,9 @@ class Webhook(Hashable):
     def avatar_url_as(
         self, *, format: Optional[Literal['png', 'jpg', 'jpeg']] = ..., size: int = ...
     ) -> Asset: ...
-    def delete(self) -> Coroutine[Any, Any, None]: ...
+    def delete(self, *, reason: Optional[str] = ...) -> Coroutine[Any, Any, None]: ...
     def edit(
-        self, **kwargs: Any
+        self, *, reason: Optional[str] = ..., **kwargs: Any
     ) -> Union[_WebhookDict, Coroutine[Any, Any, _WebhookDict]]: ...
     @overload
     def send(
@@ -133,6 +136,7 @@ class Webhook(Hashable):
         tts: bool = ...,
         file: Optional[File] = ...,
         embed: Optional[Embed] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
     ) -> Union[Message, Coroutine[Any, Any, Message]]: ...
     @overload
     def send(
@@ -145,6 +149,7 @@ class Webhook(Hashable):
         tts: bool = ...,
         files: Optional[List[File]] = ...,
         embed: Optional[Embed] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
     ) -> Union[Message, Coroutine[Any, Any, Message]]: ...
     @overload
     def send(
@@ -157,6 +162,7 @@ class Webhook(Hashable):
         tts: bool = ...,
         file: Optional[File] = ...,
         embeds: Optional[List[Embed]] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
     ) -> Union[Message, Coroutine[Any, Any, Message]]: ...
     @overload
     def send(
@@ -169,5 +175,6 @@ class Webhook(Hashable):
         tts: bool = ...,
         files: Optional[List[File]] = ...,
         embeds: Optional[List[Embed]] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
     ) -> Union[Message, Coroutine[Any, Any, Message]]: ...
     def execute(self, *args: Any, **kwargs: Any) -> Any: ...

@@ -1,5 +1,15 @@
 import datetime
-from typing import Any, Dict, Iterable, List, NamedTuple, Optional, Tuple, Union
+from typing import (
+    Any,
+    Dict,
+    Iterable,
+    List,
+    NamedTuple,
+    Optional,
+    Tuple,
+    Union,
+    overload,
+)
 from typing_extensions import Literal
 
 from .abc import Snowflake
@@ -15,6 +25,7 @@ from .enums import (
     VoiceRegion,
 )
 from .flags import SystemChannelFlags
+from .integrations import Integration
 from .invite import Invite
 from .iterators import AuditLogIterator, MemberIterator
 from .member import Member
@@ -43,6 +54,7 @@ _VALID_FEATURES = Literal[
     'BANNER',
     'ANIMATED_ICON',
     'PUBLIC_DISABLED',
+    'WELCOME_SCREEN_ENABLED',
 ]
 
 class BanEntry(NamedTuple):
@@ -61,6 +73,7 @@ class Guild(Hashable):
     unavailable: bool
     max_presences: Optional[int]
     max_members: Optional[int]
+    max_video_channel_users: Optional[int]
     banner: Optional[str]
     description: Optional[str]
     mfa_level: int
@@ -106,6 +119,8 @@ class Guild(Hashable):
     def system_channel_flags(self) -> SystemChannelFlags: ...
     @property
     def rules_channel(self) -> Optional[TextChannel]: ...
+    @property
+    def public_updates_channel(self) -> Optional[TextChannel]: ...
     @property
     def emoji_limit(self) -> int: ...
     @property
@@ -186,6 +201,7 @@ class Guild(Hashable):
         name: str,
         *,
         overwrites: Optional[Dict[Union[Role, Member], PermissionOverwrite]] = ...,
+        position: Optional[int] = ...,
         reason: Optional[str] = ...,
     ) -> CategoryChannel: ...
     async def create_category_channel(
@@ -193,6 +209,7 @@ class Guild(Hashable):
         name: str,
         *,
         overwrites: Optional[Dict[Union[Role, Member], PermissionOverwrite]] = ...,
+        position: Optional[int] = ...,
         reason: Optional[str] = ...,
     ) -> CategoryChannel: ...
     async def leave(self) -> None: ...
@@ -216,6 +233,8 @@ class Guild(Hashable):
         vanity_code: str = ...,
         system_channel: Optional[TextChannel] = ...,
         system_channel_flags: SystemChannelFlags = ...,
+        rules_channel: Optional[TextChannel] = ...,
+        public_updates_channel: Optional[TextChannel] = ...,
     ) -> None: ...
     async def fetch_channels(
         self,
@@ -234,6 +253,7 @@ class Guild(Hashable):
         *,
         days: int,
         compute_prune_count: bool = ...,
+        roles: Optional[Iterable[Snowflake]] = ...,
         reason: Optional[str] = ...,
     ) -> Optional[int]: ...
     async def webhooks(self) -> List[Webhook]: ...
@@ -241,6 +261,8 @@ class Guild(Hashable):
     async def invites(self) -> List[Invite]: ...
     async def fetch_emojis(self) -> List[Emoji]: ...
     async def fetch_emoji(self, emoji_id: int) -> Emoji: ...
+    async def create_integration(self, *, type: str, id: int) -> None: ...
+    async def integrations(self) -> List[Integration]: ...
     async def create_custom_emoji(
         self,
         *,
@@ -261,6 +283,9 @@ class Guild(Hashable):
         mentionable: bool = ...,
         reason: Optional[str] = ...,
     ) -> Role: ...
+    async def edit_role_positions(
+        self, positions: Dict[Role, int], *, reason: Optional[str] = ...
+    ) -> List[Role]: ...
     async def kick(self, user: Snowflake, *, reason: Optional[str] = ...) -> None: ...
     async def ban(
         self,
@@ -283,6 +308,23 @@ class Guild(Hashable):
         action: Optional[AuditLogAction] = ...,
     ) -> AuditLogIterator: ...
     async def widget(self) -> Widget: ...
+    @overload
     async def query_members(
         self, query: str, *, limit: int = ..., cache: bool = ...
     ) -> List[Member]: ...
+    @overload
+    async def query_members(
+        self,
+        query: None = ...,
+        *,
+        limit: int = ...,
+        user_ids: Optional[List[int]] = ...,
+        cache: bool = ...,
+    ) -> List[Member]: ...
+    async def change_voice_state(
+        self,
+        *,
+        channel: Optional[VoiceChannel],
+        self_mute: bool = ...,
+        self_deaf: bool = ...,
+    ) -> None: ...

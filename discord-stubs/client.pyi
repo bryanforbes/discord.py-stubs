@@ -34,6 +34,7 @@ from .guild import Guild
 from .invite import Invite
 from .iterators import GuildIterator
 from .member import Member, VoiceState
+from .mentions import AllowedMentions
 from .message import Message
 from .raw_models import (
     RawBulkMessageDeleteEvent,
@@ -45,6 +46,7 @@ from .raw_models import (
 from .reaction import Reaction
 from .relationship import Relationship
 from .role import Role
+from .template import Template
 from .user import ClientUser, Profile, User
 from .utils import SequenceProxy
 from .voice_client import VoiceClient
@@ -61,6 +63,7 @@ class Client:
     shard_id: Optional[int]
     shard_count: Optional[int]
     activity: Optional[BaseActivity]
+    allowed_mentions: Optional[AllowedMentions]
     def __init__(
         self,
         *,
@@ -74,7 +77,9 @@ class Client:
         fetch_offline_members: bool = ...,
         status: Optional[Status] = ...,
         activity: Optional[BaseActivity] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
         heartbeat_timeout: float = ...,
+        guild_ready_timeout: float = ...,
         guild_subscriptions: bool = ...,
         assume_unsync_clock: bool = ...,
     ) -> None: ...
@@ -99,6 +104,9 @@ class Client:
     def dispatch(self, __event: str, *args: Any, **kwargs: Any) -> None: ...
     async def on_error(self, event_method: str, *args: Any, **kwargs: Any) -> None: ...
     async def request_offline_members(self, *guilds: Guild) -> None: ...
+    async def before_identify_hook(
+        self, shard_id: int, *, initial: bool = ...
+    ) -> None: ...
     async def login(self, token: str, *, bot: bool = ...) -> None: ...
     async def logout(self) -> None: ...
     async def connect(self, *, reconnect: bool = ...) -> None: ...
@@ -537,12 +545,15 @@ class Client:
         before: Optional[Union[Snowflake, datetime]] = ...,
         after: Optional[Union[Snowflake, datetime]] = ...,
     ) -> GuildIterator: ...
+    async def fetch_template(self, code: Union[str, Template]) -> Template: ...
     async def fetch_guild(self, guild_id: int) -> Guild: ...
     async def create_guild(
         self,
         name: str,
         region: Optional[VoiceRegion] = ...,
         icon: Optional[bytes] = ...,
+        *,
+        code: Optional[str] = ...,
     ) -> Guild: ...
     async def fetch_invite(
         self, url: Union[str, Invite], *, with_counts: bool = ...

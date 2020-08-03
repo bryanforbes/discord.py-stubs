@@ -2,20 +2,20 @@ import asyncio
 import threading
 from typing import (
     Any,
-    AsyncIterable,
     Callable,
     ClassVar,
     Dict,
     Iterable,
+    List,
     NamedTuple,
     Optional,
     Type,
     TypeVar,
     Union,
 )
-from typing_extensions import TypedDict
+from typing_extensions import Literal, TypedDict
 
-import websockets
+import aiohttp
 
 from .activity import BaseActivity
 from .client import Client
@@ -26,9 +26,13 @@ class _KeepAlivePayloadDict(TypedDict):
     op: int
     d: int
 
-class ResumeWebSocket(Exception):
+class ReconnectWebSocket(Exception):
     shard_id: int
-    def __init__(self, shard_id: int) -> None: ...
+    resume: bool
+    op: Literal['RESUME', 'IDENTIFY']
+    def __init__(self, shard_id: int, *, resume: bool = ...) -> None: ...
+
+class WebSocketClosure(Exception): ...
 
 class EventListener(NamedTuple):
     predicate: Callable[[Any], bool]
@@ -47,7 +51,10 @@ class VoiceKeepAliveHandler(KeepAliveHandler): ...
 
 _DWS = TypeVar('_DWS', bound=DiscordWebSocket)
 
-class DiscordWebSocket(websockets.client.WebSocketClientProtocol):
+class DiscordClientWebSocketResponse(aiohttp.ClientWebSocketResponse):
+    async def close(self, *, code: int = ..., message: bytes = ...) -> bool: ...
+
+class DiscordWebSocket:
     DISPATCH: ClassVar[int] = ...
     HEARTBEAT: ClassVar[int] = ...
     IDENTIFY: ClassVar[int] = ...
@@ -62,13 +69,18 @@ class DiscordWebSocket(websockets.client.WebSocketClientProtocol):
     HEARTBEAT_ACK: ClassVar[int] = ...
     GUILD_SYNC: ClassVar[int] = ...
 
+    thread_id: int
     session_id: Optional[int]
     sequence: Optional[int]
+    @property
+    def open(self) -> bool: ...
     @classmethod
     async def from_client(
         cls: Type[_DWS],
         client: Client,
         *,
+        initial: bool = ...,
+        gateway: Optional[str] = ...,
         shard_id: Optional[int] = ...,
         session: Optional[int] = ...,
         sequence: Optional[int] = ...,
@@ -86,9 +98,7 @@ class DiscordWebSocket(websockets.client.WebSocketClientProtocol):
     @property
     def latency(self) -> float: ...
     async def poll_event(self) -> None: ...
-    async def send(
-        self, data: Union[_Data, Iterable[_Data], AsyncIterable[_Data]]
-    ) -> None: ...
+    async def send(self, data: str) -> None: ...
     async def send_as_json(self, data: Any) -> None: ...
     async def change_presence(
         self,
@@ -99,7 +109,15 @@ class DiscordWebSocket(websockets.client.WebSocketClientProtocol):
         since: float = ...,
     ) -> None: ...
     async def request_sync(self, guild_ids: Iterable[int]) -> None: ...
-    async def request_chunks(self, guild_id: int, query: str, limit: int) -> None: ...
+    async def request_chunks(
+        self,
+        guild_id: int,
+        query: Optional[str] = ...,
+        *,
+        limit: int,
+        user_ids: Optional[List[int]] = ...,
+        nonce: Optional[str] = ...,
+    ) -> None: ...
     async def voice_state(
         self,
         guild_id: int,
@@ -107,15 +125,11 @@ class DiscordWebSocket(websockets.client.WebSocketClientProtocol):
         self_mute: bool = ...,
         self_deaf: bool = ...,
     ) -> None: ...
-    async def close(self, code: int = ..., reason: str = ...) -> None: ...
-    async def close_connection(self, *args: Any, **kwargs: Any) -> None: ...
-
-# needed for websockets 6.x
-_Data = Union[str, bytes]
+    async def close(self, code: int = ...) -> None: ...
 
 _DVWS = TypeVar('_DVWS', bound=DiscordVoiceWebSocket)
 
-class DiscordVoiceWebSocket(websockets.client.WebSocketClientProtocol):
+class DiscordVoiceWebSocket:
     IDENTIFY: ClassVar[int] = ...
     SELECT_PROTOCOL: ClassVar[int] = ...
     READY: ClassVar[int] = ...
@@ -142,6 +156,10 @@ class DiscordVoiceWebSocket(websockets.client.WebSocketClientProtocol):
     async def speak(self, state: SpeakingState = ...) -> None: ...
     async def received_message(self, msg: Dict[str, Any]) -> None: ...
     async def initial_connection(self, data: Dict[str, Any]) -> None: ...
+    @property
+    def latency(self) -> float: ...
+    @property
+    def average_latency(self) -> float: ...
     async def load_secret_key(self, data: Dict[str, Any]) -> None: ...
     async def poll_event(self) -> None: ...
-    async def close_connection(self, *args: Any, **kwargs: Any) -> None: ...
+    async def close(self, code: int = ...) -> None: ...
