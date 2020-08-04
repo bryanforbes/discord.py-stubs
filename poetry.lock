@@ -221,7 +221,7 @@ version = "1.1.0"
 idna = ">=2.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Read metadata from Python packages"
 marker = "python_version < \"3.8\""
 name = "importlib-metadata"
@@ -563,7 +563,7 @@ python = "<3.8"
 version = ">=3.7.4"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 marker = "python_version < \"3.8\""
 name = "zipp"
@@ -576,7 +576,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "7f7137e5a647547e3edb57639e32199e397cb05bc8f57bd95055e7228a53fa89"
+content-hash = "99a0a0c3b09db2a8d5519289af07e3117db594a55f4de05200e1641e56e0553d"
 lock-version = "1.0"
 python-versions = "^3.6.1"
 
