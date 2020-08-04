@@ -37,10 +37,10 @@ jobs:
         poetry install -v
     - name: Lint with flake8, mypy, and isort
       run: |
-        poetry run flake8 discord-stubs
+        poetry run flake8 discord-stubs discord_mypy
         ln -s discord-stubs discord
-        poetry run mypy discord
-        poetry run isort --check-only discord-stubs
+        poetry run mypy discord discord_mypy
+        poetry run isort --check-only discord-stubs discord_mypy
     - name: Test with pytest
       run: |
         poetry run py.test
