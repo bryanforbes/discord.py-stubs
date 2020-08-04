@@ -27,6 +27,8 @@ flake8 = "^3.8.3"
 flake8-pyi = "^20.5.0"
 isort = "^5.2.2"
 pre-commit = "^2.6.0"
+pytest = "^6.0.1"
+pytest-mypy-plugins = "^1.4.0"
 
 [tool.black]
 line-length = 88
@@ -48,6 +50,11 @@ exclude = '''
 extra_standard_library = ["typing_extensions"]
 virtual_env = ".venv"
 profile = "black"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--mypy-ini-file=test-data/mypy.ini"
+testpaths = ["test-data"]
 
 [build-system]
 requires = ["poetry>=0.12"]

@@ -1,0 +1,162 @@
+- case: client_deleted
+  main: |
+    import discord
+
+    class MyClient(discord.Client):
+        async def on_ready(self) -> None:
+            print('Connected!')
+            print(f'Username: {self.user.name}\nID: {self.user.id}')
+
+        async def on_message(self, message: discord.Message) -> None:
+            if message.content.startswith('!deleteme'):
+                msg = await message.channel.send('I will delete myself now...')
+                await msg.delete()
+
+                # this also works
+                await message.channel.send('Goodbye in 3 seconds...', delete_after=3.0)
+
+        async def on_message_delete(self, message: discord.Message) -> None:
+            await message.channel.send(f'{message.author} has deleted the message: {message.content}')
+
+    client = MyClient()
+    client.run('token')
+
+- case: client_edits
+  main: |
+    import discord
+    import asyncio
+
+    class MyClient(discord.Client):
+        async def on_ready(self) -> None:
+            print('Connected!')
+            print(f'Username: {self.user.name}\nID: {self.user.id}')
+
+        async def on_message(self, message: discord.Message) -> None:
+            if message.content.startswith('!editme'):
+                msg = await message.channel.send('10')
+                await asyncio.sleep(3.0)
+                await msg.edit(content='40')
+
+        async def on_message_edit(self, before: discord.Message, after: discord.Message) -> None:
+            fmt = f'**{before.author}** edited their message:\n{before.content} -> {after.content}'
+            await before.channel.send(fmt)
+
+    client = MyClient()
+    client.run('token')
+
+- case: client_guessing_game
+  main: |
+    import discord
+    import random
+    import asyncio
+
+    class MyClient(discord.Client):
+        async def on_ready(self) -> None:
+            print('Logged in as')
+            print(self.user.name)
+            print(self.user.id)
+            print('------')
+
+        async def on_message(self, message: discord.Message) -> None:
+            # we do not want the bot to reply to itself
+            if message.author.id == self.user.id:
+                return
+
+            if message.content.startswith('$guess'):
+                await message.channel.send('Guess a number between 1 and 10.')
+
+                def is_correct(m: discord.Message) -> bool:
+                    return m.author == message.author and m.content.isdigit()
+
+                answer = random.randint(1, 10)
+
+                try:
+                    guess = await self.wait_for('message', check=is_correct, timeout=5.0)
+                except asyncio.TimeoutError:
+                    await message.channel.send(f'Sorry, you took too long it was {answer}.')
+                    return
+
+                if int(guess.content) == answer:
+                    await message.channel.send('You are right!')
+                else:
+                    await message.channel.send(f'Oops. It is actually {answer}.')
+
+    client = MyClient()
+    client.run('token')
+
+- case: client_new_member
+  main: |
+    import discord
+
+    class MyClient(discord.Client):
+        async def on_ready(self) -> None:
+            print('Logged in as')
+            print(self.user.name)
+            print(self.user.id)
+            print('------')
+
+        async def on_member_join(self, member: discord.Member) -> None:
+            guild = member.guild
+            if guild.system_channel is not None:
+                to_send = f'Welcome {member.mention} to {guild.name}!'
+                await guild.system_channel.send(to_send)
+
+
+    client = MyClient()
+    client.run('token')
+
+- case: client_reply
+  main: |
+    import discord
+
+    class MyClient(discord.Client):
+        async def on_ready(self) -> None:
+            print('Logged in as')
+            print(self.user.name)
+            print(self.user.id)
+            print('------')
+
+        async def on_message(self, message: discord.Message) -> None:
+            # we do not want the bot to reply to itself
+            if message.author.id == self.user.id:
+                return
+
+            if message.content.startswith('!hello'):
+                await message.channel.send(f'Hello {message.author.mention}')
+
+    client = MyClient()
+    client.run('token')
+
+- case: client_background_task
+  main: |
+    import asyncio
+    import discord
+    import typing
+
+    class MyClient(discord.Client):
+        def __init__(self, *args: typing.Any, **kwargs: typing.Any) -> None:
+            super().__init__(*args, **kwargs)
+
+            # create the background task and run it in the background
+            self.bg_task = self.loop.create_task(self.my_background_task())
+
+        async def on_ready(self) -> None:
+            print('Logged in as')
+            print(self.user.name)
+            print(self.user.id)
+            print('------')
+
+        async def my_background_task(self) -> None:
+            await self.wait_until_ready()
+            counter = 0
+            channel = self.get_channel(1234567)
+            assert isinstance(channel, discord.TextChannel)
+            while not self.is_closed():
+                counter += 1
+                await channel.send(counter)
+                await asyncio.sleep(60)
+
+
+    client = MyClient()
+    reveal_type(client.bg_task)  # N: Revealed type is 'asyncio.tasks.Task[None]'
+    client.run('token')

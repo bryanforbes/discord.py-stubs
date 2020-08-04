@@ -41,3 +41,6 @@ jobs:
         ln -s discord-stubs discord
         poetry run mypy discord
         poetry run isort --check-only discord-stubs
+    - name: Test with pytest
+      run: |
+        poetry run py.test
