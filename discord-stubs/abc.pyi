@@ -126,7 +126,7 @@ class GuildChannel:
 class Messageable(metaclass=abc.ABCMeta):
     async def send(
         self,
-        content: Optional[str] = ...,
+        content: Optional[object] = ...,
         *,
         tts: bool = ...,
         embed: Optional[Embed] = ...,
