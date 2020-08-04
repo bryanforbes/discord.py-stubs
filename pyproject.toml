@@ -5,6 +5,7 @@ description = "discord.py stubs"
 homepage = "https://github.com/bryanforbes/discord.py-stubs"
 authors = ["Bryan Forbes <bryan@reigndropsfall.net>"]
 license = "BSD-3-Clause"
+readme = "README.md"
 packages = [
   { include = "discord-stubs" }
 ]
