@@ -41,6 +41,7 @@ from .raw_models import (
     RawMessageDeleteEvent,
     RawMessageUpdateEvent,
     RawReactionActionEvent,
+    RawReactionClearEmojiEvent,
     RawReactionClearEvent,
 )
 from .reaction import Reaction
@@ -55,7 +56,9 @@ from .widget import Widget
 
 _FuncType = Callable[..., Coroutine[Any, Any, Any]]
 _F = TypeVar('_F', bound=_FuncType)
-_GuildChannels = Union[TextChannel, VoiceChannel, CategoryChannel, StoreChannel]
+_GuildChannel = Union[TextChannel, VoiceChannel, CategoryChannel, StoreChannel]
+_PrivateChannel = Union[DMChannel, GroupChannel]
+_User = Union[User, Member]
 
 class Client:
     ws: Optional[DiscordWebSocket]
@@ -97,7 +100,7 @@ class Client:
     @property
     def cached_messages(self) -> SequenceProxy[Message]: ...
     @property
-    def private_channels(self) -> List[Union[DMChannel, GroupChannel]]: ...
+    def private_channels(self) -> List[_PrivateChannel]: ...
     @property
     def voice_clients(self) -> List[VoiceClient]: ...
     def is_ready(self) -> bool: ...
@@ -121,11 +124,11 @@ class Client:
     def users(self) -> List[User]: ...
     def get_channel(
         self, id: int
-    ) -> Optional[Union[_GuildChannels, DMChannel, GroupChannel]]: ...
+    ) -> Optional[Union[_GuildChannel, _PrivateChannel]]: ...
     def get_guild(self, id: int) -> Optional[Guild]: ...
     def get_user(self, id: int) -> Optional[User]: ...
     def get_emoji(self, id: int) -> Optional[Emoji]: ...
-    def get_all_channels(self) -> Iterator[Union[_GuildChannels]]: ...
+    def get_all_channels(self) -> Iterator[Union[_GuildChannel]]: ...
     def get_all_members(self) -> Iterator[Member]: ...
     async def wait_until_ready(self) -> None: ...
     @overload
@@ -144,6 +147,14 @@ class Client:
         check: Optional[Callable[[Message], bool]] = ...,
         timeout: Optional[float] = ...,
     ) -> asyncio.Future[Message]: ...
+    @overload
+    def wait_for(
+        self,
+        event: Literal['bulk_message_delete'],
+        *,
+        check: Optional[Callable[[List[Message]], bool]] = ...,
+        timeout: Optional[float] = ...,
+    ) -> asyncio.Future[List[Message]]: ...
     @overload
     def wait_for(
         self,
@@ -181,11 +192,9 @@ class Client:
         self,
         event: Literal['reaction_add'],
         *,
-        check: Optional[
-            Callable[[Reaction, Optional[Union[User, Member]]], bool]
-        ] = ...,
+        check: Optional[Callable[[Reaction, Optional[_User]], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[Tuple[Reaction, Optional[Union[User, Member]]]]: ...
+    ) -> asyncio.Future[Tuple[Reaction, Optional[_User]]]: ...
     @overload
     def wait_for(
         self,
@@ -199,11 +208,9 @@ class Client:
         self,
         event: Literal['reaction_remove'],
         *,
-        check: Optional[
-            Callable[[Reaction, Optional[Union[User, Member]]], bool]
-        ] = ...,
+        check: Optional[Callable[[Reaction, Optional[_User]], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[Tuple[Reaction, Optional[Union[User, Member]]]]: ...
+    ) -> asyncio.Future[Tuple[Reaction, Optional[_User]]]: ...
     @overload
     def wait_for(
         self,
@@ -231,93 +238,83 @@ class Client:
     @overload
     def wait_for(
         self,
+        event: Literal['reaction_clear_emoji'],
+        *,
+        check: Optional[Callable[[Reaction], bool]] = ...,
+        timeout: Optional[float] = ...,
+    ) -> asyncio.Future[Reaction]: ...
+    @overload
+    def wait_for(
+        self,
+        event: Literal['raw_reaction_clear_emoji'],
+        *,
+        check: Optional[Callable[[RawReactionClearEmojiEvent], bool]] = ...,
+        timeout: Optional[float] = ...,
+    ) -> asyncio.Future[RawReactionClearEmojiEvent]: ...
+    @overload
+    def wait_for(
+        self,
         event: Literal['private_channel_delete'],
         *,
-        check: Optional[Callable[[Union[GroupChannel, DMChannel]], bool]] = ...,
+        check: Optional[Callable[[_PrivateChannel], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[Union[GroupChannel, DMChannel]]: ...
+    ) -> asyncio.Future[_PrivateChannel]: ...
     @overload
     def wait_for(
         self,
         event: Literal['private_channel_create'],
         *,
-        check: Optional[Callable[[Union[GroupChannel, DMChannel]], bool]] = ...,
+        check: Optional[Callable[[_PrivateChannel], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[Union[GroupChannel, DMChannel]]: ...
+    ) -> asyncio.Future[_PrivateChannel]: ...
     @overload
     def wait_for(
         self,
         event: Literal['private_channel_update'],
         *,
-        check: Optional[Callable[[GroupChannel, GroupChannel], bool]] = ...,
+        check: Optional[Callable[[_PrivateChannel, _PrivateChannel], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[Tuple[GroupChannel, GroupChannel]]: ...
+    ) -> asyncio.Future[Tuple[_PrivateChannel, _PrivateChannel]]: ...
     @overload
     def wait_for(
         self,
         event: Literal['private_channel_pins_update'],
         *,
-        check: Optional[
-            Callable[[Union[GroupChannel, DMChannel], Optional[datetime]], bool]
-        ] = ...,
+        check: Optional[Callable[[_PrivateChannel, Optional[datetime]], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[Tuple[Union[GroupChannel, DMChannel], Optional[datetime]]]: ...
+    ) -> asyncio.Future[Tuple[_PrivateChannel, Optional[datetime]]]: ...
     @overload
     def wait_for(
         self,
         event: Literal['guild_channel_delete'],
         *,
-        check: Optional[
-            Callable[[Union[TextChannel, VoiceChannel, CategoryChannel]], bool]
-        ] = ...,
+        check: Optional[Callable[[_GuildChannel], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[Union[TextChannel, VoiceChannel, CategoryChannel]]: ...
+    ) -> asyncio.Future[_GuildChannel]: ...
     @overload
     def wait_for(
         self,
         event: Literal['guild_channel_create'],
         *,
-        check: Optional[
-            Callable[[Union[TextChannel, VoiceChannel, CategoryChannel]], bool]
-        ] = ...,
+        check: Optional[Callable[[_GuildChannel], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[Union[TextChannel, VoiceChannel, CategoryChannel]]: ...
+    ) -> asyncio.Future[_GuildChannel]: ...
     @overload
     def wait_for(
         self,
         event: Literal['guild_channel_update'],
         *,
-        check: Optional[
-            Callable[
-                [
-                    Union[TextChannel, VoiceChannel, CategoryChannel],
-                    Union[TextChannel, VoiceChannel, CategoryChannel],
-                ],
-                bool,
-            ]
-        ] = ...,
+        check: Optional[Callable[[_GuildChannel, _GuildChannel], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[
-        Tuple[
-            Union[TextChannel, VoiceChannel, CategoryChannel],
-            Union[TextChannel, VoiceChannel, CategoryChannel],
-        ]
-    ]: ...
+    ) -> asyncio.Future[Tuple[_GuildChannel, _GuildChannel]]: ...
     @overload
     def wait_for(
         self,
         event: Literal['guild_channel_pins_update'],
         *,
-        check: Optional[
-            Callable[
-                [Union[TextChannel, VoiceChannel, CategoryChannel], Optional[datetime]],
-                bool,
-            ]
-        ] = ...,
+        check: Optional[Callable[[_GuildChannel, Optional[datetime]], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[
-        Tuple[Union[TextChannel, VoiceChannel, CategoryChannel], Optional[datetime]]
-    ]: ...
+    ) -> asyncio.Future[Tuple[_GuildChannel, Optional[datetime]]]: ...
     @overload
     def wait_for(
         self,
@@ -331,11 +328,9 @@ class Client:
         self,
         event: Literal['webhooks_update'],
         *,
-        check: Optional[
-            Callable[[Union[TextChannel, VoiceChannel, CategoryChannel]], bool]
-        ] = ...,
+        check: Optional[Callable[[_GuildChannel], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[Union[TextChannel, VoiceChannel, CategoryChannel]]: ...
+    ) -> asyncio.Future[_GuildChannel]: ...
     @overload
     def wait_for(
         self,
@@ -455,9 +450,9 @@ class Client:
         self,
         event: Literal['member_ban'],
         *,
-        check: Optional[Callable[[Guild, Union[User, Member]], bool]] = ...,
+        check: Optional[Callable[[Guild, _User], bool]] = ...,
         timeout: Optional[float] = ...,
-    ) -> asyncio.Future[Tuple[Guild, Union[User, Member]]]: ...
+    ) -> asyncio.Future[Tuple[Guild, _User]]: ...
     @overload
     def wait_for(
         self,
@@ -565,12 +560,5 @@ class Client:
     async def fetch_user_profile(self, user_id: int) -> Profile: ...
     async def fetch_channel(
         self, channel_id: int
-    ) -> Union[
-        TextChannel,
-        VoiceChannel,
-        StoreChannel,
-        DMChannel,
-        CategoryChannel,
-        GroupChannel,
-    ]: ...
+    ) -> Union[_GuildChannel, _PrivateChannel]: ...
     async def fetch_webhook(self, webhook_id: int) -> Webhook: ...
