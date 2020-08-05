@@ -11,3 +11,12 @@ This package contains type stubs to provide more precise static types and type i
 ```
 pip install discord.py-stubs
 ```
+
+## Development
+
+Make sure you have [poetry](https://python-poetry.org/) installed.
+
+```
+poetry install
+poetry run pre-commit install --hook-type pre-commit --hook-type post-checkout
+```
