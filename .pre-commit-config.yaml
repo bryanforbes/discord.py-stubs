@@ -23,3 +23,9 @@ repos:
         files: \.pyi?$
         exclude: discord-stubs\/[^\/]*?\.py$
         pass_filenames: false
+    -   id: install
+        name: poetry install
+        language: system
+        entry: poetry install
+        stages: [post-checkout]
+        always_run: true
