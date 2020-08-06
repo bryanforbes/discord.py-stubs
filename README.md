@@ -20,3 +20,8 @@ Make sure you have [poetry](https://python-poetry.org/) installed.
 poetry install
 poetry run pre-commit install --hook-type pre-commit --hook-type post-checkout
 ```
+
+
+## Version numbering scheme
+
+At this time, the version number of `discord.py-stubs` will follow the version number of `discord.py` it corresponds to and append one more version segment that indicates the sequence of releases for the stubs. For instance, if you are using `discord.py` version `1.3.4`, you would use `discord.py-stubs` version `1.3.4.X` where `X` is an integer.
