@@ -23,10 +23,3 @@ repos:
         language: system
         entry: poetry run flake8
         files: \.pyi?$
-    -   id: mypy
-        name: mypy
-        language: system
-        entry: poetry run mypy -p discord
-        files: \.pyi?$
-        exclude: discord-stubs\/[^\/]*?\.py$
-        pass_filenames: false

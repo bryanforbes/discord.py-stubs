@@ -37,14 +37,11 @@ jobs:
         poetry install -v
     - name: Lint with flake8, mypy, and isort
       run: |
-        poetry run flake8 discord-stubs discord
+        poetry run flake8 src
+        poetry run mypy src/discord/**/*.pyi
+        ln -s src/discord-stubs discord
         poetry run mypy discord/**/*.pyi
-        mkdir tmp
-        cd tmp
-        ln -s ../discord-stubs discord
-        cd ..
-        poetry run mypy tmp/discord/**/*.pyi
-        poetry run isort --check-only discord-stubs discord
+        poetry run isort --check-only src
     - name: Test with pytest
       run: |
         poetry run py.test
