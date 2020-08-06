@@ -7,8 +7,11 @@ authors = ["Bryan Forbes <bryan@reigndropsfall.net>"]
 license = "BSD-3-Clause"
 readme = "README.md"
 packages = [
+  { include = "discord" },
   { include = "discord-stubs" },
-  { include = "discord" }
+]
+include = [
+  "discord/ext/typed_commands/py.typed",
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
