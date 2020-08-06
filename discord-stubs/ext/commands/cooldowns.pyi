@@ -1,8 +1,7 @@
 from typing import Optional, Tuple, Type, TypeVar, Union
 
 from discord.enums import Enum
-
-from ...message import Message
+from discord.message import Message
 
 _CM = TypeVar('_CM', bound=CooldownMapping)
 _MC = TypeVar('_MC', bound=MaxConcurrency)

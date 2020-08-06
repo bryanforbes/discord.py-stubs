@@ -2,7 +2,6 @@ from typing import Any, Dict, List, Optional, TypeVar, Union
 
 import discord
 
-from ...utils import cached_property
 from .bot import Bot
 from .cog import Cog
 from .core import Command
@@ -30,15 +29,15 @@ class Context(discord.abc.Messageable):
     def valid(self) -> bool: ...
     @property
     def cog(self: _C) -> Optional[Cog[_C]]: ...
-    @cached_property
+    @discord.utils.cached_property
     def guild(self) -> Optional[discord.Guild]: ...
-    @cached_property
+    @discord.utils.cached_property
     def channel(
         self,
     ) -> Union[discord.TextChannel, discord.DMChannel, discord.GroupChannel]: ...
-    @cached_property
+    @discord.utils.cached_property
     def author(self) -> Union[discord.User, discord.Member]: ...
-    @cached_property
+    @discord.utils.cached_property
     def me(self) -> Union[discord.Member, discord.ClientUser]: ...
     @property
     def voice_client(self) -> Optional[discord.VoiceClient]: ...

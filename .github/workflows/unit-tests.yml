@@ -39,7 +39,7 @@ jobs:
       run: |
         poetry run flake8 discord-stubs
         ln -s discord-stubs discord
-        poetry run mypy discord
+        poetry run mypy discord discord/ext/commands discord/ext/tasks
         poetry run isort --check-only discord-stubs
     - name: Test with pytest
       run: |
