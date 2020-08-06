@@ -12,6 +12,8 @@ This package contains type stubs to provide more precise static types and type i
 pip install discord.py-stubs
 ```
 
+**NOTE:** Because `discord.py` uses namespace packages for its extensions, `mypy` must be configured to use namespace packages either with the `--namespace-packages` command line flag, or by setting `namespace_packages = True` in your `mypy` configuration file. See the [import discovery](https://mypy.readthedocs.io/en/stable/command_line.html#import-discovery) section of the `mypy` documentation for more details.
+
 ## Development
 
 Make sure you have [poetry](https://python-poetry.org/) installed.
