@@ -24,9 +24,13 @@ class InvalidArgument(ClientException): ...
 class LoginFailure(ClientException): ...
 
 class ConnectionClosed(ClientException):
-    code: int
+    code: Optional[int]
     reason: str
     shard_id: Optional[int]
     def __init__(
-        self, socket: aiohttp.ClientWebSocketResponse, *, shard_id: Optional[int]
+        self,
+        socket: aiohttp.ClientWebSocketResponse,
+        *,
+        shard_id: Optional[int],
+        code: Optional[int] = ...,
     ) -> None: ...

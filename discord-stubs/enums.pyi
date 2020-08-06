@@ -182,12 +182,15 @@ class UserFlags(Enum):
     partner: int
     hypesquad: int
     bug_hunter: int
+    mfa_sms: int
+    premium_promo_dismissed: int
     hypesquad_bravery: int
     hypesquad_brilliance: int
     hypesquad_balance: int
     early_supporter: int
     team_user: int
     system: int
+    has_unread_urgent_messages: int
     bug_hunter_level_2: int
     verified_bot: int
     verified_bot_developer: int

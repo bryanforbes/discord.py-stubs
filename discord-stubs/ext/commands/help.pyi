@@ -24,7 +24,7 @@ import discord
 from .cog import Cog
 from .context import Context
 from .cooldowns import Cooldown
-from .core import Command, Group
+from .core import Command, Group, _CheckPredicate
 from .errors import CommandError
 
 _T = TypeVar('_T')
@@ -45,6 +45,7 @@ class _CommandAttrs(TypedDict, total=False):
     ignore_extra: bool
     cooldown: Cooldown
     parent: Command[Context]
+    checks: List[_CheckPredicate[Any]]
 
 class _PaginatorProtocol(Protocol):
     prefix: Optional[str]
@@ -96,6 +97,8 @@ class HelpCommand(Generic[_CT]):
         command_attrs: _CommandAttrs = ...,
     ) -> None: ...
     def copy(self: _HC) -> _HC: ...
+    def add_check(self, func: _CheckPredicate[_CT]) -> None: ...
+    def remove_check(self, func: _CheckPredicate[_CT]) -> None: ...
     def get_bot_mapping(self) -> Dict[Optional[Cog[_CT]], List[Command[_CT]]]: ...
     @property
     def clean_prefix(self) -> str: ...

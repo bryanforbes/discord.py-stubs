@@ -222,14 +222,7 @@ discord.state.ConnectionState.store_user
 discord.state.ConnectionState.voice_clients
 discord.team.Team.__init__
 discord.team.TeamMember.__init__
-discord.template.T
 discord.template.Template.__init__
-discord.template.a
-discord.template.e
-discord.template.l
-discord.template.m
-discord.template.p
-discord.template.t
 discord.user.BaseUser.__init__
 discord.user.ClientUser.__init__
 discord.user.Profile.__doc__
