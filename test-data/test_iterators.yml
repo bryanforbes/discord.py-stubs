@@ -1,0 +1,40 @@
+- case: iterator_find
+  main: |
+    import discord
+
+    async def main() -> None:
+        client = discord.Client()
+
+        def finder(guild: discord.Guild) -> bool:
+            return True
+
+        guild = await client.fetch_guilds().find(finder)
+
+        reveal_type(guild)  # N: Revealed type is 'Union[discord.guild.Guild*, None]'
+
+- case: iterator_filter
+  main: |
+    import discord
+
+    async def main() -> None:
+        client = discord.Client()
+
+        def filterer(guild: discord.Guild) -> bool:
+            return True
+
+        async for guild in client.fetch_guilds().filter(filterer):
+            reveal_type(guild)  # N: Revealed type is 'discord.guild.Guild*'
+
+- case: iterator_map
+  main: |
+    import discord
+    import typing
+
+    async def main() -> None:
+        client = discord.Client()
+
+        def mapper(guild: discord.Guild) -> typing.List[discord.Member]:
+            return guild.members
+
+        async for members in client.fetch_guilds().map(mapper):
+            reveal_type(members)  # N: Revealed type is 'builtins.list*[discord.member.Member]'
