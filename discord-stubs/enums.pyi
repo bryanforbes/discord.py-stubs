@@ -47,6 +47,7 @@ class VoiceRegion(Enum):
     russia: str
     japan: str
     southafrica: str
+    south_korea: str
     india: str
     europe: str
     dubai: str
