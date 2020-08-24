@@ -27,7 +27,7 @@ class Snowflake(Protocol):
     def created_at(self) -> datetime.datetime: ...
 
 @runtime_checkable
-class User(Snowflake):
+class User(Snowflake, Protocol):
     name: str
     discriminator: str
     avatar: Optional[str]
@@ -40,7 +40,7 @@ class User(Snowflake):
     def mention(self) -> str: ...
 
 @runtime_checkable
-class PrivateChannel(Snowflake):
+class PrivateChannel(Snowflake, Protocol):
     me: ClientUser
 
 class GuildChannel:
