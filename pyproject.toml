@@ -21,7 +21,7 @@ mypy = "^0.782"
 typing-extensions = "^3.7.4"
 
 [tool.poetry.dev-dependencies]
-black = "^19.10b0"
+black = "^20.8b1"
 "discord.py" = {git = "https://github.com/Rapptz/discord.py.git", rev = "38ebef8c16a8e579f6508983a670da7fc0d4e52b"}
 flake8 = "^3.8.3"
 flake8-pyi = "^20.5.0"
