@@ -14,6 +14,38 @@ pip install discord.py-stubs
 
 **NOTE:** Because `discord.py` uses namespace packages for its extensions, `mypy` must be configured to use namespace packages either with the `--namespace-packages` command line flag, or by setting `namespace_packages = True` in your `mypy` configuration file. See the [import discovery](https://mypy.readthedocs.io/en/stable/command_line.html#import-discovery) section of the `mypy` documentation for more details.
 
+## Usage Notes
+
+In most cases, installing this package will enable developers to type check their discord.py bots using mypy out of the box. However, if developers wish to subclass the classes in `discord.ext.commands` they will need to follow the `mypy` documentation outlining how to use [classes that are generic in stubs but not at runtime](https://mypy.readthedocs.io/en/stable/common_issues.html#using-classes-that-are-generic-in-stubs-but-not-at-runtime):
+
+```python
+from typing import TYPE_CHECKING
+from discord.ext import commands
+
+class MyContext(commands.Context):
+    ...
+
+if TYPE_CHECKING:
+    Cog = commands.Cog[MyContext]
+else:
+    Cog = commands.Cog
+
+class MyCog(Cog):
+    ...
+```
+
+In order to avoid this issue, developers can use [`discord-ext-typed-commands`](https://github.com/bryanforbes/discord-ext-typed-commands/):
+
+```python
+from discord.ext import typed_commands
+
+class MyContext(typed_commands.Context):
+    ...
+
+class MyCog(typed_commands.Cog[MyContext]):
+    ...
+```
+
 ## Development
 
 Make sure you have [poetry](https://python-poetry.org/) installed.
