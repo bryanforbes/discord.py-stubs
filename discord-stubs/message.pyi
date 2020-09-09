@@ -1,6 +1,6 @@
 import datetime
 from os import PathLike
-from typing import BinaryIO, List, Optional, Union
+from typing import Any, BinaryIO, List, Optional, Union
 from typing_extensions import TypedDict
 
 from .abc import User as _BaseUser
@@ -70,6 +70,7 @@ class Message:
     reactions: List[Reaction]
     activity: Optional[_MessageActivity]
     application: Optional[_MessageApplication]
+    def __eq__(self, other: Any) -> bool: ...
     @cached_slot_property('_cs_guild')
     def guild(self) -> Optional[Guild]: ...
     @cached_slot_property('_cs_raw_mentions')

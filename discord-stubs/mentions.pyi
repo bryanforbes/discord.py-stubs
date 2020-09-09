@@ -1,7 +1,9 @@
-from typing import Any, Iterable, List, Union
+from typing import Any, Iterable, List, Type, TypeVar, Union
 from typing_extensions import TypedDict
 
 from .abc import Snowflake
+
+_AM = TypeVar('_AM', bound=AllowedMentions)
 
 class _FakeBool:
     def __eq__(self, other: Any) -> bool: ...
@@ -27,5 +29,9 @@ class AllowedMentions:
         users: Union[bool, _FakeBool, Iterable[Snowflake]] = ...,
         roles: Union[bool, _FakeBool, Iterable[Snowflake]] = ...,
     ) -> None: ...
+    @classmethod
+    def all(cls: Type[_AM]) -> _AM: ...
+    @classmethod
+    def none(cls: Type[_AM]) -> _AM: ...
     def to_dict(self) -> _AllowedMentionsDict: ...
     def merge(self, other: AllowedMentions) -> AllowedMentions: ...

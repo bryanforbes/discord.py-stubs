@@ -1,7 +1,16 @@
 from inspect import Parameter
 from typing import Any, List, Optional, Tuple, Union
 
-from discord import Permissions, abc
+from discord import (
+    CategoryChannel,
+    DMChannel,
+    GroupChannel,
+    Permissions,
+    StoreChannel,
+    TextChannel,
+    VoiceChannel,
+    abc,
+)
 from discord.errors import ClientException, DiscordException
 
 from .cooldowns import BucketType, Cooldown
@@ -31,6 +40,48 @@ class NoPrivateMessage(CheckFailure):
     def __init__(self, message: Optional[str] = ...) -> None: ...
 
 class NotOwner(CheckFailure): ...
+
+class MemberNotFound(BadArgument):
+    argument: str
+
+class UserNotFound(BadArgument):
+    argument: str
+
+class MessageNotFound(BadArgument):
+    argument: str
+
+class ChannelNotReadable(BadArgument):
+    argument: Union[
+        TextChannel,
+        VoiceChannel,
+        CategoryChannel,
+        StoreChannel,
+        DMChannel,
+        GroupChannel,
+    ]
+
+class ChannelNotFound(BadArgument):
+    argument: str
+
+class BadColourArgument(BadArgument):
+    argument: str
+
+BadColorArgument = BadColourArgument
+
+class RoleNotFound(BadArgument):
+    argument: str
+
+class BadInviteArgument(BadArgument): ...
+
+class EmojiNotFound(BadArgument):
+    argument: str
+
+class PartialEmojiConversionFailure(BadArgument):
+    argument: str
+
+class BadBoolArgument(BadArgument):
+    argument: str
+
 class DisabledCommand(CommandError): ...
 
 class CommandInvokeError(CommandError):

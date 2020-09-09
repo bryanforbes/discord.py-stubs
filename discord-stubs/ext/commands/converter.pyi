@@ -30,6 +30,8 @@ class CategoryChannelConverter(IDConverter):
 class ColourConverter(Converter):
     async def convert(self, ctx: Context, argument: str) -> discord.Colour: ...
 
+ColorConverter = ColourConverter
+
 class RoleConverter(IDConverter):
     async def convert(self, ctx: Context, argument: str) -> discord.Role: ...
 

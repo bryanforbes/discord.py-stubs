@@ -54,6 +54,7 @@ class Command(_BaseCommand, Generic[_CT]):
     hidden: bool
     rest_is_raw: bool
     ignore_extra: bool
+    require_var_positional: bool
     cooldown_after_parsing: bool
     params: Mapping[str, Parameter]
     _buckets: CooldownMapping
@@ -72,6 +73,7 @@ class Command(_BaseCommand, Generic[_CT]):
         hidden: bool = ...,
         rest_is_raw: bool = ...,
         ignore_extra: bool = ...,
+        require_var_positional: bool = ...,
         cooldown_after_parsing: bool = ...,
         checks: List[_CheckPredicate[_CT]] = ...,
         cooldown: Cooldown = ...,
@@ -93,6 +95,7 @@ class Command(_BaseCommand, Generic[_CT]):
         hidden: bool = ...,
         rest_is_raw: bool = ...,
         ignore_extra: bool = ...,
+        require_var_positional: bool = ...,
         cooldown_after_parsing: bool = ...,
     ) -> None: ...
     async def __call__(self, *args: Any, **kwargs: Any) -> Any: ...
@@ -154,6 +157,7 @@ class GroupMixin(Generic[_CT]):
         hidden: bool = ...,
         rest_is_raw: bool = ...,
         ignore_extra: bool = ...,
+        require_var_positional: bool = ...,
         cooldown_after_parsing: bool = ...,
     ) -> Callable[[_CoroType], Command[_CT]]: ...
     def group(
@@ -210,6 +214,7 @@ def command(
     hidden: bool = ...,
     rest_is_raw: bool = ...,
     ignore_extra: bool = ...,
+    require_var_positional: bool = ...,
     cooldown_after_parsing: bool = ...,
 ) -> Callable[[_CoroType], Command[Any]]: ...
 @overload
@@ -226,6 +231,7 @@ def command(
     hidden: bool = ...,
     rest_is_raw: bool = ...,
     ignore_extra: bool = ...,
+    require_var_positional: bool = ...,
     cooldown_after_parsing: bool = ...,
 ) -> Callable[[_CoroType], Command[_CT]]: ...
 @overload

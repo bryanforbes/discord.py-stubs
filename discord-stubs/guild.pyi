@@ -48,6 +48,7 @@ _VALID_FEATURES = Literal[
     'MORE_EMOJI',
     'DISCOVERABLE',
     'FEATURABLE',
+    'COMMUNITY',
     'COMMERCE',
     'PUBLIC',
     'NEWS',
