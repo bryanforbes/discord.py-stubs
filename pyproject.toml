@@ -22,7 +22,7 @@ typing-extensions = "^3.7.4"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
-"discord.py" = {git = "https://github.com/Rapptz/discord.py.git", rev = "4b18238ade0137d6a809b065bfc62daccebd408c"}
+"discord.py" = {git = "https://github.com/Rapptz/discord.py.git", rev = "450e71f086b548cd294b7439d973befc9284193a"}
 flake8 = "^3.8.3"
 flake8-pyi = "^20.5.0"
 isort = "^5.5.1"
