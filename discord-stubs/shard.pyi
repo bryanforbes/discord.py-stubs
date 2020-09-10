@@ -7,7 +7,6 @@ from .activity import BaseActivity
 from .client import Client
 from .enums import Status
 from .guild import Guild
-from .utils import cached_property
 
 class EventType:
     close: ClassVar[int] = ...
@@ -77,7 +76,7 @@ class AutoShardedClient(Client):
     @property
     def latencies(self) -> List[Tuple[int, float]]: ...
     def get_shard(self, shard_id: int) -> Optional[ShardInfo]: ...
-    @cached_property
+    @property
     def shards(self) -> Mapping[int, ShardInfo]: ...
     async def request_offline_members(self, *guilds: Guild) -> None: ...
     async def launch_shard(
