@@ -1,5 +1,5 @@
 import datetime
-from typing import ClassVar, List, NamedTuple, Optional, Union
+from typing import ClassVar, List, Optional, Union
 from typing_extensions import Literal
 
 from .asset import Asset
@@ -12,7 +12,7 @@ from .user import User
 
 _VALID_ICON_FORMATS = Literal['jpeg', 'jpg', 'webp', 'png']
 
-class PartialInviteChannel(NamedTuple):
+class PartialInviteChannel:
     id: int
     name: str
     type: ChannelType

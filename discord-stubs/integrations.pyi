@@ -1,12 +1,12 @@
 import datetime
-from typing import NamedTuple, Optional
+from typing import Optional
 
 from .enums import ExpireBehaviour
 from .guild import Guild
 from .role import Role
 from .user import User
 
-class IntegrationAccount(NamedTuple):
+class IntegrationAccount:
     id: int
     name: str
 

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Any, List, NamedTuple, Optional, Union
+from typing import Any, List, Optional, Union
 
 from .activity import BaseActivity, Spotify
 from .channel import VoiceChannel
@@ -7,7 +7,7 @@ from .enums import Status
 from .invite import Invite
 from .user import BaseUser
 
-class WidgetChannel(NamedTuple):
+class WidgetChannel:
     id: int
     name: str
     position: int

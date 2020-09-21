@@ -203,6 +203,7 @@ class ActivityType(Enum):
     listening: int
     watching: int
     custom: int
+    competing: int
     def __int__(self) -> int: ...
 
 class HypeSquadHouse(Enum):
