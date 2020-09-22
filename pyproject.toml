@@ -25,7 +25,7 @@ black = "^20.8b1"
 "discord.py" = {git = "https://github.com/Rapptz/discord.py.git", rev = "ab5e175b25f3470cc6c6dbcbaf3a0d53e02169e3"}
 flake8 = "^3.8.3"
 flake8-pyi = "^20.5.0"
-isort = "^5.5.2"
+isort = "^5.5.3"
 pre-commit = "^2.7.1"
 pytest = "^6.0.2"
 pytest-mypy-plugins = "^1.4.0"
