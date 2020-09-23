@@ -6,6 +6,7 @@ from typing import (
     Iterator,
     List,
     Tuple,
+    Type,
     TypeVar,
     overload,
 )
@@ -13,6 +14,8 @@ from typing import (
 from .enums import UserFlags
 
 _F = TypeVar('_F', bound=flag_value)
+_I = TypeVar('_I', bound=Intents)
+_MCF = TypeVar('_MCF', bound=MemberCacheFlags)
 
 class flag_value:
     flag: int
@@ -63,3 +66,65 @@ class PublicUserFlags(BaseFlags):
     verified_bot: flag_value
     verified_bot_developer: flag_value
     def all(self) -> List[UserFlags]: ...
+
+class Intents(BaseFlags):
+    VALID_FLAGS: ClassVar[Dict[str, int]]
+    def __init__(
+        self,
+        *,
+        guilds: bool = ...,
+        members: bool = ...,
+        bans: bool = ...,
+        emojis: bool = ...,
+        integrations: bool = ...,
+        webhooks: bool = ...,
+        invites: bool = ...,
+        voice_states: bool = ...,
+        presences: bool = ...,
+        messages: bool = ...,
+        guild_messages: bool = ...,
+        dm_messages: bool = ...,
+        reactions: bool = ...,
+        guild_reactions: bool = ...,
+        dm_reactions: bool = ...,
+        typing: bool = ...,
+        guild_typing: bool = ...,
+        dm_typing: bool = ...,
+    ) -> None: ...
+    @classmethod
+    def all(cls: Type[_I]) -> _I: ...
+    @classmethod
+    def none(cls: Type[_I]) -> _I: ...
+    guilds: flag_value
+    members: flag_value
+    bans: flag_value
+    emojis: flag_value
+    integrations: flag_value
+    webhooks: flag_value
+    invites: flag_value
+    voice_states: flag_value
+    presences: flag_value
+    messages: flag_value
+    guild_messages: flag_value
+    dm_messages: flag_value
+    reactions: flag_value
+    guild_reactions: flag_value
+    dm_reactions: flag_value
+    typing: flag_value
+    guild_typing: flag_value
+    dm_typing: flag_value
+
+class MemberCacheFlags(BaseFlags):
+    VALID_FLAGS: ClassVar[Dict[str, int]]
+    def __init__(
+        self, *, online: bool = ..., voice: bool = ..., joined: bool = ...
+    ) -> None: ...
+    @classmethod
+    def all(cls: Type[_MCF]) -> _MCF: ...
+    @classmethod
+    def none(cls: Type[_MCF]) -> _MCF: ...
+    online: flag_value
+    voice: flag_value
+    joined: flag_value
+    @classmethod
+    def from_intents(cls: Type[_MCF], intents: Intents) -> _MCF: ...

@@ -35,3 +35,6 @@ class ConnectionClosed(ClientException):
         shard_id: Optional[int],
         code: Optional[int] = ...,
     ) -> None: ...
+
+class PrivilegedIntentsRequired(ClientException):
+    shard_id: Optional[int]

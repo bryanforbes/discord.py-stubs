@@ -1,6 +1,6 @@
 import abc
 import datetime
-from typing import Dict, List, Optional, TypeVar, Union, overload
+from typing import Dict, List, Optional, Type, TypeVar, Union, overload
 from typing_extensions import Protocol, runtime_checkable
 
 from .channel import CategoryChannel
@@ -16,9 +16,10 @@ from .message import Message
 from .permissions import PermissionOverwrite, Permissions
 from .role import Role
 from .user import ClientUser
-from .voice_client import VoiceClient
+from .voice_client import VoiceClient, VoiceProtocol
 
 _GC = TypeVar('_GC', bound=GuildChannel)
+_VP = TypeVar('_VP', bound=VoiceProtocol)
 @runtime_checkable
 class Snowflake(Protocol):
     id: int
@@ -151,6 +152,11 @@ class Messageable(metaclass=abc.ABCMeta):
     ) -> HistoryIterator: ...
 
 class Connectable(metaclass=abc.ABCMeta):
+    @overload
     async def connect(
         self, *, timeout: float = ..., reconnect: bool = ...
     ) -> VoiceClient: ...
+    @overload
+    async def connect(
+        self, *, timeout: float = ..., reconnect: bool = ..., cls: Type[_VP] = ...
+    ) -> _VP: ...

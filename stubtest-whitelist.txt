@@ -20,6 +20,7 @@ discord.GroupChannel.__init__
 discord.GroupChannel.edit
 discord.Guild.__init__
 discord.Integration.__init__
+discord.Intents.DEFAULT_VALUE
 discord.Invite.__init__
 discord.Invite.from_gateway
 discord.Invite.from_incomplete
@@ -35,10 +36,13 @@ discord.Member.profile
 discord.Member.remove_friend
 discord.Member.send_friend_request
 discord.Member.unblock
+discord.MemberCacheFlags.DEFAULT_VALUE
 discord.Message.__init__
+discord.MessageReference.__init__
 discord.MessageFlags.DEFAULT_VALUE
 discord.PartialEmoji.__init__
 discord.Permissions.DEFAULT_VALUE
+discord.PrivilegedIntentsRequired.__init__
 discord.Profile.__doc__
 discord.PublicUserFlags.DEFAULT_VALUE
 discord.Reaction.__init__
@@ -53,7 +57,6 @@ discord.TeamMember.__init__
 discord.Template.__init__
 discord.TextChannel.__init__
 discord.VoiceChannel.__init__
-discord.VoiceClient.__init__
 discord.VoiceState.__init__
 discord.Webhook.__init__
 discord.Widget.__init__
@@ -81,6 +84,7 @@ discord.enums.Enum._missing_
 discord.enums.Enum.try_value
 discord.enums.SpeakingState.__int__
 discord.errors.GatewayNotFound.__init__
+discord.errors.PrivilegedIntentsRequired.__init__
 discord.ext.commands.BucketType.get_key
 discord.ext.commands.CheckAnyFailure.__init__
 discord.ext.commands.Cog.__new__
@@ -107,6 +111,8 @@ discord.ext.commands.help._HelpCommandImpl.__init__
 discord.flags.MessageFlags.DEFAULT_VALUE
 discord.flags.SystemChannelFlags.DEFAULT_VALUE
 discord.flags.PublicUserFlags.DEFAULT_VALUE
+discord.flags.Intents.DEFAULT_VALUE
+discord.flags.MemberCacheFlags.DEFAULT_VALUE
 discord.gateway.DiscordVoiceWebSocket.__init__
 discord.gateway.DiscordWebSocket.__init__
 discord.guild.Guild.__init__
@@ -137,6 +143,7 @@ discord.member.Member.send_friend_request
 discord.member.Member.unblock
 discord.member.VoiceState.__init__
 discord.message.Attachment.__init__
+discord.message.MessageReference.__init__
 discord.message.Message.__init__
 discord.opus.OpusError.__init__
 discord.opus.band_ctl
@@ -153,19 +160,17 @@ discord.state.AutoShardedConnectionState.__init__
 discord.state.AutoShardedConnectionState.chunker
 discord.state.AutoShardedConnectionState.parse_ready
 discord.state.AutoShardedConnectionState.parse_resumed
-discord.state.AutoShardedConnectionState.request_offline_members
 discord.state.ConnectionState.__init__
 discord.state.ConnectionState.add_dm_channel
 discord.state.ConnectionState.call_handlers
 discord.state.ConnectionState.call_hooks
 discord.state.ConnectionState.chunker
-discord.state.ConnectionState.chunks_needed
+discord.state.ConnectionState.chunk_guild
 discord.state.ConnectionState.clear
 discord.state.ConnectionState.create_message
 discord.state.ConnectionState.emojis
 discord.state.ConnectionState.get_channel
 discord.state.ConnectionState.get_emoji
-discord.state.ConnectionState.get_nonce
 discord.state.ConnectionState.get_reaction_emoji
 discord.state.ConnectionState.get_user
 discord.state.ConnectionState.guilds
@@ -211,11 +216,8 @@ discord.state.ConnectionState.parse_voice_server_update
 discord.state.ConnectionState.parse_voice_state_update
 discord.state.ConnectionState.parse_webhooks_update
 discord.state.ConnectionState.private_channels
-discord.state.ConnectionState.process_listeners
+discord.state.ConnectionState.process_chunk_requests
 discord.state.ConnectionState.query_members
-discord.state.ConnectionState.receive_chunk
-discord.state.ConnectionState.receive_member_query
-discord.state.ConnectionState.request_offline_members
 discord.state.ConnectionState.self_id
 discord.state.ConnectionState.store_emoji
 discord.state.ConnectionState.store_user
@@ -226,7 +228,6 @@ discord.template.Template.__init__
 discord.user.BaseUser.__init__
 discord.user.ClientUser.__init__
 discord.user.Profile.__doc__
-discord.voice_client.VoiceClient.__init__
 discord.webhook.Webhook.__init__
 discord.widget.Widget.__init__
 discord.widget.WidgetMember.__init__

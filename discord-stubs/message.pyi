@@ -39,6 +39,13 @@ class Attachment:
     async def read(self, *, use_cached: bool = ...) -> bytes: ...
     async def to_file(self, *, use_cached: bool = ..., spoiler: bool = ...) -> File: ...
 
+class MessageReference:
+    message_id: Optional[int]
+    channel_id: int
+    guild_id: Optional[int]
+    @property
+    def cached_message(self) -> Optional[Message]: ...
+
 class _MessageActivity(TypedDict, total=False):
     type: int
     party_id: str
@@ -60,6 +67,7 @@ class Message:
     embeds: List[Embed]
     channel: Union[TextChannel, DMChannel, GroupChannel]
     call: Optional[CallMessage]
+    reference: Optional[MessageReference]
     mention_everyone: bool
     mentions: List[Union[User, Member]]
     role_mentions: List[Role]

@@ -29,6 +29,7 @@ from .channel import (
 )
 from .emoji import Emoji
 from .enums import Status, VoiceRegion
+from .flags import Intents, MemberCacheFlags
 from .gateway import DiscordWebSocket
 from .guild import Guild
 from .invite import Invite
@@ -50,7 +51,7 @@ from .role import Role
 from .template import Template
 from .user import ClientUser, Profile, User
 from .utils import SequenceProxy
-from .voice_client import VoiceClient
+from .voice_client import VoiceProtocol
 from .webhook import Webhook
 from .widget import Widget
 
@@ -77,6 +78,8 @@ class Client:
         proxy_auth: Optional[aiohttp.BasicAuth] = ...,
         shard_id: Optional[int] = ...,
         shard_count: Optional[int] = ...,
+        intents: Intents = ...,
+        member_cache_flags: MemberCacheFlags = ...,
         fetch_offline_members: bool = ...,
         status: Optional[Status] = ...,
         activity: Optional[BaseActivity] = ...,
@@ -102,7 +105,7 @@ class Client:
     @property
     def private_channels(self) -> List[_PrivateChannel]: ...
     @property
-    def voice_clients(self) -> List[VoiceClient]: ...
+    def voice_clients(self) -> List[VoiceProtocol]: ...
     def is_ready(self) -> bool: ...
     def dispatch(self, __event: str, *args: Any, **kwargs: Any) -> None: ...
     async def on_error(self, event_method: str, *args: Any, **kwargs: Any) -> None: ...

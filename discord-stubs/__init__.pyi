@@ -26,6 +26,8 @@ from .emoji import Emoji as Emoji  # noqa: F401
 from .enums import *  # noqa: F401
 from .errors import *  # noqa: F401
 from .file import File as File  # noqa: F401
+from .flags import Intents as Intents  # noqa: F401
+from .flags import MemberCacheFlags as MemberCacheFlags  # noqa: F401
 from .flags import MessageFlags as MessageFlags  # noqa: F401
 from .flags import PublicUserFlags as PublicUserFlags  # noqa: F401
 from .flags import SystemChannelFlags as SystemChannelFlags  # noqa: F401
@@ -38,6 +40,7 @@ from .member import VoiceState as VoiceState  # noqa: F401
 from .mentions import AllowedMentions as AllowedMentions  # noqa: F401
 from .message import Attachment as Attachment  # noqa: F401
 from .message import Message as Message  # noqa: F401
+from .message import MessageReference as MessageReference  # noqa: F401
 from .object import Object as Object  # noqa: F401
 from .partial_emoji import PartialEmoji as PartialEmoji  # noqa: F401
 from .permissions import PermissionOverwrite as PermissionOverwrite  # noqa: F401
@@ -60,6 +63,7 @@ from .user import ClientUser as ClientUser  # noqa: F401
 from .user import Profile as Profile  # noqa: F401
 from .user import User as User  # noqa: F401
 from .voice_client import VoiceClient as VoiceClient  # noqa: F401
+from .voice_client import VoiceProtocol as VoiceProtocol  # noqa: F401
 from .webhook import *  # noqa: F401
 from .widget import Widget as Widget  # noqa: F401
 from .widget import WidgetChannel as WidgetChannel  # noqa: F401
