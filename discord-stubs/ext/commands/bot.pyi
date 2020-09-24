@@ -108,6 +108,7 @@ class Bot(BotBase[_CT], discord.Client):
         intents: Optional[discord.Intents] = ...,
         member_cache_flags: discord.MemberCacheFlags = ...,
         fetch_offline_members: bool = ...,
+        chunk_guilds_at_startup: bool = ...,
         status: Optional[discord.Status] = ...,
         activity: Optional[
             Union[discord.Activity, discord.Game, discord.Streaming]
@@ -138,6 +139,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         intents: Optional[discord.Intents] = ...,
         member_cache_flags: Optional[discord.MemberCacheFlags] = ...,
         fetch_offline_members: bool = ...,
+        chunk_guilds_at_startup: bool = ...,
         status: Optional[discord.Status] = ...,
         activity: Optional[
             Union[discord.Activity, discord.Game, discord.Streaming]
@@ -166,6 +168,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         intents: Optional[discord.Intents] = ...,
         member_cache_flags: Optional[discord.MemberCacheFlags] = ...,
         fetch_offline_members: bool = ...,
+        chunk_guilds_at_startup: bool = ...,
         status: Optional[discord.Status] = ...,
         activity: Optional[
             Union[discord.Activity, discord.Game, discord.Streaming]
