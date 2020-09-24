@@ -6,7 +6,9 @@ import aiohttp
 from .activity import BaseActivity
 from .client import Client
 from .enums import Status
+from .flags import Intents, MemberCacheFlags
 from .guild import Guild
+from .mentions import AllowedMentions
 
 class EventType:
     close: ClassVar[int] = ...
@@ -42,34 +44,45 @@ class AutoShardedClient(Client):
     def __init__(
         self,
         *args: Any,
+        shard_ids: Union[List[int], Tuple[int]],
+        shard_count: int,
+        max_messages: Optional[int] = ...,
         loop: Optional[asyncio.AbstractEventLoop] = ...,
-        shard_ids: Union[List[int], Tuple[int]] = ...,
-        shard_count: int = ...,
         connector: aiohttp.BaseConnector = ...,
         proxy: Optional[str] = ...,
         proxy_auth: Optional[aiohttp.BasicAuth] = ...,
-        max_messages: Optional[int] = ...,
+        intents: Optional[Intents] = ...,
+        member_cache_flags: Optional[MemberCacheFlags] = ...,
         fetch_offline_members: bool = ...,
         status: Optional[Status] = ...,
         activity: Optional[BaseActivity] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
         heartbeat_timeout: float = ...,
-        **kwargs: Any,
+        guild_ready_timeout: float = ...,
+        guild_subscriptions: bool = ...,
+        assume_unsync_clock: bool = ...,
     ) -> None: ...
     @overload
     def __init__(
         self,
         *args: Any,
-        loop: Optional[asyncio.AbstractEventLoop] = ...,
+        shard_ids: None = ...,
         shard_count: Optional[int] = ...,
+        max_messages: Optional[int] = ...,
+        loop: Optional[asyncio.AbstractEventLoop] = ...,
         connector: aiohttp.BaseConnector = ...,
         proxy: Optional[str] = ...,
         proxy_auth: Optional[aiohttp.BasicAuth] = ...,
-        max_messages: Optional[int] = ...,
+        intents: Optional[Intents] = ...,
+        member_cache_flags: Optional[MemberCacheFlags] = ...,
         fetch_offline_members: bool = ...,
         status: Optional[Status] = ...,
         activity: Optional[BaseActivity] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
         heartbeat_timeout: float = ...,
-        **kwargs: Any,
+        guild_ready_timeout: float = ...,
+        guild_subscriptions: bool = ...,
+        assume_unsync_clock: bool = ...,
     ) -> None: ...
     @property
     def latency(self) -> float: ...
