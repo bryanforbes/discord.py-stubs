@@ -144,7 +144,7 @@ description = "A Python wrapper for the Discord API"
 name = "discord.py"
 optional = false
 python-versions = ">=3.5.3"
-version = "1.5.0a2526+ge4d7f44"
+version = "1.5.0a2528+g28e5b2a"
 
 [package.dependencies]
 aiohttp = ">=3.6.0,<3.7.0"
@@ -154,7 +154,7 @@ docs = ["sphinx (1.8.5)", "sphinxcontrib_trio (1.1.1)", "sphinxcontrib-websuppor
 voice = ["PyNaCl (1.3.0)"]
 
 [package.source]
-reference = "e4d7f44aa59d2bbd0f98f461e4b6504426a7eb8b"
+reference = "28e5b2a5e133970aff7d0f4db1d973c7516e429a"
 type = "git"
 url = "https://github.com/Rapptz/discord.py.git"
 [[package]]
@@ -590,7 +590,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "3eabc0344b401f76cfeae4ac8b40f90ac79c57d08f592c492c76ad21574fff52"
+content-hash = "6bd9258f36b62a9e7b10c3803ad2af40626d645ecb86f228ee85ec7f47e51a00"
 lock-version = "1.0"
 python-versions = "^3.6.1"
 
