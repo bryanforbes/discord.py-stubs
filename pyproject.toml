@@ -27,7 +27,7 @@ flake8 = "^3.8.3"
 flake8-pyi = "^20.5.0"
 isort = "^5.5.3"
 pre-commit = "^2.7.1"
-pytest = "^6.0.2"
+pytest = "^6.1.0"
 pytest-mypy-plugins = "^1.4.0"
 
 [tool.black]
