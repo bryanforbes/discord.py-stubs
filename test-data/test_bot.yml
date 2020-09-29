@@ -131,3 +131,56 @@
 
 
     bot.run('token')
+- case: bot_intents
+  main: |
+    import random
+    from typing import TYPE_CHECKING, Any, Type, TypeVar, Union, cast, overload
+
+    import discord
+    from discord.ext import commands
+
+    if TYPE_CHECKING:
+        Bot = commands.Bot['MyContext']
+    else:
+        Bot = commands.Bot
+
+
+    CT = TypeVar('CT', bound='MyContext')
+    OT = TypeVar('OT', bound=commands.Context)
+
+
+    class MyContext(commands.Context):
+        async def tick(self, value: int) -> None:
+            emoji = '\N{WHITE HEAVY CHECK MARK}' if value else '\N{CROSS MARK}'
+            try:
+                await self.message.add_reaction(emoji)
+            except discord.HTTPException:
+                pass
+
+
+    class MyBot(Bot):
+        @overload
+        async def get_context(self, message: discord.Message) -> MyContext:
+            ...
+
+        @overload
+        async def get_context(self, message: discord.Message, *, cls: Type[OT]) -> OT:
+            ...
+
+        async def get_context(
+            self, message: discord.Message, *, cls: Type[OT] = cast(Any, MyContext)
+        ) -> Union[MyContext, OT]:
+            return await super().get_context(message, cls=cls)
+
+
+    bot = MyBot(command_prefix='!', intents=discord.Intents.all())
+
+
+    @bot.command()
+    async def guess(ctx: MyContext, number: int) -> None:
+        """ Guess a random number from 1 to 6. """
+        value = random.randint(1, 6)
+        await ctx.tick(number == value)
+
+
+    bot.run('your token here')
