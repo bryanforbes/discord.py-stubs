@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "discord.py-stubs"
-version = "1.5.0.0dev0"
+version = "1.5.0.0"
 description = "discord.py stubs"
 homepage = "https://github.com/bryanforbes/discord.py-stubs"
 authors = ["Bryan Forbes <bryan@reigndropsfall.net>"]
@@ -22,7 +22,7 @@ typing-extensions = "^3.7.4"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
-"discord.py" = {git = "https://github.com/Rapptz/discord.py.git", rev = "28e5b2a5e133970aff7d0f4db1d973c7516e429a"}
+"discord.py" = "^1.5.0"
 flake8 = "^3.8.3"
 flake8-pyi = "^20.5.0"
 isort = "^5.5.3"
