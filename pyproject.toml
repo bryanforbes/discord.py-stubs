@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "discord.py-stubs"
-version = "1.5.0.1dev0"
+version = "1.5.0.1"
 description = "discord.py stubs"
 homepage = "https://github.com/bryanforbes/discord.py-stubs"
 authors = ["Bryan Forbes <bryan@reigndropsfall.net>"]
