@@ -57,5 +57,5 @@ addopts = "--mypy-ini-file=test-data/mypy.ini"
 testpaths = ["test-data"]
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
