@@ -429,7 +429,7 @@ testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xm
 
 [[package]]
 name = "pytest-mypy-plugins"
-version = "1.5.0"
+version = "1.6.0"
 description = "pytest plugin for writing tests for mypy plugins"
 category = "dev"
 optional = false
@@ -437,9 +437,9 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 decorator = "*"
-mypy = ">=0.730"
+mypy = ">=0.790"
 pystache = ">=0.5.4"
-pytest = ">=5.4.0"
+pytest = ">=6.0.0"
 pyyaml = "*"
 
 [[package]]
@@ -538,7 +538,7 @@ testing = ["jaraco.itertools", "func-timeout"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.1"
-content-hash = "34166f4d387440eba4fc969ce61bf6bedf2504fd55b34550e9d1d79be35c480d"
+content-hash = "4ce5c83bc20792fb4b8e5511684f2def5ec7135a2cb97519ccc193cef29ee296"
 
 [metadata.files]
 aiohttp = [
@@ -572,7 +572,6 @@ attrs = [
     {file = "attrs-20.1.0.tar.gz", hash = "sha256:0ef97238856430dcf9228e07f316aefc17e8939fc8507e18c6501b761ef1a42a"},
 ]
 black = [
-    {file = "black-20.8b1-py3-none-any.whl", hash = "sha256:70b62ef1527c950db59062cda342ea224d772abdf6adc58b86a45421bab20a6b"},
     {file = "black-20.8b1.tar.gz", hash = "sha256:1c02557aa099101b9d21496f8a914e9ed2222ef70336404eeeac8edba836fbea"},
 ]
 cfgv = [
@@ -733,8 +732,8 @@ pytest = [
     {file = "pytest-6.1.1.tar.gz", hash = "sha256:8f593023c1a0f916110285b6efd7f99db07d59546e3d8c36fc60e2ab05d3be92"},
 ]
 pytest-mypy-plugins = [
-    {file = "pytest-mypy-plugins-1.5.0.tar.gz", hash = "sha256:bd76959cbd34765ad350bac7c0c923276dff59ffebbd66bb4becc95baa0e600f"},
-    {file = "pytest_mypy_plugins-1.5.0-py3-none-any.whl", hash = "sha256:ce569074d8b9ce8a84cebaf9e7859399f238b1d3fd19dc4643eb41b2d60d7dc4"},
+    {file = "pytest-mypy-plugins-1.6.0.tar.gz", hash = "sha256:03b42827bc9d1b2cc86e3cd567efe04935f5ff211bf80e85748fabc95c210515"},
+    {file = "pytest_mypy_plugins-1.6.0-py3-none-any.whl", hash = "sha256:2ff6edbff897cc9f14b176d466c88f0b2c0289bee24af0037ed5deb02472a64d"},
 ]
 pyyaml = [
     {file = "PyYAML-5.3.1-cp27-cp27m-win32.whl", hash = "sha256:74809a57b329d6cc0fdccee6318f44b9b8649961fa73144a98735b0aaf029f1f"},
