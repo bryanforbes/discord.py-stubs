@@ -35,6 +35,7 @@ jobs:
     - name: Install dependencies
       run: |
         poetry install -v
+        ./fix-site-packages.sh
     - name: Lint with flake8, mypy, and isort
       run: |
         poetry run flake8 discord-stubs
