@@ -15,9 +15,7 @@ from typing import (
     TypeVar,
     Union,
 )
-from typing_extensions import Protocol
-
-from mypy_extensions import TypedDict
+from typing_extensions import Protocol, TypedDict
 
 import discord
 

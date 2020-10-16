@@ -47,6 +47,7 @@ exclude = '''
 '''
 
 [tool.isort]
+known_first_party = ["discord"]
 extra_standard_library = ["typing_extensions"]
 virtual_env = ".venv"
 profile = "black"
