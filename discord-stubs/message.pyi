@@ -70,7 +70,7 @@ class Message:
     call: Optional[CallMessage]
     reference: Optional[MessageReference]
     mention_everyone: bool
-    mentions: List[Union[User, Member, Client.User]]
+    mentions: List[Union[User, Member, Client.user]]
     role_mentions: List[Role]
     webhook_id: Optional[int]
     attachments: List[Attachment]
