@@ -1,6 +1,7 @@
 import datetime
 from os import PathLike
 from typing import Any, BinaryIO, List, Optional, Union
+
 from typing_extensions import TypedDict
 
 from .abc import User as _BaseUser
@@ -17,8 +18,9 @@ from .mentions import AllowedMentions
 from .partial_emoji import PartialEmoji
 from .reaction import Reaction
 from .role import Role
-from .user import User, ClientUser
+from .user import ClientUser, User
 from .utils import cached_slot_property
+
 
 class Attachment:
     id: int
