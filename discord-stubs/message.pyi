@@ -6,7 +6,6 @@ from typing_extensions import TypedDict
 from .abc import User as _BaseUser
 from .calls import CallMessage
 from .channel import DMChannel, GroupChannel, TextChannel
-from .client import Client
 from .embeds import Embed
 from .emoji import Emoji
 from .enums import MessageType
