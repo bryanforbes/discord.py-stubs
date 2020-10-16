@@ -17,7 +17,7 @@ from .mentions import AllowedMentions
 from .partial_emoji import PartialEmoji
 from .reaction import Reaction
 from .role import Role
-from .user import User
+from .user import ClientUser, User
 from .utils import cached_slot_property
 
 class Attachment:
@@ -69,7 +69,7 @@ class Message:
     call: Optional[CallMessage]
     reference: Optional[MessageReference]
     mention_everyone: bool
-    mentions: List[Union[User, Member]]
+    mentions: List[Union[User, Member, ClientUser]]
     role_mentions: List[Role]
     webhook_id: Optional[int]
     attachments: List[Attachment]
