@@ -109,13 +109,13 @@ class Intents(BaseFlags):
     invites: flag_value
     voice_states: flag_value
     presences: flag_value
-    messages: flag_value
+    messages: alias_flag_value
     guild_messages: flag_value
     dm_messages: flag_value
-    reactions: flag_value
+    reactions: alias_flag_value
     guild_reactions: flag_value
     dm_reactions: flag_value
-    typing: flag_value
+    typing: alias_flag_value
     guild_typing: flag_value
     dm_typing: flag_value
 

@@ -1,6 +1,6 @@
 import datetime
 from os import PathLike
-from typing import Any, BinaryIO, List, Optional, Union
+from typing import BinaryIO, List, Optional, Union
 from typing_extensions import TypedDict
 
 from .abc import User as _BaseUser
@@ -14,6 +14,7 @@ from .flags import MessageFlags
 from .guild import Guild
 from .member import Member
 from .mentions import AllowedMentions
+from .mixins import Hashable
 from .partial_emoji import PartialEmoji
 from .reaction import Reaction
 from .role import Role
@@ -57,7 +58,7 @@ class _MessageApplication(TypedDict):
     icon: str
     cover_image: str
 
-class Message:
+class Message(Hashable):
     id: int
     tts: bool
     type: MessageType
@@ -78,7 +79,6 @@ class Message:
     reactions: List[Reaction]
     activity: Optional[_MessageActivity]
     application: Optional[_MessageApplication]
-    def __eq__(self, other: Any) -> bool: ...
     @cached_slot_property('_cs_guild')
     def guild(self) -> Optional[Guild]: ...
     @cached_slot_property('_cs_raw_mentions')

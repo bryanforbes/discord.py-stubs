@@ -1,7 +1,8 @@
-from typing import Any, List
+from typing import Any, List, Optional
 
 import discord
 
+from .bot import Bot
 from .context import Context
 
 class Converter:
@@ -10,6 +11,12 @@ class Converter:
 class IDConverter(Converter): ...
 
 class MemberConverter(IDConverter):
+    async def query_member_named(
+        self, guild: discord.Guild, argument: str
+    ) -> Optional[discord.Member]: ...
+    async def query_member_by_id(
+        self, bot: Bot[Context], guild: discord.Guild, user_id: int
+    ) -> Optional[discord.Member]: ...
     async def convert(self, ctx: Context, argument: str) -> discord.Member: ...
 
 class UserConverter(IDConverter):
