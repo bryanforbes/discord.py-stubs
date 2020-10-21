@@ -1,0 +1,64 @@
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+.[0-9]+'
+
+name: Create Release
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Get version
+      id: version
+      run: |
+        echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install Poetry
+      uses: dschep/install-poetry-action@v1.3
+      with:
+        version: 1.1.3
+        create_virtualenvs: true
+    - name: Install dependencies
+      run: |
+        poetry install --no-dev -v
+        ./fix-site-packages.sh
+    - name: Publish to PyPI
+      env:
+        POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+      run: |
+        poetry publish --build -n
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ steps.version.outputs.version }}
+        release_name: v${{ steps.version.outputs.version }}
+        draft: false
+        prerelease: false
+    - name: Upload tarball
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: dist/discord.py-stubs-${{ steps.version.outputs.version }}.tar.gz
+        asset_name: discord.py-stubs-${{ steps.version.outputs.version }}.tar.gz
+        asset_content_type: application/gzip
+    - name: Upload wheel
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: dist/discord.py_stubs-${{ steps.version.outputs.version }}-py3-none-any.whl
+        asset_name: discord.py_stubs-${{ steps.version.outputs.version }}-py3-none-any.whl
+        asset_content_type: application/zip
