@@ -3,12 +3,12 @@ from types import MappingProxyType, ModuleType
 from typing import (
     Any,
     Callable,
+    Collection,
     Coroutine,
     Dict,
     Iterable,
     List,
     Optional,
-    Set,
     Tuple,
     Type,
     TypeVar,
@@ -48,7 +48,7 @@ class BotBase(GroupMixin[_CT]):
     case_insensitive: bool
     description: str
     owner_id: Optional[int]
-    owner_ids: Optional[Set[int]]
+    owner_ids: Optional[Collection[int]]
     help_command: Optional[HelpCommand[_CT]]
     def __init__(
         self,
@@ -91,6 +91,67 @@ class BotBase(GroupMixin[_CT]):
     async def on_message(self, message: discord.Message) -> None: ...
 
 class Bot(BotBase[_CT], discord.Client):
+    @overload
+    def __new__(
+        self,
+        command_prefix: _CommandPrefix,
+        help_command: Optional[HelpCommand[Context]] = ...,
+        description: Optional[str] = ...,
+        *,
+        case_insensitive: bool = ...,
+        owner_id: int,
+        max_messages: Optional[int] = ...,
+        loop: Optional[asyncio.AbstractEventLoop] = ...,
+        connector: aiohttp.BaseConnector = ...,
+        proxy: Optional[str] = ...,
+        proxy_auth: Optional[aiohttp.BasicAuth] = ...,
+        shard_id: Optional[int] = ...,
+        shard_count: Optional[int] = ...,
+        intents: Optional[discord.Intents] = ...,
+        member_cache_flags: discord.MemberCacheFlags = ...,
+        fetch_offline_members: bool = ...,
+        chunk_guilds_at_startup: bool = ...,
+        status: Optional[discord.Status] = ...,
+        activity: Optional[
+            Union[discord.Activity, discord.Game, discord.Streaming]
+        ] = ...,
+        allowed_mentions: Optional[discord.AllowedMentions] = ...,
+        heartbeat_timeout: float = ...,
+        guild_ready_timeout: float = ...,
+        guild_subscriptions: bool = ...,
+        assume_unsync_clock: bool = ...,
+    ) -> Bot[Context]: ...
+    @overload
+    def __new__(
+        self,
+        command_prefix: _CommandPrefix,
+        help_command: Optional[HelpCommand[Context]] = ...,
+        description: Optional[str] = ...,
+        *,
+        case_insensitive: bool = ...,
+        owner_ids: Collection[int],
+        max_messages: Optional[int] = ...,
+        loop: Optional[asyncio.AbstractEventLoop] = ...,
+        connector: aiohttp.BaseConnector = ...,
+        proxy: Optional[str] = ...,
+        proxy_auth: Optional[aiohttp.BasicAuth] = ...,
+        shard_id: Optional[int] = ...,
+        shard_count: Optional[int] = ...,
+        intents: Optional[discord.Intents] = ...,
+        member_cache_flags: discord.MemberCacheFlags = ...,
+        fetch_offline_members: bool = ...,
+        chunk_guilds_at_startup: bool = ...,
+        status: Optional[discord.Status] = ...,
+        activity: Optional[
+            Union[discord.Activity, discord.Game, discord.Streaming]
+        ] = ...,
+        allowed_mentions: Optional[discord.AllowedMentions] = ...,
+        heartbeat_timeout: float = ...,
+        guild_ready_timeout: float = ...,
+        guild_subscriptions: bool = ...,
+        assume_unsync_clock: bool = ...,
+    ) -> Bot[Context]: ...
+    @overload
     def __new__(
         self,
         command_prefix: _CommandPrefix,
@@ -128,8 +189,128 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         help_command: HelpCommand[Context] = ...,
         description: Optional[str] = ...,
         *,
+        owner_id: int,
         shard_ids: Union[List[int], Tuple[int]],
         shard_count: int,
+        case_insensitive: bool = ...,
+        max_messages: Optional[int] = ...,
+        loop: Optional[asyncio.AbstractEventLoop] = ...,
+        connector: aiohttp.BaseConnector = ...,
+        proxy: Optional[str] = ...,
+        proxy_auth: Optional[aiohttp.BasicAuth] = ...,
+        intents: Optional[discord.Intents] = ...,
+        member_cache_flags: Optional[discord.MemberCacheFlags] = ...,
+        fetch_offline_members: bool = ...,
+        chunk_guilds_at_startup: bool = ...,
+        status: Optional[discord.Status] = ...,
+        activity: Optional[
+            Union[discord.Activity, discord.Game, discord.Streaming]
+        ] = ...,
+        allowed_mentions: Optional[discord.AllowedMentions] = ...,
+        heartbeat_timeout: float = ...,
+        guild_ready_timeout: float = ...,
+        guild_subscriptions: bool = ...,
+        assume_unsync_clock: bool = ...,
+    ) -> AutoShardedBot[Context]: ...
+    @overload
+    def __new__(
+        self,
+        command_prefix: _CommandPrefix,
+        help_command: HelpCommand[Context] = ...,
+        description: Optional[str] = ...,
+        *,
+        owner_ids: Collection[int],
+        shard_ids: Union[List[int], Tuple[int]],
+        shard_count: int,
+        case_insensitive: bool = ...,
+        max_messages: Optional[int] = ...,
+        loop: Optional[asyncio.AbstractEventLoop] = ...,
+        connector: aiohttp.BaseConnector = ...,
+        proxy: Optional[str] = ...,
+        proxy_auth: Optional[aiohttp.BasicAuth] = ...,
+        intents: Optional[discord.Intents] = ...,
+        member_cache_flags: Optional[discord.MemberCacheFlags] = ...,
+        fetch_offline_members: bool = ...,
+        chunk_guilds_at_startup: bool = ...,
+        status: Optional[discord.Status] = ...,
+        activity: Optional[
+            Union[discord.Activity, discord.Game, discord.Streaming]
+        ] = ...,
+        allowed_mentions: Optional[discord.AllowedMentions] = ...,
+        heartbeat_timeout: float = ...,
+        guild_ready_timeout: float = ...,
+        guild_subscriptions: bool = ...,
+        assume_unsync_clock: bool = ...,
+    ) -> AutoShardedBot[Context]: ...
+    @overload
+    def __new__(
+        self,
+        command_prefix: _CommandPrefix,
+        help_command: HelpCommand[Context] = ...,
+        description: Optional[str] = ...,
+        *,
+        shard_ids: Union[List[int], Tuple[int]],
+        shard_count: int,
+        case_insensitive: bool = ...,
+        max_messages: Optional[int] = ...,
+        loop: Optional[asyncio.AbstractEventLoop] = ...,
+        connector: aiohttp.BaseConnector = ...,
+        proxy: Optional[str] = ...,
+        proxy_auth: Optional[aiohttp.BasicAuth] = ...,
+        intents: Optional[discord.Intents] = ...,
+        member_cache_flags: Optional[discord.MemberCacheFlags] = ...,
+        fetch_offline_members: bool = ...,
+        chunk_guilds_at_startup: bool = ...,
+        status: Optional[discord.Status] = ...,
+        activity: Optional[
+            Union[discord.Activity, discord.Game, discord.Streaming]
+        ] = ...,
+        allowed_mentions: Optional[discord.AllowedMentions] = ...,
+        heartbeat_timeout: float = ...,
+        guild_ready_timeout: float = ...,
+        guild_subscriptions: bool = ...,
+        assume_unsync_clock: bool = ...,
+    ) -> AutoShardedBot[Context]: ...
+    @overload
+    def __new__(
+        self,
+        command_prefix: _CommandPrefix,
+        help_command: HelpCommand[Context] = ...,
+        description: Optional[str] = ...,
+        *,
+        owner_id: int,
+        shard_ids: None = ...,
+        shard_count: Optional[int] = ...,
+        case_insensitive: bool = ...,
+        max_messages: Optional[int] = ...,
+        loop: Optional[asyncio.AbstractEventLoop] = ...,
+        connector: aiohttp.BaseConnector = ...,
+        proxy: Optional[str] = ...,
+        proxy_auth: Optional[aiohttp.BasicAuth] = ...,
+        intents: Optional[discord.Intents] = ...,
+        member_cache_flags: Optional[discord.MemberCacheFlags] = ...,
+        fetch_offline_members: bool = ...,
+        chunk_guilds_at_startup: bool = ...,
+        status: Optional[discord.Status] = ...,
+        activity: Optional[
+            Union[discord.Activity, discord.Game, discord.Streaming]
+        ] = ...,
+        allowed_mentions: Optional[discord.AllowedMentions] = ...,
+        heartbeat_timeout: float = ...,
+        guild_ready_timeout: float = ...,
+        guild_subscriptions: bool = ...,
+        assume_unsync_clock: bool = ...,
+    ) -> AutoShardedBot[Context]: ...
+    @overload
+    def __new__(
+        self,
+        command_prefix: _CommandPrefix,
+        help_command: HelpCommand[Context] = ...,
+        description: Optional[str] = ...,
+        *,
+        owner_ids: Collection[int],
+        shard_ids: None = ...,
+        shard_count: Optional[int] = ...,
         case_insensitive: bool = ...,
         max_messages: Optional[int] = ...,
         loop: Optional[asyncio.AbstractEventLoop] = ...,
