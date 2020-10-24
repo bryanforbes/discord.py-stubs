@@ -1,12 +1,12 @@
+name: Create Release
+
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+.[0-9]+'
-
-name: Create Release
+      - v[0-9]+.[0-9]+.[0-9]+.[0-9]+
 
 jobs:
-  build:
+  Release:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
