@@ -18,24 +18,24 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install Poetry
-      uses: dschep/install-poetry-action@v1.3
+      uses: snok/install-poetry@v1.0.0
       with:
-        version: 1.1.2
-        create_virtualenvs: true
+        version: 1.1.4
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        virtualenvs-path: .venv
     - name: Cache Poetry virtualenv
       uses: actions/cache@v2
       env:
-        cache-name: poetry-cache
+        cache-name: venv-cache
       with:
-        path: ~/.cache/pypoetry
-        key: poetry-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+        path: .venv
+        key: venv-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
         restore-keys: |
-          poetry-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
-          poetry-${{ matrix.python-version }}-
+          venv-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+          venv-${{ matrix.python-version }}-
     - name: Install dependencies
       run: |
-        rm -rf ~/.cache/pypoetry/artifacts
-        rm -rf ~/.cache/pypoetry/repositories
         poetry install -v
         ./fix-site-packages.sh
     - name: Lint with flake8, mypy, and isort
