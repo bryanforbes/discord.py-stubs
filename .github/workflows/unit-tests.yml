@@ -34,7 +34,8 @@ jobs:
           poetry-${{ matrix.python-version }}-
     - name: Install dependencies
       run: |
-        poetry cache clear -n --all pypi
+        rm -rf ~/.cache/pypoetry/artifacts
+        rm -rf ~/.cache/pypoetry/repositories
         poetry install -v
         ./fix-site-packages.sh
     - name: Lint with flake8, mypy, and isort
