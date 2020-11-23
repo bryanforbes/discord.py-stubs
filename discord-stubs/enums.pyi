@@ -228,3 +228,8 @@ class ExpireBehaviour(Enum):
     kick: int
 
 ExpireBehavior = ExpireBehaviour
+
+class StickerType(Enum):
+    png: int
+    apng: int
+    lottie: int

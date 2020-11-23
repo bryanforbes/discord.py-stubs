@@ -18,6 +18,7 @@ from .mixins import Hashable
 from .partial_emoji import PartialEmoji
 from .reaction import Reaction
 from .role import Role
+from .sticker import Sticker
 from .user import ClientUser, User
 from .utils import cached_slot_property
 
@@ -79,6 +80,7 @@ class Message(Hashable):
     reactions: List[Reaction]
     activity: Optional[_MessageActivity]
     application: Optional[_MessageApplication]
+    stickers: List[Sticker]
     @cached_slot_property('_cs_guild')
     def guild(self) -> Optional[Guild]: ...
     @cached_slot_property('_cs_raw_mentions')

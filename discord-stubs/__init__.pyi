@@ -57,6 +57,7 @@ from .relationship import Relationship as Relationship  # noqa: F401
 from .role import Role as Role  # noqa: F401
 from .shard import AutoShardedClient as AutoShardedClient  # noqa: F401
 from .shard import ShardInfo as ShardInfo  # noqa: F401
+from .sticker import Sticker as Sticker  # noqa: F401
 from .team import *  # noqa: F401
 from .template import Template as Template  # noqa: F401
 from .user import ClientUser as ClientUser  # noqa: F401
