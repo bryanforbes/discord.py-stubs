@@ -1,6 +1,6 @@
 import datetime
 from os import PathLike
-from typing import BinaryIO, List, Optional, Union
+from typing import BinaryIO, List, Optional, Type, TypeVar, Union
 from typing_extensions import TypedDict
 
 from .abc import User as _BaseUser
@@ -22,6 +22,8 @@ from .sticker import Sticker
 from .user import ClientUser, User
 from .utils import cached_slot_property
 
+_MR = TypeVar('_MR', bound=MessageReference)
+
 class Attachment:
     id: int
     size: int
@@ -41,12 +43,35 @@ class Attachment:
     async def read(self, *, use_cached: bool = ...) -> bytes: ...
     async def to_file(self, *, use_cached: bool = ..., spoiler: bool = ...) -> File: ...
 
+class DeletedReferencedMessage:
+    @property
+    def id(self) -> Optional[int]: ...
+    @property
+    def channel_id(self) -> int: ...
+    @property
+    def guild_id(self) -> Optional[int]: ...
+
+class _BaseMessageReferenceDict(TypedDict):
+    channel_id: int
+
+class _MessageReferenceDict(_BaseMessageReferenceDict, total=False):
+    message_id: int
+    guild_id: int
+
 class MessageReference:
     message_id: Optional[int]
     channel_id: int
     guild_id: Optional[int]
+    resolved: Optional[Union[Message, DeletedReferencedMessage]]
+    def __init__(
+        self, *, message_id: int, channel_id: int, guild_id: Optional[int]
+    ) -> None: ...
+    @classmethod
+    def from_message(cls: Type[_MR], message: Message) -> _MR: ...
     @property
     def cached_message(self) -> Optional[Message]: ...
+    def to_dict(self) -> _MessageReferenceDict: ...
+    to_message_reference_dict = to_dict
 
 class _MessageActivity(TypedDict, total=False):
     type: int
@@ -111,6 +136,7 @@ class Message(Hashable):
         suppress: bool = ...,
         delete_after: Optional[float] = ...,
         allowed_mentions: Optional[AllowedMentions] = ...,
+        mention_author: Optional[bool] = ...,
     ) -> None: ...
     async def publish(self) -> None: ...
     async def pin(self, *, reason: Optional[str] = ...) -> None: ...
@@ -126,3 +152,18 @@ class Message(Hashable):
     ) -> None: ...
     async def clear_reactions(self) -> None: ...
     async def ack(self) -> None: ...
+    async def reply(
+        self,
+        content: Optional[object] = ...,
+        *,
+        tts: bool = ...,
+        embed: Optional[Embed] = ...,
+        file: Optional[File] = ...,
+        files: Optional[List[File]] = ...,
+        delete_after: Optional[float] = ...,
+        nonce: Optional[int] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
+        mention_author: Optional[bool] = ...,
+    ) -> Message: ...
+    def to_reference(self) -> MessageReference: ...
+    def to_message_reference_dict(self) -> _MessageReferenceDict: ...

@@ -16,7 +16,8 @@ from typing_extensions import TypedDict
 import aiohttp
 
 from .file import File
-from .mentions import AllowedMentions
+from .mentions import _AllowedMentionsDict
+from .message import _MessageReferenceDict
 
 class _ApplicationDict(TypedDict):
     id: int
@@ -525,7 +526,8 @@ class HTTPClient:
         tts: bool = ...,
         embed: Optional[Dict[str, Any]] = ...,
         nonce: Optional[int] = ...,
-        allowed_mentions: Optional[AllowedMentions] = ...,
+        allowed_mentions: Optional[_AllowedMentionsDict] = ...,
+        message_reference: Optional[_MessageReferenceDict] = ...,
     ) -> Coroutine[Any, Any, _MessageDict]: ...
     def send_typing(self, channel_id: int) -> Coroutine[Any, Any, None]: ...
     def send_files(
@@ -537,7 +539,8 @@ class HTTPClient:
         tts: bool = ...,
         embed: Optional[Dict[str, Any]] = ...,
         nonce: Optional[int] = ...,
-        allowed_mentions: Optional[AllowedMentions] = ...,
+        allowed_mentions: Optional[_AllowedMentionsDict] = ...,
+        message_reference: Optional[_MessageReferenceDict] = ...,
     ) -> Coroutine[Any, Any, _MessageDict]: ...
     async def ack_message(self, channel_id: int, message_id: int) -> None: ...
     def ack_guild(self, guild_id: int) -> Coroutine[Any, Any, Any]: ...

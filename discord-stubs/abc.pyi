@@ -12,7 +12,7 @@ from .invite import Invite
 from .iterators import HistoryIterator
 from .member import Member
 from .mentions import AllowedMentions
-from .message import Message
+from .message import Message, MessageReference
 from .permissions import PermissionOverwrite, Permissions
 from .role import Role
 from .user import ClientUser
@@ -136,6 +136,8 @@ class Messageable(metaclass=abc.ABCMeta):
         delete_after: Optional[float] = ...,
         nonce: Optional[int] = ...,
         allowed_mentions: Optional[AllowedMentions] = ...,
+        reference: Optional[Union[Message, MessageReference]] = ...,
+        mention_author: Optional[bool] = ...,
     ) -> Message: ...
     async def trigger_typing(self) -> None: ...
     def typing(self) -> Typing: ...

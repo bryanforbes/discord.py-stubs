@@ -38,9 +38,7 @@ from .invite import Invite as Invite  # noqa: F401
 from .member import Member as Member  # noqa: F401
 from .member import VoiceState as VoiceState  # noqa: F401
 from .mentions import AllowedMentions as AllowedMentions  # noqa: F401
-from .message import Attachment as Attachment  # noqa: F401
-from .message import Message as Message  # noqa: F401
-from .message import MessageReference as MessageReference  # noqa: F401
+from .message import *  # noqa: F401
 from .object import Object as Object  # noqa: F401
 from .partial_emoji import PartialEmoji as PartialEmoji  # noqa: F401
 from .permissions import PermissionOverwrite as PermissionOverwrite  # noqa: F401
@@ -55,6 +53,7 @@ from .raw_models import *  # noqa: F401
 from .reaction import Reaction as Reaction  # noqa: F401
 from .relationship import Relationship as Relationship  # noqa: F401
 from .role import Role as Role  # noqa: F401
+from .role import RoleTags as RoleTags  # noqa: F401
 from .shard import AutoShardedClient as AutoShardedClient  # noqa: F401
 from .shard import ShardInfo as ShardInfo  # noqa: F401
 from .sticker import Sticker as Sticker  # noqa: F401

@@ -44,3 +44,17 @@ class Context(discord.abc.Messageable):
     async def send_help(
         self: _C, __entity: Optional[Union[Command[_C], Cog[_C], str]]
     ) -> Any: ...
+    async def reply(
+        self,
+        content: Optional[object] = ...,
+        *,
+        tts: bool = ...,
+        embed: Optional[discord.Embed] = ...,
+        file: Optional[discord.File] = ...,
+        files: Optional[List[discord.File]] = ...,
+        delete_after: Optional[float] = ...,
+        nonce: Optional[int] = ...,
+        allowed_mentions: Optional[discord.AllowedMentions] = ...,
+        reference: Optional[Union[discord.Message, discord.MessageReference]] = ...,
+        mention_author: Optional[bool] = ...,
+    ) -> discord.Message: ...
