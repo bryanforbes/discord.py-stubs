@@ -38,7 +38,10 @@ from .invite import Invite as Invite  # noqa: F401
 from .member import Member as Member  # noqa: F401
 from .member import VoiceState as VoiceState  # noqa: F401
 from .mentions import AllowedMentions as AllowedMentions  # noqa: F401
-from .message import *  # noqa: F401
+from .message import Attachment as Attachment  # noqa: F401
+from .message import DeletedReferencedMessage as DeletedReferencedMessage  # noqa: F401
+from .message import Message as Message  # noqa: F401
+from .message import MessageReference as MessageReference  # noqa: F401
 from .object import Object as Object  # noqa: F401
 from .partial_emoji import PartialEmoji as PartialEmoji  # noqa: F401
 from .permissions import PermissionOverwrite as PermissionOverwrite  # noqa: F401
