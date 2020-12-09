@@ -38,3 +38,40 @@
 
         async for members in client.fetch_guilds().map(mapper):
             reveal_type(members)  # N: Revealed type is 'builtins.list*[discord.member.Member]'
+
+- case: iterator_flatten
+  main: |
+    import discord
+
+    async def main() -> None:
+        client = discord.Client()
+
+        guilds = await client.fetch_guilds().flatten()
+        reveal_type(guilds)  # N: Revealed type is 'builtins.list*[discord.guild.Guild]'
+
+- case: iterator_chunk
+  main: |
+    import discord
+
+    async def main() -> None:
+        client = discord.Client()
+
+        async for guild in client.fetch_guilds().chunk(10):
+            reveal_type(guild)  # N: Revealed type is 'builtins.list*[discord.guild.Guild*]'
+
+- case: iterator_chunk_map
+  main: |
+    import discord
+    import typing
+
+    async def main() -> None:
+        client = discord.Client()
+
+        def member_mapper(guild: discord.Guild) -> typing.List[discord.Member]:
+            return guild.members
+
+        def mapper(guild: typing.List[discord.Guild]) -> typing.List[typing.List[discord.Member]]:
+            return list(map(member_mapper, guild))
+
+        async for members_chunks in client.fetch_guilds().chunk(10).map(mapper):
+            reveal_type(members_chunks)  # N: Revealed type is 'builtins.list*[builtins.list[discord.member.Member]]'

@@ -153,6 +153,7 @@ discord.iterators.GuildIterator.__init__
 discord.iterators.HistoryIterator.__init__
 discord.iterators.MemberIterator.__init__
 discord.iterators.ReactionIterator.__init__
+discord.iterators._ChunkedAsyncIterator.__init__
 discord.iterators._FilteredAsyncIterator.__init__
 discord.iterators._MappedAsyncIterator.__init__
 discord.member.Member.__init__
