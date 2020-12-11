@@ -184,12 +184,37 @@ class Webhook(Hashable):
 
 class WebhookMessage(Message):
     def edit(
+            self,
+            *,
+            content: Optional[str] = ...,
+            embed: Optional[Embed] = ...,
+            embeds: Optional[List[Embed]] = ...,
+            allowed_mentions: Optional[AllowedMentions] = ...,
+    ) -> None: ...
+    @overload
+    def edit(
         self,
         *,
         content: Optional[str] = ...,
         embed: Optional[Embed] = ...,
-        embeds: Optional[List[Embed]] = ...,
+        suppress: bool = ...,
+        delete_after: Optional[float] = ...,
         allowed_mentions: Optional[AllowedMentions] = ...,
     ) -> None: ...
 
+    @overload
+    async def edit(
+            self,
+            *,
+            content: Optional[str] = ...,
+            embed: Optional[Embed] = ...,
+            suppress: bool = ...,
+            delete_after: Optional[float] = ...,
+            allowed_mentions: Optional[AllowedMentions] = ...,
+    ) -> None: ...
+
+
     def delete(self, *, delay: Optional[float] = ...) -> None: ...
+
+    @overload
+    async def delete(self, *, delay: Optional[float] = ...) -> None: ...
