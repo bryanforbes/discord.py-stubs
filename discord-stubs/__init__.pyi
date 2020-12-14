@@ -42,6 +42,7 @@ from .message import Attachment as Attachment  # noqa: F401
 from .message import DeletedReferencedMessage as DeletedReferencedMessage  # noqa: F401
 from .message import Message as Message  # noqa: F401
 from .message import MessageReference as MessageReference  # noqa: F401
+from .message import PartialMessage as PartialMessage  # noqa: F401
 from .object import Object as Object  # noqa: F401
 from .partial_emoji import PartialEmoji as PartialEmoji  # noqa: F401
 from .permissions import PermissionOverwrite as PermissionOverwrite  # noqa: F401

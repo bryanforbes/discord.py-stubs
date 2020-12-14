@@ -7,7 +7,7 @@ from .asset import Asset
 from .enums import ChannelType
 from .guild import _VALID_STATIC_ICON_FORMATS
 from .member import Member, VoiceState
-from .message import Message
+from .message import Message, PartialMessage
 from .mixins import Hashable
 from .permissions import PermissionOverwrite, Permissions
 from .role import Role
@@ -67,6 +67,7 @@ class TextChannel(discord.abc.Messageable, discord.abc.GuildChannel, Hashable):
     async def follow(
         self, *, destination: TextChannel, reason: Optional[str] = ...
     ) -> Webhook: ...
+    def get_partial_message(self, message_id: int) -> PartialMessage: ...
 
 class VoiceChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
     bitrate: int
@@ -160,6 +161,7 @@ class DMChannel(discord.abc.Messageable, Hashable):
     @property
     def created_at(self) -> datetime.datetime: ...
     def permissions_for(self, user: Optional[BaseUser] = ...) -> Permissions: ...
+    def get_partial_message(self, message_id: int) -> PartialMessage: ...
 
 class GroupChannel(discord.abc.Messageable, Hashable):
     id: int

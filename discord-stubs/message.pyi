@@ -1,6 +1,6 @@
 import datetime
 from os import PathLike
-from typing import BinaryIO, List, Optional, Type, TypeVar, Union
+from typing import BinaryIO, List, Optional, Type, TypeVar, Union, type_check_only
 from typing_extensions import TypedDict
 
 from .abc import User as _BaseUser
@@ -84,7 +84,50 @@ class _MessageApplication(TypedDict):
     icon: str
     cover_image: str
 
-class Message(Hashable):
+@type_check_only
+class _MessageShared:
+    @property
+    def jump_url(self) -> str: ...
+    async def delete(self, *, delay: Optional[float] = ...) -> None: ...
+    async def edit(
+        self,
+        *,
+        content: Optional[str] = ...,
+        embed: Optional[Embed] = ...,
+        suppress: bool = ...,
+        delete_after: Optional[float] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
+    ) -> None: ...
+    async def publish(self) -> None: ...
+    async def pin(self, *, reason: Optional[str] = ...) -> None: ...
+    async def unpin(self, *, reason: Optional[str] = ...) -> None: ...
+    async def add_reaction(
+        self, emoji: Union[Emoji, Reaction, PartialEmoji, str]
+    ) -> None: ...
+    async def remove_reaction(
+        self, emoji: Union[Emoji, Reaction, PartialEmoji, str], member: _BaseUser
+    ) -> None: ...
+    async def clear_reaction(
+        self, emoji: Union[Emoji, Reaction, PartialEmoji, str]
+    ) -> None: ...
+    async def clear_reactions(self) -> None: ...
+    async def reply(
+        self,
+        content: Optional[object] = ...,
+        *,
+        tts: bool = ...,
+        embed: Optional[Embed] = ...,
+        file: Optional[File] = ...,
+        files: Optional[List[File]] = ...,
+        delete_after: Optional[float] = ...,
+        nonce: Optional[int] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
+        mention_author: Optional[bool] = ...,
+    ) -> Message: ...
+    def to_reference(self) -> MessageReference: ...
+    def to_message_reference_dict(self) -> _MessageReferenceDict: ...
+
+class Message(Hashable, _MessageShared):
     id: int
     tts: bool
     type: MessageType
@@ -127,43 +170,13 @@ class Message(Hashable):
     def is_system(self) -> bool: ...
     @cached_slot_property('_cs_system_content')
     def system_content(self) -> str: ...
-    async def delete(self, *, delay: Optional[float] = ...) -> None: ...
-    async def edit(
-        self,
-        *,
-        content: Optional[str] = ...,
-        embed: Optional[Embed] = ...,
-        suppress: bool = ...,
-        delete_after: Optional[float] = ...,
-        allowed_mentions: Optional[AllowedMentions] = ...,
-        mention_author: Optional[bool] = ...,
-    ) -> None: ...
-    async def publish(self) -> None: ...
-    async def pin(self, *, reason: Optional[str] = ...) -> None: ...
-    async def unpin(self, *, reason: Optional[str] = ...) -> None: ...
-    async def add_reaction(
-        self, emoji: Union[Emoji, Reaction, PartialEmoji, str]
-    ) -> None: ...
-    async def remove_reaction(
-        self, emoji: Union[Emoji, Reaction, PartialEmoji, str], member: _BaseUser
-    ) -> None: ...
-    async def clear_reaction(
-        self, emoji: Union[Emoji, Reaction, PartialEmoji, str]
-    ) -> None: ...
-    async def clear_reactions(self) -> None: ...
     async def ack(self) -> None: ...
-    async def reply(
-        self,
-        content: Optional[object] = ...,
-        *,
-        tts: bool = ...,
-        embed: Optional[Embed] = ...,
-        file: Optional[File] = ...,
-        files: Optional[List[File]] = ...,
-        delete_after: Optional[float] = ...,
-        nonce: Optional[int] = ...,
-        allowed_mentions: Optional[AllowedMentions] = ...,
-        mention_author: Optional[bool] = ...,
-    ) -> Message: ...
-    def to_reference(self) -> MessageReference: ...
-    def to_message_reference_dict(self) -> _MessageReferenceDict: ...
+
+class PartialMessage(Hashable, _MessageShared):
+    id: int
+    channel: Union[TextChannel, DMChannel]
+    @property
+    def created_at(self) -> datetime.datetime: ...
+    @cached_slot_property('_cs_guild')
+    def guild(self) -> Optional[Guild]: ...
+    async def fetch(self) -> Message: ...
