@@ -1,4 +1,4 @@
-from typing import Any, Iterable, List, Type, TypeVar, Union
+from typing import Any, Iterable, List, Type, TypeVar, Union, type_check_only
 from typing_extensions import TypedDict
 
 from .abc import Snowflake
@@ -11,9 +11,12 @@ class _FakeBool:
 
 default: _FakeBool
 
+# TODO: remove this comment when a new version of black comes out
+@type_check_only
 class _AllowedMentionsDictBase(TypedDict):
     parse: List[str]
 
+@type_check_only
 class _AllowedMentionsDict(_AllowedMentionsDictBase, total=False):
     users: List[int]
     roles: List[int]

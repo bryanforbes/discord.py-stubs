@@ -10,6 +10,7 @@ from typing import (
     Optional,
     Tuple,
     Union,
+    type_check_only,
 )
 from typing_extensions import TypedDict
 
@@ -19,6 +20,8 @@ from .file import File
 from .mentions import _AllowedMentionsDict
 from .message import _MessageReferenceDict
 
+# TODO: remove this comment when a new version of black comes out
+@type_check_only
 class _ApplicationDict(TypedDict):
     id: int
     cover_image: str
@@ -26,12 +29,14 @@ class _ApplicationDict(TypedDict):
     icon: str
     name: str
 
+@type_check_only
 class _BaseUserDict(TypedDict):
     id: int
     username: str
     discriminator: str
     avatar: Optional[str]
 
+@type_check_only
 class _UserDict(_BaseUserDict, total=False):
     bot: bool
     mfa_enabled: bool
@@ -39,6 +44,7 @@ class _UserDict(_BaseUserDict, total=False):
     email: str
     premium: bool
 
+@type_check_only
 class _BaseApplicationInfoDict(TypedDict):
     id: int
     name: str
@@ -46,11 +52,13 @@ class _BaseApplicationInfoDict(TypedDict):
     bot_require_code_grant: bool
     owner: _UserDict
 
+@type_check_only
 class _ApplicationInfoDict(_BaseApplicationInfoDict, total=False):
     icon: str
     description: str
     rpc_origins: List[str]
 
+@type_check_only
 class _AttachmentDict(TypedDict):
     id: int
     filename: str
@@ -60,38 +68,47 @@ class _AttachmentDict(TypedDict):
     height: Optional[int]
     width: Optional[int]
 
+@type_check_only
 class _EmbedFooterDict(TypedDict, total=False):
     text: str
     icon_url: str
     proxy_icon_url: str
 
+@type_check_only
 class _BaseEmbedMediaDict(TypedDict):
     url: str
 
+@type_check_only
 class _EmbedMediaDict(_BaseEmbedMediaDict, total=False):
     height: int
     width: int
 
+@type_check_only
 class _EmbedImageDict(_EmbedMediaDict, total=False):
     proxy_url: str
 
+@type_check_only
 class _EmbedProviderDict(TypedDict):
     name: str
     url: str
 
+@type_check_only
 class _EmbedAuthorDict(TypedDict, total=False):
     name: str
     url: str
     icon_url: str
     proxy_icon_url: str
 
+@type_check_only
 class _BaseEmbedFieldDict(TypedDict):
     name: str
     value: str
 
+@type_check_only
 class _EmbedFieldDict(_BaseEmbedFieldDict, total=False):
     inline: bool
 
+@type_check_only
 class _EmbedDict(TypedDict, total=False):
     type: str
     title: str
@@ -107,20 +124,24 @@ class _EmbedDict(TypedDict, total=False):
     author: _EmbedAuthorDict
     fields: List[_EmbedFieldDict]
 
+@type_check_only
 class _PositionDict(TypedDict):
     id: int
     position: int
 
+@type_check_only
 class _OverwriteDict(TypedDict):
     id: int
     type: str
     allow: int
     deny: int
 
+@type_check_only
 class _BaseChannelDict(TypedDict):
     id: int
     type: int
 
+@type_check_only
 class _ChannelDict(_BaseChannelDict, total=False):
     guild_id: int
     position: int
@@ -138,6 +159,7 @@ class _ChannelDict(_BaseChannelDict, total=False):
     parent_id: Optional[int]
     last_pin_timestamp: str
 
+@type_check_only
 class _ClientUserDict(TypedDict):
     afk_timeout: int
     animate_emojis: bool
@@ -163,6 +185,7 @@ class _ClientUserDict(TypedDict):
     theme: str
     timezone_offset: int
 
+@type_check_only
 class _BaseMessageDict(TypedDict):
     id: int
     channel_id: int
@@ -179,31 +202,39 @@ class _BaseMessageDict(TypedDict):
     pinned: bool
     type: int
 
+@type_check_only
 class _BaseMessageActivityDict(TypedDict):
     type: int
 
+@type_check_only
 class _MessageActivityDict(_BaseMessageActivityDict, total=False):
     party_id: str
 
+@type_check_only
 class _MessageCallDict(TypedDict, total=False):
     participants: List[int]
 
+@type_check_only
 class _BasePartialEmojiDict(TypedDict):
     id: Optional[int]
     name: str
 
+@type_check_only
 class _PartialEmojiDict(_BasePartialEmojiDict, total=False):
     animated: bool
 
+@type_check_only
 class _ReactionDict(TypedDict):
     count: int
     me: bool
     emoji: _PartialEmojiDict
 
+@type_check_only
 class _BaseEmojiDict(TypedDict):
     id: int
     name: str
 
+@type_check_only
 class _EmojiDict(_BaseEmojiDict, total=False):
     animated: bool
     roles: List[int]
@@ -211,6 +242,7 @@ class _EmojiDict(_BaseEmojiDict, total=False):
     require_colons: bool
     managed: bool
 
+@type_check_only
 class _MessageDict(_BaseMessageDict, total=False):
     reactions: List[_ReactionDict]
     nonce: int
@@ -220,6 +252,7 @@ class _MessageDict(_BaseMessageDict, total=False):
     call: _MessageCallDict
     guild_id: int
 
+@type_check_only
 class _BaseGuildMemberDict(TypedDict):
     user: _UserDict
     roles: List[int]
@@ -227,10 +260,12 @@ class _BaseGuildMemberDict(TypedDict):
     deaf: bool
     mute: bool
 
+@type_check_only
 class _GuildMemberDict(_BaseGuildMemberDict, total=False):
     nick: str
     guild_id: str
 
+@type_check_only
 class _RoleDict(TypedDict):
     id: int
     name: str
@@ -241,15 +276,18 @@ class _RoleDict(TypedDict):
     managed: bool
     mentionable: bool
 
+@type_check_only
 class _BaseInviteDict(TypedDict):
     code: str
     guild: Any
     channel: Any
 
+@type_check_only
 class _InviteDict(_BaseInviteDict, total=False):
     approximate_presence_count: int
     approximate_member_count: int
 
+@type_check_only
 class _InviteMetaDict(_InviteDict):
     inviter: _UserDict
     uses: int
@@ -259,10 +297,12 @@ class _InviteMetaDict(_InviteDict):
     created_at: str
     revoked: bool
 
+@type_check_only
 class _BaseWebhookDict(TypedDict):
     id: int
     token: str
 
+@type_check_only
 class _WebhookDict(_BaseWebhookDict, total=False):
     channel_id: int
     name: Optional[str]
@@ -270,31 +310,38 @@ class _WebhookDict(_BaseWebhookDict, total=False):
     guild_id: int
     user: _UserDict
 
+@type_check_only
 class _GuildBanDict(TypedDict):
     reason: Optional[str]
     user: _UserDict
 
+@type_check_only
 class _GuildPruneDict(TypedDict):
     pruned: int
 
+@type_check_only
 class _TimestampsDict(TypedDict, total=False):
     start: int
     end: int
 
+@type_check_only
 class _ActivityPartyDict(TypedDict, total=False):
     id: str
     size: List[int]
 
+@type_check_only
 class _ActivityAssetsDict(TypedDict, total=False):
     large_image: str
     large_text: str
     small_image: str
     small_text: str
 
+@type_check_only
 class _BaseActivityDict(TypedDict):
     name: str
     type: int
 
+@type_check_only
 class _ActivityDict(_BaseActivityDict, total=False):
     url: Optional[str]
     timestamps: _TimestampsDict
@@ -304,6 +351,7 @@ class _ActivityDict(_BaseActivityDict, total=False):
     party: _ActivityPartyDict
     assets: _ActivityAssetsDict
 
+@type_check_only
 class _SpotifyActivityDict(TypedDict, total=False):
     name: str
     url: Optional[str]
@@ -317,14 +365,17 @@ class _SpotifyActivityDict(TypedDict, total=False):
     sync_id: str
     session_id: str
 
+@type_check_only
 class _BaseCustomActivityDict(TypedDict):
     type: int
     name: Optional[str]
 
+@type_check_only
 class _CustomActivityDict(_BaseCustomActivityDict, total=False):
     state: str
     emoji: _EmojiDict
 
+@type_check_only
 class _PresenceUpdateDict(TypedDict):
     user: _UserDict
     roles: List[int]
@@ -332,6 +383,7 @@ class _PresenceUpdateDict(TypedDict):
     guild_id: int
     status: str
 
+@type_check_only
 class _BaseGuildDict(TypedDict):
     id: int
     name: str
@@ -351,6 +403,7 @@ class _BaseGuildDict(TypedDict):
     application_id: Optional[int]
     system_channel_id: Optional[int]
 
+@type_check_only
 class _GuildDict(_BaseGuildDict, total=False):
     owner: bool
     permissions: int
@@ -367,29 +420,35 @@ class _GuildDict(_BaseGuildDict, total=False):
     channels: List[_ChannelDict]
     presences: List[_PresenceUpdateDict]
 
+@type_check_only
 class _BaseAuditLogChangeDict(TypedDict):
     key: str
 
+@type_check_only
 class _AuditLogChangeDict(_BaseAuditLogChangeDict, total=False):
     new_value: Any
     old_value: Any
 
+@type_check_only
 class _BaseAuditLogEntryDict(TypedDict):
     target_id: Optional[str]
     user_id: int
     id: int
     action_type: int
 
+@type_check_only
 class _AuditLogEntryDict(_BaseAuditLogEntryDict, total=False):
     changes: List[_AuditLogChangeDict]
     options: Any
     reason: str
 
+@type_check_only
 class _AuditLogDict(TypedDict):
     webhooks: List[_WebhookDict]
     users: List[_UserDict]
     audit_log_entries: List[_AuditLogEntryDict]
 
+@type_check_only
 class _CurrentUserGuildDict(TypedDict):
     id: int
     name: str
@@ -397,11 +456,13 @@ class _CurrentUserGuildDict(TypedDict):
     owner: bool
     permissions: int
 
+@type_check_only
 class _WidgetChannelDict(TypedDict):
     id: int
     name: str
     position: int
 
+@type_check_only
 class _BaseWidgetMemberDict(TypedDict):
     id: int
     username: str
@@ -409,6 +470,7 @@ class _BaseWidgetMemberDict(TypedDict):
     nick: str
     status: str
 
+@type_check_only
 class _WidgetMemberDict(_BaseWidgetMemberDict, total=False):
     channel_id: int
     avatar: str
@@ -420,15 +482,18 @@ class _WidgetMemberDict(_BaseWidgetMemberDict, total=False):
     suppress: bool
     activity: Union[_ActivityDict, _SpotifyActivityDict]
 
+@type_check_only
 class _BaseWidgetDict(TypedDict):
     id: int
     name: str
 
+@type_check_only
 class _WidgetDict(_BaseWidgetDict, total=False):
     instant_invite: Optional[str]
     channels: List[_WidgetChannelDict]
     members: List[_WidgetMemberDict]
 
+@type_check_only
 class _BaseTemplateDict(TypedDict):
     code: str
     usage_count: int
@@ -437,15 +502,18 @@ class _BaseTemplateDict(TypedDict):
     source_guild_id: int
     serialized_source_guild: _GuildDict
 
+@type_check_only
 class _TemplateDict(_BaseTemplateDict, total=False):
     creator: _UserDict
     created_at: str
     updated_at: str
 
+@type_check_only
 class _IntegrationAccountDict(TypedDict):
     id: int
     name: str
 
+@type_check_only
 class _BaseIntegrationDict(TypedDict):
     id: int
     name: str
@@ -459,6 +527,7 @@ class _BaseIntegrationDict(TypedDict):
     account: _IntegrationAccountDict
     synced_at: str
 
+@type_check_only
 class _IntegrationDict(_BaseIntegrationDict, total=False):
     enable_emoticons: bool
 

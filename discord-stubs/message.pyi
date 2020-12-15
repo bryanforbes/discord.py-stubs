@@ -51,9 +51,11 @@ class DeletedReferencedMessage:
     @property
     def guild_id(self) -> Optional[int]: ...
 
+@type_check_only
 class _BaseMessageReferenceDict(TypedDict):
     channel_id: int
 
+@type_check_only
 class _MessageReferenceDict(_BaseMessageReferenceDict, total=False):
     message_id: int
     guild_id: int
@@ -73,10 +75,12 @@ class MessageReference:
     def to_dict(self) -> _MessageReferenceDict: ...
     to_message_reference_dict = to_dict
 
+@type_check_only
 class _MessageActivity(TypedDict, total=False):
     type: int
     party_id: str
 
+@type_check_only
 class _MessageApplication(TypedDict):
     id: str
     name: str

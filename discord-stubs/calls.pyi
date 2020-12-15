@@ -1,5 +1,5 @@
 import datetime
-from typing import List, Optional, Union
+from typing import List, Optional, Union, type_check_only
 from typing_extensions import TypedDict
 
 from .channel import GroupChannel
@@ -8,6 +8,8 @@ from .member import VoiceState
 from .message import Message
 from .user import ClientUser, User
 
+# TODO: remove this comment when a new version of black comes out
+@type_check_only
 class _BaseVoiceStateDict(TypedDict):
     channel_id: Optional[int]
     user_id: int
@@ -18,6 +20,7 @@ class _BaseVoiceStateDict(TypedDict):
     self_mute: bool
     suppress: bool
 
+@type_check_only
 class _VoiceStateDict(_BaseVoiceStateDict, total=False):
     guild_id: int
 

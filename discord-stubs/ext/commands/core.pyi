@@ -15,6 +15,7 @@ from typing import (
     Union,
     ValuesView,
     overload,
+    type_check_only,
 )
 from typing_extensions import Protocol
 
@@ -31,12 +32,16 @@ _CMD = TypeVar('_CMD', bound=Command[Any])
 _F = TypeVar('_F', bound=Union[_CoroType, Command[Any]])
 _T_contra = TypeVar('_T_contra', contravariant=True)
 
+# TODO: remove this comment when a new version of black comes out
+@type_check_only
 class _CheckPredicate(Protocol[_T_contra]):
     def __call__(self, __ctx: _T_contra) -> Union[bool, Coroutine[Any, Any, bool]]: ...
 
+@type_check_only
 class _CheckDecorator(Protocol):
     def __call__(self, __func: _F) -> _F: ...
 
+@type_check_only
 class _InvokeCallback(Protocol[_T_contra]):
     async def __call__(self, __ctx: _T_contra) -> None: ...
 

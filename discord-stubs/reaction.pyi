@@ -1,4 +1,4 @@
-from typing import Any, Optional, Union
+from typing import Any, Optional, Union, type_check_only
 from typing_extensions import Protocol, TypedDict
 
 from .abc import Snowflake
@@ -7,12 +7,16 @@ from .iterators import ReactionIterator
 from .message import Message
 from .partial_emoji import PartialEmoji
 
+# TODO: remove this comment when a new version of black comes out
+@type_check_only
 class _RequiredReactionData(TypedDict):
     me: bool
 
+@type_check_only
 class _ReactionData(_RequiredReactionData, total=False):
     count: int
 
+@type_check_only
 class _UserProtocol(Protocol):
     id: int
 

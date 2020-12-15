@@ -1,4 +1,4 @@
-from typing import ClassVar, Optional, Union
+from typing import ClassVar, Optional, Union, type_check_only
 from typing_extensions import Final, TypedDict
 
 from .errors import DiscordException
@@ -21,6 +21,8 @@ CTL_SET_FEC: Final[int] = ...
 CTL_SET_PLP: Final[int] = ...
 CTL_SET_SIGNAL: Final[int] = ...
 
+# TODO: remove this comment when a new version of black comes out
+@type_check_only
 class _BandCtl(TypedDict):
     narrow: int
     medium: int
@@ -28,6 +30,7 @@ class _BandCtl(TypedDict):
     superwide: int
     full: int
 
+@type_check_only
 class _SignalCtl(TypedDict):
     auto: int
     voice: int

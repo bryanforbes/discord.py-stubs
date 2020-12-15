@@ -14,6 +14,7 @@ from typing import (
     Sequence,
     TypeVar,
     Union,
+    type_check_only,
 )
 from typing_extensions import Protocol, TypedDict
 
@@ -30,6 +31,8 @@ _MaybeAwaitable = Union[Awaitable[_T], _T]
 _CT = TypeVar('_CT', bound=Context)
 _HC = TypeVar('_HC', bound=HelpCommand[Any])
 
+# TODO: remove this comment when a new version of black comes out
+@type_check_only
 class _CommandAttrs(TypedDict, total=False):
     name: str
     enabled: bool
@@ -45,6 +48,7 @@ class _CommandAttrs(TypedDict, total=False):
     parent: Command[Context]
     checks: List[_CheckPredicate[Any]]
 
+@type_check_only
 class _PaginatorProtocol(Protocol):
     prefix: Optional[str]
     suffix: Optional[str]

@@ -1,4 +1,4 @@
-from typing import List, Optional, Set
+from typing import List, Optional, Set, type_check_only
 from typing_extensions import Literal, TypedDict
 
 from .http import _MessageDict, _PartialEmojiDict
@@ -6,26 +6,33 @@ from .member import Member
 from .message import Message
 from .partial_emoji import PartialEmoji
 
+# TODO: remove this comment when a new version of black comes out
+@type_check_only
 class _BaseBulkMessageDeleteDict(TypedDict, total=False):
     guild_id: str
 
+@type_check_only
 class _BulkMessageDeleteDict(_BaseBulkMessageDeleteDict):
     ids: List[str]
     channel_id: str
 
+@type_check_only
 class _BaseReactionActionDict(TypedDict):
     message_id: str
     channel_id: str
     user_id: str
     emoji: _PartialEmojiDict
 
+@type_check_only
 class _ReactionActionDict(_BaseReactionActionDict, total=False):
     guild_id: str
 
+@type_check_only
 class _BaseReactionClearDict(TypedDict):
     channel_id: int
     message_id: int
 
+@type_check_only
 class _ReactionClearDict(_BaseReactionClearDict, total=False):
     guild_id: int
 
