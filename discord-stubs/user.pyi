@@ -1,5 +1,5 @@
 import datetime
-from typing import Any, List, NamedTuple, Optional
+from typing import Any, List, NamedTuple, Optional, type_check_only
 from typing_extensions import Literal
 
 import discord.abc
@@ -53,7 +53,11 @@ class Profile(NamedTuple):
     @property
     def system(self) -> bool: ...
 
-class BaseUser(discord.abc.User):
+# The following is only used in the stubs in order to allow Member to use the
+# properties of BaseUser without inheriting from it and creating a false
+# positive between BaseUser and Member
+@type_check_only
+class _BaseUser:
     name: str
     id: int
     discriminator: str
@@ -91,6 +95,8 @@ class BaseUser(discord.abc.User):
     @property
     def display_name(self) -> str: ...
     def mentioned_in(self, message: Message) -> bool: ...
+
+class BaseUser(_BaseUser, discord.abc.User): ...
 
 class ClientUser(BaseUser):
     verified: bool
@@ -144,7 +150,11 @@ class ClientUser(BaseUser):
         timezone_offset: int = ...,
     ) -> _ClientUserDict: ...
 
-class User(BaseUser, discord.abc.Messageable):
+# The following is only used in the stubs in order to allow Member to use the
+# properties of User without inheriting from it and creating a false
+# positive between User and Member
+@type_check_only
+class _User:
     @property
     def dm_channel(self) -> Optional[DMChannel]: ...
     async def create_dm(self) -> DMChannel: ...
@@ -158,3 +168,5 @@ class User(BaseUser, discord.abc.Messageable):
     async def remove_friend(self) -> None: ...
     async def send_friend_request(self) -> None: ...
     async def profile(self) -> Profile: ...
+
+class User(_User, BaseUser, discord.abc.Messageable): ...

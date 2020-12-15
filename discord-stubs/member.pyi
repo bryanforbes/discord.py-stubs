@@ -4,17 +4,14 @@ from typing import Any, List, Optional, Tuple, Union
 import discord.abc
 
 from .activity import BaseActivity, Spotify
-from .asset import Asset
-from .channel import DMChannel, GroupChannel, VoiceChannel
+from .channel import GroupChannel, VoiceChannel
 from .colour import Colour
-from .enums import DefaultAvatar, Status
-from .flags import PublicUserFlags
+from .enums import Status
 from .guild import Guild
 from .message import Message
 from .permissions import Permissions
-from .relationship import Relationship
 from .role import Role
-from .user import Profile, User
+from .user import _BaseUser, _User
 
 class VoiceState:
     deaf: bool
@@ -27,51 +24,12 @@ class VoiceState:
     channel: Optional[Union[GroupChannel, VoiceChannel]]
     session_id: str
 
-class Member(discord.abc.Messageable, discord.abc.User):
+class Member(_BaseUser, _User, discord.abc.Messageable, discord.abc.User):
     joined_at: Optional[datetime.datetime]
     activities: Tuple[Union[BaseActivity, Spotify], ...]
     nick: Optional[str]
     premium_since: Optional[datetime.datetime]
     guild: Guild
-
-    # From discord.user.BaseUser
-    name: str
-    id: int
-    discriminator: str
-    avatar: Optional[str]
-    bot: bool
-    system: bool
-    @property
-    def public_flags(self) -> PublicUserFlags: ...
-    @property
-    def avatar_url(self) -> Asset: ...
-    def is_avatar_animated(self) -> bool: ...
-    def avatar_url_as(
-        self, *, format: Optional[str] = ..., static_format: str = ..., size: int = ...
-    ) -> Asset: ...
-    @property
-    def default_avatar(self) -> DefaultAvatar: ...
-    @property
-    def default_avatar_url(self) -> Asset: ...
-    # End from discord.user.BaseUser
-
-    # From discord.user.User
-    @property
-    def created_at(self) -> datetime.datetime: ...
-    @property
-    def dm_channel(self) -> Optional[DMChannel]: ...
-    async def create_dm(self) -> DMChannel: ...
-    @property
-    def relationship(self) -> Optional[Relationship]: ...
-    async def mutual_friends(self) -> List[User]: ...
-    def is_friend(self) -> bool: ...
-    def is_blocked(self) -> bool: ...
-    async def block(self) -> None: ...
-    async def unblock(self) -> None: ...
-    async def remove_friend(self) -> None: ...
-    async def send_friend_request(self) -> None: ...
-    async def profile(self) -> Profile: ...
-    # End from discord.user.User
     def __eq__(self, other: Any) -> bool: ...
     def __ne__(self, other: Any) -> bool: ...
     def __hash__(self) -> int: ...
