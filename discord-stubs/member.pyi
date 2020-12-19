@@ -28,6 +28,7 @@ class Member(_BaseUser, _User, discord.abc.Messageable, discord.abc.User):
     joined_at: Optional[datetime.datetime]
     activities: Tuple[Union[BaseActivity, Spotify], ...]
     nick: Optional[str]
+    pending: bool
     premium_since: Optional[datetime.datetime]
     guild: Guild
     def __eq__(self, other: Any) -> bool: ...

@@ -2,7 +2,7 @@ import datetime
 from typing import Any, Iterator, List, Optional, Tuple
 
 from .asset import Asset
-from .guild import Guild
+from .guild import _VALID_ANIMATED_ICON_FORMATS, _VALID_STATIC_ICON_FORMATS, Guild
 from .partial_emoji import _EmojiTag
 from .role import Role
 from .user import User
@@ -28,6 +28,12 @@ class Emoji(_EmojiTag):
     def roles(self) -> List[Role]: ...
     @property
     def guild(self) -> Guild: ...
+    def url_as(
+        self,
+        *,
+        format: Optional[_VALID_ANIMATED_ICON_FORMATS] = ...,
+        static_format: _VALID_STATIC_ICON_FORMATS = ...,
+    ) -> Asset: ...
     def is_usable(self) -> bool: ...
     async def delete(self, *, reason: Optional[str] = ...) -> None: ...
     async def edit(
