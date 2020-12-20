@@ -52,7 +52,7 @@ from .template import Template
 from .user import ClientUser, Profile, User
 from .utils import SequenceProxy
 from .voice_client import VoiceProtocol
-from .webhook import Webhook
+from .webhook import _AsyncWebhook
 from .widget import Widget
 
 _FuncType = Callable[..., Coroutine[Any, Any, Any]]
@@ -568,4 +568,4 @@ class Client:
     async def fetch_channel(
         self, channel_id: int
     ) -> Union[_GuildChannel, _PrivateChannel]: ...
-    async def fetch_webhook(self, webhook_id: int) -> Webhook: ...
+    async def fetch_webhook(self, webhook_id: int) -> _AsyncWebhook: ...

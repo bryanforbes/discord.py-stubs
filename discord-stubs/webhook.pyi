@@ -2,15 +2,12 @@ import asyncio
 import datetime
 from typing import (
     Any,
-    BinaryIO,
     ClassVar,
     Coroutine,
     Dict,
+    Generic,
     Iterable,
-    List,
     Optional,
-    Tuple,
-    Type,
     TypeVar,
     Union,
     overload,
@@ -34,10 +31,16 @@ from .state import ConnectionState
 
 _T = TypeVar('_T')
 
-class WebhookAdapter:
-    BASE: ClassVar[str] = ...
+_AsyncNone = Coroutine[Any, Any, None]
+_AsyncOptionalMessage = Coroutine[Any, Any, Optional[WebhookMessage[_AsyncNone]]]
 
-    webhook: Webhook
+_N = TypeVar('_N', bound=Union[_AsyncNone, None])
+_M = TypeVar('_M', bound=Union[_AsyncOptionalMessage, Optional[WebhookMessage[None]]])
+
+class WebhookAdapter(Generic[_N, _M]):
+    BASE: ClassVar[str]
+
+    webhook: Webhook[_N, _M]
     def is_async(self) -> bool: ...
     def request(
         self,
@@ -45,76 +48,45 @@ class WebhookAdapter:
         url: str,
         payload: Optional[Dict[str, Any]] = ...,
         multipart: Optional[Dict[str, Any]] = ...,
+        *,
+        files: Optional[Iterable[File]] = ...,
+        reason: Optional[str] = ...,
     ) -> Any: ...
-    def delete_webhook(self, *, reason: Optional[str] = ...) -> Any: ...
-    def edit_webhook(self, *, reason: Optional[str] = ..., **payload: Any) -> Any: ...
-    def edit_webhook_message(self, message_id: int, payload: Any) -> Any: ...
-    def delete_webhook_message(self, message_id: int) -> Any: ...
-    def handle_execution_response(self, data: Any, *, wait: bool) -> Any: ...
+    def delete_webhook(self, *, reason: Optional[str] = ...) -> _N: ...
+    def edit_webhook(
+        self,
+        *,
+        reason: Optional[str] = ...,
+        **payload: Any,
+    ) -> _N: ...
+    def edit_webhook_message(self, message_id: int, payload: Any) -> _N: ...
+    def delete_webhook_message(self, message_id: int) -> _N: ...
+    def handle_execution_response(
+        self,
+        response: Any,
+        *,
+        wait: bool,
+    ) -> _M: ...
     def execute_webhook(
         self,
         *,
         payload: Dict[str, Any],
         wait: bool = ...,
-        file: Optional[Tuple[str, BinaryIO, str]] = ...,
-        files: Optional[List[Tuple[str, BinaryIO, str]]] = ...,
-    ) -> Any: ...
+        file: Optional[File] = ...,
+        files: Optional[Iterable[File]] = ...,
+    ) -> _M: ...
 
-class AsyncWebhookAdapter(WebhookAdapter):
+class AsyncWebhookAdapter(WebhookAdapter[_AsyncNone, _AsyncOptionalMessage]):
     session: aiohttp.ClientSession
     loop: asyncio.AbstractEventLoop
     def __init__(self, session: aiohttp.ClientSession) -> None: ...
     def is_async(self) -> bool: ...
-    async def request(
-        self,
-        verb: str,
-        url: str,
-        payload: Optional[Dict[str, Any]] = ...,
-        multipart: Optional[Dict[str, Any]] = ...,
-        *,
-        files: Optional[Iterable[File]] = ...,
-        reason: Optional[str] = ...,
-    ) -> Any: ...
-    @overload
-    async def handle_execution_response(
-        self, response: Any, *, wait: Literal[True]
-    ) -> WebhookMessage: ...
-    @overload
-    async def handle_execution_response(
-        self, response: Coroutine[Any, Any, _T], *, wait: Literal[False]
-    ) -> _T: ...
-    @overload
-    async def handle_execution_response(
-        self, response: Coroutine[Any, Any, _T], *, wait: bool
-    ) -> Union[_T, WebhookMessage]: ...
 
-class RequestsWebhookAdapter(WebhookAdapter):
+class RequestsWebhookAdapter(WebhookAdapter[None, WebhookMessage[None]]):
     session: Any
     def __init__(self, session: Optional[Any] = ..., *, sleep: bool = ...) -> None: ...
-    def request(
-        self,
-        verb: str,
-        url: str,
-        payload: Optional[Dict[str, Any]] = ...,
-        multipart: Optional[Dict[str, Any]] = ...,
-        *,
-        files: Optional[Iterable[File]] = ...,
-        reason: Optional[str] = ...,
-    ) -> Any: ...
-    @overload
-    def handle_execution_response(
-        self, response: Any, *, wait: Literal[True]
-    ) -> WebhookMessage: ...
-    @overload
-    def handle_execution_response(
-        self, response: _T, *, wait: Literal[False]
-    ) -> _T: ...
-    @overload
-    def handle_execution_response(
-        self, response: _T, *, wait: bool
-    ) -> Union[_T, WebhookMessage]: ...
 
-class WebhookMessage(Message):
+class WebhookMessage(Message, Generic[_N]):
     @overload  # type: ignore[override]
     def edit(
         self,
@@ -122,7 +94,7 @@ class WebhookMessage(Message):
         content: Optional[str] = ...,
         embed: Optional[Embed] = ...,
         allowed_mentions: Optional[AllowedMentions] = ...,
-    ) -> Union[None, Coroutine[Any, Any, None]]: ...
+    ) -> _N: ...
     @overload
     def edit(
         self,
@@ -130,11 +102,9 @@ class WebhookMessage(Message):
         content: Optional[str] = ...,
         embeds: Optional[Embed] = ...,
         allowed_mentions: Optional[AllowedMentions] = ...,
-    ) -> Union[None, Coroutine[Any, Any, None]]: ...
+    ) -> _N: ...
 
-_W = TypeVar('_W', bound=Webhook)
-
-class Webhook(Hashable):
+class Webhook(Hashable, Generic[_N, _M]):
     id: int
     type: WebhookType
     token: Optional[str]
@@ -147,13 +117,17 @@ class Webhook(Hashable):
     def url(self) -> str: ...
     @classmethod
     def partial(
-        cls: Type[_W], id: int, token: str, *, adapter: WebhookAdapter
-    ) -> _W: ...
+        cls, id: int, token: str, *, adapter: WebhookAdapter[_N, _M]
+    ) -> Webhook[_N, _M]: ...
     @classmethod
-    def from_url(cls: Type[_W], url: str, *, adapter: WebhookAdapter) -> _W: ...
+    def from_url(
+        cls, url: str, *, adapter: WebhookAdapter[_N, _M]
+    ) -> Webhook[_N, _M]: ...
     # NOTE: While this method is public, it should never be invoked by users.
     @classmethod
-    def from_state(cls: Type[_W], data: _WebhookDict, state: ConnectionState) -> _W: ...
+    def from_state(
+        cls, data: _WebhookDict, state: ConnectionState
+    ) -> _AsyncWebhook: ...
     @property
     def guild(self) -> Optional[Guild]: ...
     @property
@@ -165,16 +139,118 @@ class Webhook(Hashable):
     def avatar_url_as(
         self, *, format: Optional[Literal['png', 'jpg', 'jpeg']] = ..., size: int = ...
     ) -> Asset: ...
-    def delete(
-        self, *, reason: Optional[str] = ...
-    ) -> Union[None, Coroutine[Any, Any, None]]: ...
+    def delete(self, *, reason: Optional[str] = ...) -> _N: ...
     def edit(
         self,
         *,
         reason: Optional[str] = ...,
         name: Optional[str] = ...,
         avatar: Optional[bytes] = ...,
-    ) -> Union[_WebhookDict, Coroutine[Any, Any, _WebhookDict]]: ...
+    ) -> _N: ...
+    @overload
+    def send(
+        self,
+        content: str,
+        *,
+        wait: bool = ...,
+        username: Optional[str] = ...,
+        avatar_url: Optional[Union[str, Asset]] = ...,
+        tts: bool = ...,
+        file: Optional[File] = ...,
+        embed: Optional[Embed] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
+    ) -> _M: ...
+    @overload
+    def send(
+        self,
+        content: str,
+        *,
+        wait: bool = ...,
+        username: Optional[str] = ...,
+        avatar_url: Optional[Union[str, Asset]] = ...,
+        tts: bool = ...,
+        file: Optional[File] = ...,
+        embeds: Optional[Iterable[Embed]] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
+    ) -> _M: ...
+    @overload
+    def send(
+        self,
+        content: str,
+        *,
+        wait: bool = ...,
+        username: Optional[str] = ...,
+        avatar_url: Optional[Union[str, Asset]] = ...,
+        tts: bool = ...,
+        files: Optional[Iterable[File]] = ...,
+        embed: Optional[Embed] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
+    ) -> _M: ...
+    @overload
+    def send(
+        self,
+        content: str,
+        *,
+        wait: bool = ...,
+        username: Optional[str] = ...,
+        avatar_url: Optional[Union[str, Asset]] = ...,
+        tts: bool = ...,
+        files: Optional[Iterable[File]] = ...,
+        embeds: Optional[Iterable[Embed]] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
+    ) -> _M: ...
+    @overload
+    def send(
+        self,
+        content: Optional[str] = ...,
+        *,
+        wait: bool = ...,
+        username: Optional[str] = ...,
+        avatar_url: Optional[Union[str, Asset]] = ...,
+        tts: bool = ...,
+        file: File,
+        embed: Optional[Embed] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
+    ) -> _M: ...
+    @overload
+    def send(
+        self,
+        content: Optional[str] = ...,
+        *,
+        wait: bool = ...,
+        username: Optional[str] = ...,
+        avatar_url: Optional[Union[str, Asset]] = ...,
+        tts: bool = ...,
+        file: File,
+        embeds: Optional[Iterable[Embed]] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
+    ) -> _M: ...
+    @overload
+    def send(
+        self,
+        content: Optional[str] = ...,
+        *,
+        wait: bool = ...,
+        username: Optional[str] = ...,
+        avatar_url: Optional[Union[str, Asset]] = ...,
+        tts: bool = ...,
+        files: Iterable[File],
+        embed: Optional[Embed] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
+    ) -> _M: ...
+    @overload
+    def send(
+        self,
+        content: Optional[str] = ...,
+        *,
+        wait: bool = ...,
+        username: Optional[str] = ...,
+        avatar_url: Optional[Union[str, Asset]] = ...,
+        tts: bool = ...,
+        files: Iterable[File],
+        embeds: Optional[Iterable[Embed]] = ...,
+        allowed_mentions: Optional[AllowedMentions] = ...,
+    ) -> _M: ...
     @overload
     def send(
         self,
@@ -185,9 +261,9 @@ class Webhook(Hashable):
         avatar_url: Optional[Union[str, Asset]] = ...,
         tts: bool = ...,
         file: Optional[File] = ...,
-        embed: Optional[Embed] = ...,
+        embed: Embed,
         allowed_mentions: Optional[AllowedMentions] = ...,
-    ) -> Union[WebhookMessage, Coroutine[Any, Any, WebhookMessage]]: ...
+    ) -> _M: ...
     @overload
     def send(
         self,
@@ -197,10 +273,10 @@ class Webhook(Hashable):
         username: Optional[str] = ...,
         avatar_url: Optional[Union[str, Asset]] = ...,
         tts: bool = ...,
-        files: Optional[List[File]] = ...,
-        embed: Optional[Embed] = ...,
+        files: Optional[Iterable[File]] = ...,
+        embed: Embed,
         allowed_mentions: Optional[AllowedMentions] = ...,
-    ) -> Union[WebhookMessage, Coroutine[Any, Any, WebhookMessage]]: ...
+    ) -> _M: ...
     @overload
     def send(
         self,
@@ -211,9 +287,9 @@ class Webhook(Hashable):
         avatar_url: Optional[Union[str, Asset]] = ...,
         tts: bool = ...,
         file: Optional[File] = ...,
-        embeds: Optional[List[Embed]] = ...,
+        embeds: Iterable[Embed],
         allowed_mentions: Optional[AllowedMentions] = ...,
-    ) -> Union[WebhookMessage, Coroutine[Any, Any, WebhookMessage]]: ...
+    ) -> _M: ...
     @overload
     def send(
         self,
@@ -223,11 +299,11 @@ class Webhook(Hashable):
         username: Optional[str] = ...,
         avatar_url: Optional[Union[str, Asset]] = ...,
         tts: bool = ...,
-        files: Optional[List[File]] = ...,
-        embeds: Optional[List[Embed]] = ...,
+        files: Optional[Iterable[File]] = ...,
+        embeds: Iterable[Embed],
         allowed_mentions: Optional[AllowedMentions] = ...,
-    ) -> Union[WebhookMessage, Coroutine[Any, Any, WebhookMessage]]: ...
-    def execute(self, *args: Any, **kwargs: Any) -> Any: ...
+    ) -> _M: ...
+    execute = send
     @overload
     def edit_message(
         self,
@@ -236,7 +312,7 @@ class Webhook(Hashable):
         content: Optional[str] = ...,
         embed: Optional[Embed] = ...,
         allowed_mentions: Optional[AllowedMentions] = ...,
-    ) -> Union[None, Coroutine[Any, Any, None]]: ...
+    ) -> _N: ...
     @overload
     def edit_message(
         self,
@@ -245,7 +321,7 @@ class Webhook(Hashable):
         content: Optional[str] = ...,
         embeds: Optional[Embed] = ...,
         allowed_mentions: Optional[AllowedMentions] = ...,
-    ) -> Union[None, Coroutine[Any, Any, None]]: ...
-    def delete_message(
-        self, message_id: int
-    ) -> Union[None, Coroutine[Any, Any, None]]: ...
+    ) -> _N: ...
+    def delete_message(self, message_id: int) -> _N: ...
+
+_AsyncWebhook = Webhook[_AsyncNone, _AsyncOptionalMessage]

@@ -12,7 +12,7 @@ from .mixins import Hashable
 from .permissions import PermissionOverwrite, Permissions
 from .role import Role
 from .user import BaseUser, ClientUser, User
-from .webhook import Webhook
+from .webhook import _AsyncWebhook
 
 _OverwritesDict = Dict[Union[Role, Member], PermissionOverwrite]
 
@@ -56,17 +56,17 @@ class TextChannel(discord.abc.Messageable, discord.abc.GuildChannel, Hashable):
         oldest_first: Optional[bool] = ...,
         bulk: bool = ...,
     ) -> List[Message]: ...
-    async def webhooks(self) -> List[Webhook]: ...
+    async def webhooks(self) -> List[_AsyncWebhook]: ...
     async def create_webhook(
         self,
         *,
         name: str,
         avatar: Optional[Union[bytes, bytearray]] = ...,
         reason: Optional[str] = ...,
-    ) -> Webhook: ...
+    ) -> _AsyncWebhook: ...
     async def follow(
         self, *, destination: TextChannel, reason: Optional[str] = ...
-    ) -> Webhook: ...
+    ) -> _AsyncWebhook: ...
     def get_partial_message(self, message_id: int) -> PartialMessage: ...
 
 class VoiceChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
