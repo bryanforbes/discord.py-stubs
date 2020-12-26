@@ -56,6 +56,8 @@ _VALID_FEATURES = Literal[
     'ANIMATED_ICON',
     'PUBLIC_DISABLED',
     'WELCOME_SCREEN_ENABLED',
+    'MEMBER_VERIFICATION_GATE_ENABLED',
+    'PREVIEW_ENABLED',
 ]
 
 class BanEntry(NamedTuple):
@@ -282,8 +284,8 @@ class Guild(Hashable):
         *,
         name: str,
         permissions: Permissions = ...,
-        colour: Colour = ...,
-        color: Colour = ...,
+        colour: Union[Colour, int] = ...,
+        color: Union[Colour, int] = ...,
         hoist: bool = ...,
         mentionable: bool = ...,
         reason: Optional[str] = ...,
