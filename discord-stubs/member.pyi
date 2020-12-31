@@ -11,7 +11,7 @@ from .guild import Guild
 from .message import Message
 from .permissions import Permissions
 from .role import Role
-from .user import _BaseUser, _User
+from .user import _CommonUser, _User
 
 class VoiceState:
     deaf: bool
@@ -24,7 +24,7 @@ class VoiceState:
     channel: Optional[Union[GroupChannel, VoiceChannel]]
     session_id: str
 
-class Member(_BaseUser, _User, discord.abc.Messageable, discord.abc.User):
+class Member(_CommonUser, _User, discord.abc.Messageable, discord.abc.User):
     joined_at: Optional[datetime.datetime]
     activities: Tuple[Union[BaseActivity, Spotify], ...]
     nick: Optional[str]

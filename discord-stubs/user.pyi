@@ -57,7 +57,7 @@ class Profile(NamedTuple):
 # properties of BaseUser without inheriting from it and creating a false
 # positive between BaseUser and Member
 @type_check_only
-class _BaseUser:
+class _CommonUser:
     name: str
     id: int
     discriminator: str
@@ -96,7 +96,7 @@ class _BaseUser:
     def display_name(self) -> str: ...
     def mentioned_in(self, message: Message) -> bool: ...
 
-class BaseUser(_BaseUser, discord.abc.User): ...
+class BaseUser(_CommonUser, discord.abc.User): ...
 
 class ClientUser(BaseUser):
     verified: bool

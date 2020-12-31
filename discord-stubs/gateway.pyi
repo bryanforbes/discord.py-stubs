@@ -128,6 +128,7 @@ class DiscordWebSocket:
         *,
         limit: int,
         user_ids: Optional[List[int]] = ...,
+        presences: bool,
         nonce: Optional[str] = ...,
     ) -> None: ...
     async def voice_state(

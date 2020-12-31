@@ -318,7 +318,7 @@ class Guild(Hashable):
     async def chunk(self, *, cache: bool = ...) -> List[Member]: ...
     @overload
     async def query_members(
-        self, query: str, *, limit: int = ..., cache: bool = ...
+        self, query: str, *, limit: int = ..., presences: bool = ..., cache: bool = ...
     ) -> List[Member]: ...
     @overload
     async def query_members(
@@ -327,6 +327,7 @@ class Guild(Hashable):
         *,
         limit: int = ...,
         user_ids: Optional[List[int]] = ...,
+        presences: bool = ...,
         cache: bool = ...,
     ) -> List[Member]: ...
     async def change_voice_state(

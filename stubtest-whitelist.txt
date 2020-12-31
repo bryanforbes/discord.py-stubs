@@ -43,6 +43,7 @@ discord.MessageReference.__init__
 discord.MessageReference.with_state
 discord.MessageFlags.DEFAULT_VALUE
 discord.PartialEmoji.__init__
+discord.PartialMessage.__init__
 discord.Permissions.DEFAULT_VALUE
 discord.PrivilegedIntentsRequired.__init__
 discord.Profile.__doc__
@@ -63,6 +64,7 @@ discord.TextChannel.__init__
 discord.VoiceChannel.__init__
 discord.VoiceState.__init__
 discord.Webhook.__init__
+discord.WebhookAdapter.handle_execution_response
 discord.Widget.__init__
 discord.WidgetMember.__init__
 discord.activity.CustomActivity.state
@@ -174,6 +176,7 @@ discord.message.DeletedReferencedMessage.__init__
 discord.message.MessageReference.__init__
 discord.message.MessageReference.with_state
 discord.message.Message.__init__
+discord.message.PartialMessage.__init__
 discord.opus.OpusError.__init__
 discord.opus.band_ctl
 discord.opus.signal_ctl
@@ -262,5 +265,6 @@ discord.user.BaseUser.__init__
 discord.user.ClientUser.__init__
 discord.user.Profile.__doc__
 discord.webhook.Webhook.__init__
+discord.webhook.WebhookAdapter.handle_execution_response
 discord.widget.Widget.__init__
 discord.widget.WidgetMember.__init__

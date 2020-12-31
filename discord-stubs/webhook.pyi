@@ -48,9 +48,6 @@ class WebhookAdapter(Generic[_N, _M]):
         url: str,
         payload: Optional[Dict[str, Any]] = ...,
         multipart: Optional[Dict[str, Any]] = ...,
-        *,
-        files: Optional[Iterable[File]] = ...,
-        reason: Optional[str] = ...,
     ) -> Any: ...
     def delete_webhook(self, *, reason: Optional[str] = ...) -> _N: ...
     def edit_webhook(
@@ -81,10 +78,30 @@ class AsyncWebhookAdapter(WebhookAdapter[_AsyncNone, _AsyncOptionalMessage]):
     loop: asyncio.AbstractEventLoop
     def __init__(self, session: aiohttp.ClientSession) -> None: ...
     def is_async(self) -> bool: ...
+    async def request(
+        self,
+        verb: str,
+        url: str,
+        payload: Optional[Dict[str, Any]] = ...,
+        multipart: Optional[Dict[str, Any]] = ...,
+        *,
+        files: Optional[Iterable[File]] = ...,
+        reason: Optional[str] = ...,
+    ) -> Optional[WebhookMessage[_AsyncNone]]: ...
 
 class RequestsWebhookAdapter(WebhookAdapter[None, WebhookMessage[None]]):
     session: Any
     def __init__(self, session: Optional[Any] = ..., *, sleep: bool = ...) -> None: ...
+    def request(
+        self,
+        verb: str,
+        url: str,
+        payload: Optional[Dict[str, Any]] = ...,
+        multipart: Optional[Dict[str, Any]] = ...,
+        *,
+        files: Optional[Iterable[File]] = ...,
+        reason: Optional[str] = ...,
+    ) -> WebhookMessage[None]: ...
 
 class WebhookMessage(Message, Generic[_N]):
     @overload  # type: ignore[override]
