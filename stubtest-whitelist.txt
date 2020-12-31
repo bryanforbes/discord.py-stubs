@@ -44,6 +44,7 @@ discord.MessageReference.with_state
 discord.MessageFlags.DEFAULT_VALUE
 discord.PartialEmoji.__init__
 discord.PartialMessage.__init__
+discord.PartialMessage.pinned
 discord.Permissions.DEFAULT_VALUE
 discord.PrivilegedIntentsRequired.__init__
 discord.Profile.__doc__
@@ -177,6 +178,7 @@ discord.message.MessageReference.__init__
 discord.message.MessageReference.with_state
 discord.message.Message.__init__
 discord.message.PartialMessage.__init__
+discord.message.PartialMessage.pinned
 discord.opus.OpusError.__init__
 discord.opus.band_ctl
 discord.opus.signal_ctl
