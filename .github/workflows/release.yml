@@ -21,10 +21,12 @@ jobs:
       with:
         python-version: 3.8
     - name: Install Poetry
-      uses: dschep/install-poetry-action@v1.3
+      uses: snok/install-poetry@v1.0.0
       with:
-        version: 1.1.3
-        create_virtualenvs: true
+        version: 1.1.4
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        virtualenvs-path: .venv
     - name: Install dependencies
       run: |
         poetry install --no-dev -v
