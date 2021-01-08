@@ -240,6 +240,7 @@ class Guild(Hashable):
         vanity_code: str = ...,
         system_channel: Optional[TextChannel] = ...,
         system_channel_flags: SystemChannelFlags = ...,
+        preferred_locale: str = ...,
         rules_channel: Optional[TextChannel] = ...,
         public_updates_channel: Optional[TextChannel] = ...,
     ) -> None: ...
