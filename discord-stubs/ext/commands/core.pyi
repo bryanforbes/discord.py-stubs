@@ -48,9 +48,9 @@ class _InvokeCallback(Protocol[_T_contra]):
 class Command(_BaseCommand, Generic[_CT]):
     name: str
     callback: _CoroType
-    help: str
-    brief: str
-    usage: str
+    help: Optional[str]
+    brief: Optional[str]
+    usage: Optional[str]
     aliases: Union[List[str], Tuple[str, ...]]
     enabled: bool
     parent: Optional[Command[_CT]]
@@ -129,6 +129,7 @@ class Command(_BaseCommand, Generic[_CT]):
     async def invoke(self, ctx: _CT) -> None: ...
     async def reinvoke(self, ctx: _CT, *, call_hooks: bool = ...) -> None: ...
     def error(self, coro: _C) -> _C: ...
+    def has_error_handler(self) -> bool: ...
     def before_invoke(self, coro: _C) -> _C: ...
     def after_invoke(self, coro: _C) -> _C: ...
     @property

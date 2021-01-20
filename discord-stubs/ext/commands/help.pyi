@@ -53,6 +53,7 @@ class _PaginatorProtocol(Protocol):
     prefix: Optional[str]
     suffix: Optional[str]
     max_size: int
+    linesep: str
     def clear(self) -> None: ...
     def add_line(self, line: str = ..., *, empty: bool = ...) -> None: ...
     def close_page(self) -> None: ...
@@ -64,11 +65,13 @@ class Paginator:
     prefix: Optional[str]
     suffix: Optional[str]
     max_size: int
+    linesep: str
     def __init__(
         self,
         prefix: Optional[str] = ...,
         suffix: Optional[str] = ...,
         max_size: int = ...,
+        linesep: str = ...,
     ) -> None: ...
     def clear(self) -> None: ...
     def add_line(self, line: str = ..., *, empty: bool = ...) -> None: ...
