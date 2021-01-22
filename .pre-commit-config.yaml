@@ -26,7 +26,5 @@ repos:
     -   id: mypy
         name: mypy
         language: system
-        entry: poetry run mypy -p discord
+        entry: poetry run mypy
         files: \.pyi?$
-        exclude: discord-stubs\/[^\/]*?\.py$
-        pass_filenames: false
