@@ -26,5 +26,6 @@ repos:
     -   id: mypy
         name: mypy
         language: system
-        entry: poetry run mypy
+        entry: poetry run mypy discord-stubs
         files: \.pyi?$
+        pass_filenames: false
