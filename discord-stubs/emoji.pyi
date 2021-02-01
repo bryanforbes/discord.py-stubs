@@ -1,8 +1,8 @@
 import datetime
 from typing import Any, Iterator, List, Optional, Tuple
 
-from .asset import Asset
-from .guild import _VALID_ANIMATED_ICON_FORMATS, _VALID_STATIC_ICON_FORMATS, Guild
+from .asset import _VALID_ANIMATED_ICON_FORMATS, _VALID_STATIC_ICON_FORMATS, Asset
+from .guild import Guild
 from .partial_emoji import _EmojiTag
 from .role import Role
 from .user import User

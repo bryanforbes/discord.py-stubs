@@ -1,12 +1,15 @@
 import sys
 from typing import Any, BinaryIO, ClassVar, FrozenSet, Union
-from typing_extensions import Final
+from typing_extensions import Final, Literal
 
 if sys.version_info >= (3, 6):
     from os import PathLike
 
-VALID_STATIC_FORMATS: Final[FrozenSet[str]] = ...
-VALID_AVATAR_FORMATS: Final[FrozenSet[str]] = ...
+_VALID_STATIC_ICON_FORMATS = Literal['jpeg', 'jpg', 'webp', 'png']
+_VALID_ANIMATED_ICON_FORMATS = Literal[_VALID_STATIC_ICON_FORMATS, 'gif']
+
+VALID_STATIC_FORMATS: Final[FrozenSet[_VALID_STATIC_ICON_FORMATS]] = ...
+VALID_AVATAR_FORMATS: Final[FrozenSet[_VALID_ANIMATED_ICON_FORMATS]] = ...
 
 class Asset:
     BASE: ClassVar[str]

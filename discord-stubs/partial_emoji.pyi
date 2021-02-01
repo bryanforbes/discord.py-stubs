@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any, Dict, Optional, Type, TypeVar
 
-from .asset import Asset
+from .asset import _VALID_ANIMATED_ICON_FORMATS, _VALID_STATIC_ICON_FORMATS, Asset
 
 class _EmojiTag: ...
 
@@ -32,3 +32,9 @@ class PartialEmoji(_EmojiTag):
     def created_at(self) -> Optional[datetime]: ...
     @property
     def url(self) -> Asset: ...
+    def url_as(
+        self,
+        *,
+        format: Optional[_VALID_ANIMATED_ICON_FORMATS] = ...,
+        static_format: _VALID_STATIC_ICON_FORMATS = ...,
+    ) -> Asset: ...

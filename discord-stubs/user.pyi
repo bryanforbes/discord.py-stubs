@@ -1,10 +1,9 @@
 import datetime
 from typing import Any, List, NamedTuple, Optional, type_check_only
-from typing_extensions import Literal
 
 import discord.abc
 
-from .asset import Asset
+from .asset import _VALID_ANIMATED_ICON_FORMATS, _VALID_STATIC_ICON_FORMATS, Asset
 from .channel import DMChannel, GroupChannel
 from .colour import Colour
 from .enums import (
@@ -22,9 +21,6 @@ from .http import _ClientUserDict
 from .message import Message
 from .permissions import Permissions
 from .relationship import Relationship
-
-_VALID_STATIC_FORMATS = Literal['jpeg', 'jpg', 'webp', 'png']
-_VALID_AVATAR_FORMATS = Literal[_VALID_STATIC_FORMATS, 'gif']
 
 class Profile(NamedTuple):
     flags: int
@@ -75,8 +71,8 @@ class _CommonUser:
     def avatar_url_as(
         self,
         *,
-        format: Optional[_VALID_AVATAR_FORMATS] = ...,
-        static_format: _VALID_STATIC_FORMATS = ...,
+        format: Optional[_VALID_ANIMATED_ICON_FORMATS] = ...,
+        static_format: _VALID_STATIC_ICON_FORMATS = ...,
         size: int = ...,
     ) -> Asset: ...
     @property

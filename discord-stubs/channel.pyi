@@ -3,9 +3,8 @@ from typing import Callable, Dict, Iterable, List, Optional, Union
 
 import discord.abc
 
-from .asset import Asset
+from .asset import _VALID_STATIC_ICON_FORMATS, Asset
 from .enums import ChannelType
-from .guild import _VALID_STATIC_ICON_FORMATS
 from .member import Member, VoiceState
 from .message import Message, PartialMessage
 from .mixins import Hashable

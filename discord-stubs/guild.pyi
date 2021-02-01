@@ -13,6 +13,8 @@ from typing import (
 from typing_extensions import Literal
 
 from .abc import Snowflake
+from .asset import _VALID_ANIMATED_ICON_FORMATS as _VALID_ANIMATED_ICON_FORMATS
+from .asset import _VALID_STATIC_ICON_FORMATS as _VALID_STATIC_ICON_FORMATS
 from .asset import Asset
 from .channel import CategoryChannel, StoreChannel, TextChannel, VoiceChannel
 from .colour import Colour
@@ -37,8 +39,6 @@ from .voice_client import VoiceProtocol
 from .webhook import _AsyncWebhook
 from .widget import Widget
 
-_VALID_STATIC_ICON_FORMATS = Literal['jpeg', 'jpg', 'webp', 'png']
-_VALID_ANIMATED_ICON_FORMATS = Literal[_VALID_STATIC_ICON_FORMATS, 'gif']
 _VALID_FEATURES = Literal[
     'VIP_REGIONS',
     'VANITY_URL',

@@ -1,16 +1,13 @@
 import datetime
 from typing import ClassVar, List, Optional, Union
-from typing_extensions import Literal
 
-from .asset import Asset
+from .asset import _VALID_ANIMATED_ICON_FORMATS, _VALID_STATIC_ICON_FORMATS, Asset
 from .channel import StoreChannel, TextChannel, VoiceChannel
 from .enums import ChannelType, VerificationLevel
 from .guild import Guild
 from .mixins import Hashable
 from .object import Object
 from .user import User
-
-_VALID_ICON_FORMATS = Literal['jpeg', 'jpg', 'webp', 'png']
 
 class PartialInviteChannel:
     id: int
@@ -38,19 +35,19 @@ class PartialInviteGuild:
     def icon_url_as(
         self,
         *,
-        format: Optional[_VALID_ICON_FORMATS] = ...,
-        static_format: _VALID_ICON_FORMATS = ...,
+        format: Optional[_VALID_ANIMATED_ICON_FORMATS] = ...,
+        static_format: _VALID_STATIC_ICON_FORMATS = ...,
         size: int = ...,
     ) -> Asset: ...
     @property
     def banner_url(self) -> Asset: ...
     def banner_url_as(
-        self, *, format: _VALID_ICON_FORMATS = ..., size: int = ...
+        self, *, format: _VALID_STATIC_ICON_FORMATS = ..., size: int = ...
     ) -> Asset: ...
     @property
     def splash_url(self) -> Asset: ...
     def splash_url_as(
-        self, *, format: _VALID_ICON_FORMATS = ..., size: int = ...
+        self, *, format: _VALID_STATIC_ICON_FORMATS = ..., size: int = ...
     ) -> Asset: ...
 
 class Invite(Hashable):

@@ -1,7 +1,7 @@
 from typing import List, Optional
 
-from .asset import Asset
-from .guild import _VALID_STATIC_ICON_FORMATS, Guild
+from .asset import _VALID_STATIC_ICON_FORMATS, Asset
+from .guild import Guild
 from .team import Team
 from .user import User
 
