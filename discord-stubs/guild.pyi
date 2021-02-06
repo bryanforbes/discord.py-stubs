@@ -61,8 +61,8 @@ _VALID_FEATURES = Literal[
 ]
 
 class BanEntry(NamedTuple):
-    user: User
     reason: str
+    user: User
 
 class Guild(Hashable):
     name: str

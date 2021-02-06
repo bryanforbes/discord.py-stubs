@@ -1,25 +1,31 @@
-from typing import ClassVar, Optional, Union, type_check_only
+from ctypes import Structure, c_float, c_int, c_int16, pointer
+from typing import Any, ClassVar, Optional, Type, Union, type_check_only
 from typing_extensions import Final, TypedDict
 
 from .errors import DiscordException
 
-def load_opus(name: str) -> None: ...
-def is_loaded() -> bool: ...
+c_int_ptr: Final[Type[pointer[c_int]]]
+c_int16_ptr: Final[Type[pointer[c_int16]]]
+c_float_ptr: Final[Type[pointer[c_float]]]
 
-class OpusError(DiscordException):
-    code: int
+class EncoderStruct(Structure): ...
+class DecoderStruct(Structure): ...
 
-class OpusNotLoaded(DiscordException): ...
+EncoderStructPtr: Final[Type[pointer[EncoderStruct]]]
+DecoderStructPtr: Final[Type[pointer[DecoderStruct]]]
 
-OK: Final[int] = ...
-APPLICATION_AUDIO: Final[int] = ...
-APPLICATION_VOIP: Final[int] = ...
-APPLICATION_LOWDELAY: Final[int] = ...
-CTL_SET_BITRATE: Final[int] = ...
-CTL_SET_BANDWIDTH: Final[int] = ...
-CTL_SET_FEC: Final[int] = ...
-CTL_SET_PLP: Final[int] = ...
-CTL_SET_SIGNAL: Final[int] = ...
+OK: Final[int]
+BAD_ARG: Final[int]
+APPLICATION_AUDIO: Final[int]
+APPLICATION_VOIP: Final[int]
+APPLICATION_LOWDELAY: Final[int]
+CTL_SET_BITRATE: Final[int]
+CTL_SET_BANDWIDTH: Final[int]
+CTL_SET_FEC: Final[int]
+CTL_SET_PLP: Final[int]
+CTL_SET_SIGNAL: Final[int]
+CTL_SET_GAIN: Final[int]
+CTL_LAST_PACKET_DURATION: Final[int]
 
 # TODO: remove this comment when a new version of black comes out
 @type_check_only
@@ -38,6 +44,15 @@ class _SignalCtl(TypedDict):
 
 band_ctl: Final[_BandCtl]
 signal_ctl: Final[_SignalCtl]
+
+def libopus_loader(name: str) -> Any: ...
+def load_opus(name: str) -> None: ...
+def is_loaded() -> bool: ...
+
+class OpusError(DiscordException):
+    code: int
+
+class OpusNotLoaded(DiscordException): ...
 
 class _OpusStruct:
     SAMPLING_RATE: ClassVar[int]

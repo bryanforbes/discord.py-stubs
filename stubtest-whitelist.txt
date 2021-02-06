@@ -159,6 +159,7 @@ discord.iterators.ReactionIterator.__init__
 discord.iterators._ChunkedAsyncIterator.__init__
 discord.iterators._FilteredAsyncIterator.__init__
 discord.iterators._MappedAsyncIterator.__init__
+discord.member.flatten_user
 discord.member.Member.__init__
 discord.member.Member.avatar_url_as
 discord.member.Member.block
@@ -189,12 +190,14 @@ discord.reaction.Reaction.__init__
 discord.relationship.Relationship.__init__
 discord.role.Role.__init__
 discord.role.RoleTags.__init__
+discord.shard.EventItem
 discord.shard.Shard.__init__
 discord.shard.ShardInfo.__init__
 discord.state.AutoShardedConnectionState.__init__
 discord.state.AutoShardedConnectionState.chunker
 discord.state.AutoShardedConnectionState.parse_ready
 discord.state.AutoShardedConnectionState.parse_resumed
+discord.state.ChunkRequest
 discord.state.ConnectionState.__init__
 discord.state.ConnectionState.add_dm_channel
 discord.state.ConnectionState.call_handlers
@@ -259,6 +262,7 @@ discord.state.ConnectionState.store_emoji
 discord.state.ConnectionState.store_user
 discord.state.ConnectionState.store_user_no_intents
 discord.state.ConnectionState.voice_clients
+discord.state.logging_coroutine
 discord.sticker.Sticker.__init__
 discord.team.Team.__init__
 discord.team.TeamMember.__init__
@@ -266,6 +270,7 @@ discord.template.Template.__init__
 discord.user.BaseUser.__init__
 discord.user.ClientUser.__init__
 discord.user.Profile.__doc__
+discord.utils.SnowflakeList
 discord.webhook.Webhook.__init__
 discord.webhook.WebhookAdapter.handle_execution_response
 discord.widget.Widget.__init__
