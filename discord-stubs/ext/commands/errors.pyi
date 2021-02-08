@@ -47,6 +47,9 @@ class MemberNotFound(BadArgument):
 class UserNotFound(BadArgument):
     argument: str
 
+class GuildNotFound(BadArgument):
+    argument: str
+
 class MessageNotFound(BadArgument):
     argument: str
 

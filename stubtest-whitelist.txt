@@ -105,6 +105,7 @@ discord.ext.commands.EmojiNotFound.__init__
 discord.ext.commands.ExtensionError.__init__
 discord.ext.commands.Group.__init__
 discord.ext.commands.GroupMixin.__init__
+discord.ext.commands.GuildNotFound.__init__
 discord.ext.commands.HelpCommand.__new__
 discord.ext.commands.MemberNotFound.__init__
 discord.ext.commands.MessageNotFound.__init__
@@ -128,6 +129,7 @@ discord.ext.commands.errors.ChannelNotReadable.__init__
 discord.ext.commands.errors.CheckAnyFailure.__init__
 discord.ext.commands.errors.EmojiNotFound.__init__
 discord.ext.commands.errors.ExtensionError.__init__
+discord.ext.commands.errors.GuildNotFound.__init__
 discord.ext.commands.errors.MemberNotFound.__init__
 discord.ext.commands.errors.MessageNotFound.__init__
 discord.ext.commands.errors.PartialEmojiConversionFailure.__init__
