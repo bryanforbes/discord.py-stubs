@@ -9,7 +9,7 @@ from .message import Message
 from .object import Object
 from .user import User
 
-OLDEST_OBJECT: Final[Object] = ...
+OLDEST_OBJECT: Final[Object]
 
 _IT = TypeVar('_IT')
 _AIT = TypeVar('_AIT', bound=_AsyncIterator[Any])

@@ -8,8 +8,8 @@ if sys.version_info >= (3, 6):
 _VALID_STATIC_ICON_FORMATS = Literal['jpeg', 'jpg', 'webp', 'png']
 _VALID_ANIMATED_ICON_FORMATS = Literal[_VALID_STATIC_ICON_FORMATS, 'gif']
 
-VALID_STATIC_FORMATS: Final[FrozenSet[_VALID_STATIC_ICON_FORMATS]] = ...
-VALID_AVATAR_FORMATS: Final[FrozenSet[_VALID_ANIMATED_ICON_FORMATS]] = ...
+VALID_STATIC_FORMATS: Final[FrozenSet[_VALID_STATIC_ICON_FORMATS]]
+VALID_AVATAR_FORMATS: Final[FrozenSet[_VALID_ANIMATED_ICON_FORMATS]]
 
 class Asset:
     BASE: ClassVar[str]

@@ -31,7 +31,7 @@ _U_co = TypeVar('_U_co', covariant=True)
 _FuncType = Callable[..., Any]
 _F = TypeVar('_F', bound=_FuncType)
 
-DISCORD_EPOCH: Final[int] = ...
+DISCORD_EPOCH: Final[int]
 
 class cached_property(Generic[_T, _U_co]):
     def __init__(self, function: Callable[[_T], _U_co]) -> None: ...

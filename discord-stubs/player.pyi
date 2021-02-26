@@ -145,7 +145,7 @@ class PCMVolumeTransformer(AudioSource):
     def read(self) -> bytes: ...
 
 class AudioPlayer(threading.Thread):
-    DELAY: ClassVar[float] = ...
+    DELAY: ClassVar[float]
 
     daemon: bool
     source: AudioSource

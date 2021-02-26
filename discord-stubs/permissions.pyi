@@ -149,8 +149,8 @@ class Permissions(BaseFlags):
 _PO = TypeVar('_PO', bound=PermissionOverwrite)
 
 class PermissionOverwrite:
-    VALID_NAMES: ClassVar[Set[str]] = ...
-    PURE_FLAGS: ClassVar[Set[str]] = ...
+    VALID_NAMES: ClassVar[Set[str]]
+    PURE_FLAGS: ClassVar[Set[str]]
 
     create_instant_invite: Optional[bool]
     kick_members: Optional[bool]

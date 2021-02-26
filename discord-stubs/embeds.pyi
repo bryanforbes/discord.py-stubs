@@ -64,7 +64,7 @@ class Embed:
     color: Union[int, Colour, _EmptyEmbed]
     timestamp: Union[datetime.datetime, _EmptyEmbed]
 
-    Empty: ClassVar[_EmptyEmbed] = ...
+    Empty: ClassVar[_EmptyEmbed]
     def __init__(
         self,
         *,

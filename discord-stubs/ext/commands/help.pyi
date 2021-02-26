@@ -92,8 +92,8 @@ class HelpCommand(Generic[_CT]):
     command_attrs: _CommandAttrs
     cog: Optional[Cog[_CT]]
 
-    MENTION_TRANSFORMS: ClassVar[Dict[str, str]] = ...
-    MENTION_PATTERN: ClassVar[Pattern[str]] = ...
+    MENTION_TRANSFORMS: ClassVar[Dict[str, str]]
+    MENTION_PATTERN: ClassVar[Pattern[str]]
     def __init__(
         self,
         *,

@@ -20,8 +20,8 @@ class VoiceProtocol:
     def cleanup(self) -> None: ...
 
 class VoiceClient(VoiceProtocol):
-    warn_nacl: ClassVar[bool] = ...
-    supported_modes: ClassVar[Tuple[str, ...]] = ...
+    warn_nacl: ClassVar[bool]
+    supported_modes: ClassVar[Tuple[str, ...]]
 
     session_id: str
     token: str

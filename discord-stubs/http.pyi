@@ -556,8 +556,8 @@ class MaybeUnlock:
     def __exit__(self, type: Any, value: Any, traceback: Any) -> None: ...
 
 class HTTPClient:
-    SUCCESS_LOG: ClassVar[str] = ...
-    REQUEST_LOG: ClassVar[str] = ...
+    SUCCESS_LOG: ClassVar[str]
+    REQUEST_LOG: ClassVar[str]
 
     loop: asyncio.AbstractEventLoop
     connector: Optional[aiohttp.BaseConnector]
