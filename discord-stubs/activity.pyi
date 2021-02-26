@@ -8,6 +8,7 @@ from .http import (
     _ActivityDict,
     _ActivityPartyDict,
     _CustomActivityDict,
+    _PartialEmojiDict,
     _SpotifyActivityDict,
     _TimestampsDict,
 )
@@ -148,7 +149,11 @@ class CustomActivity(BaseActivity):
     name: Optional[str]
     emoji: Optional[PartialEmoji]
     def __init__(
-        self, name: Optional[str], *, emoji: Optional[PartialEmoji] = ..., **extra: Any
+        self,
+        name: Optional[str],
+        *,
+        emoji: Optional[Union[PartialEmoji, str, _PartialEmojiDict]] = ...,
+        **extra: Any,
     ) -> None: ...
     @property
     def type(self) -> ActivityType: ...

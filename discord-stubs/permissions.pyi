@@ -44,6 +44,7 @@ class Permissions(BaseFlags):
     manage_permissions: permission_alias
     manage_webhooks: flag_value
     manage_emojis: flag_value
+    use_slash_commands: flag_value
     def __init__(
         self,
         permissions: int = ...,
@@ -82,6 +83,7 @@ class Permissions(BaseFlags):
         manage_permissions: bool = ...,
         manage_webhooks: bool = ...,
         manage_emojis: bool = ...,
+        use_slash_commands: bool = ...,
     ) -> None: ...
     def is_subset(self, other: Any) -> bool: ...
     def is_superset(self, other: Any) -> bool: ...
@@ -140,6 +142,7 @@ class Permissions(BaseFlags):
         manage_permissions: bool = ...,
         manage_webhooks: bool = ...,
         manage_emojis: bool = ...,
+        use_slash_commands: bool = ...,
     ) -> None: ...
     def handle_overwrite(self, allow: int, deny: int) -> None: ...
 
@@ -183,6 +186,7 @@ class PermissionOverwrite:
     manage_permissions: Optional[bool]
     manage_webhooks: Optional[bool]
     manage_emojis: Optional[bool]
+    use_slash_commands: Optional[bool]
     def __init__(
         self,
         *,
@@ -220,6 +224,7 @@ class PermissionOverwrite:
         manage_permissions: Optional[bool] = ...,
         manage_webhooks: Optional[bool] = ...,
         manage_emojis: Optional[bool] = ...,
+        use_slash_commands: Optional[bool] = ...,
     ) -> None: ...
     def __eq__(self, other: Any) -> bool: ...
     def pair(self) -> Tuple[Permissions, Permissions]: ...
@@ -263,5 +268,6 @@ class PermissionOverwrite:
         manage_permissions: Optional[bool] = ...,
         manage_webhooks: Optional[bool] = ...,
         manage_emojis: Optional[bool] = ...,
+        use_slash_commands: Optional[bool] = ...,
     ) -> None: ...
     def __iter__(self) -> Iterator[Tuple[str, Optional[bool]]]: ...

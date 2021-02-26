@@ -498,7 +498,7 @@ class _BaseTemplateDict(TypedDict):
     code: str
     usage_count: int
     name: str
-    description: str
+    description: Optional[str]
     source_guild_id: int
     serialized_source_guild: _GuildDict
 
@@ -507,6 +507,14 @@ class _TemplateDict(_BaseTemplateDict, total=False):
     creator: _UserDict
     created_at: str
     updated_at: str
+
+@type_check_only
+class _BaseCreateTemplateDict(TypedDict):
+    name: str
+
+@type_check_only
+class _CreateTemplateDict(TypedDict, total=False):
+    description: Optional[str]
 
 @type_check_only
 class _IntegrationAccountDict(TypedDict):
@@ -757,6 +765,21 @@ class HTTPClient:
         self, guild_id: int, *, reason: Optional[str] = ..., **fields: Any
     ) -> Coroutine[Any, Any, _GuildDict]: ...
     def get_template(self, code: str) -> Coroutine[Any, Any, _TemplateDict]: ...
+    def guild_templates(
+        self, guild_id: int
+    ) -> Coroutine[Any, Any, List[_TemplateDict]]: ...
+    def create_template(
+        self, guild_id: int, payload: _CreateTemplateDict
+    ) -> Coroutine[Any, Any, _TemplateDict]: ...
+    def sync_template(
+        self, guild_id: int, code: str
+    ) -> Coroutine[Any, Any, _TemplateDict]: ...
+    def edit_template(
+        self, guild_id: int, code: str, payload: _CreateTemplateDict
+    ) -> Coroutine[Any, Any, _TemplateDict]: ...
+    def delete_template(
+        self, guild_id: int, code: str
+    ) -> Coroutine[Any, Any, _TemplateDict]: ...
     def create_from_template(
         self, code: str, name: str, region: str, icon: str
     ) -> Coroutine[Any, Any, _GuildDict]: ...

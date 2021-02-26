@@ -88,7 +88,7 @@ class _HelpCommandImpl(Command[_CT]):
 class HelpCommand(Generic[_CT]):
     context: Optional[_CT]
     show_hidden: bool
-    verify_checks: bool
+    verify_checks: Optional[bool]
     command_attrs: _CommandAttrs
     cog: Optional[Cog[_CT]]
 
@@ -98,7 +98,7 @@ class HelpCommand(Generic[_CT]):
         self,
         *,
         show_hidden: bool = ...,
-        verify_checks: bool = ...,
+        verify_checks: Optional[bool] = ...,
         command_attrs: _CommandAttrs = ...,
     ) -> None: ...
     def copy(self: _HC) -> _HC: ...

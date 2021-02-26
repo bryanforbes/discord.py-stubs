@@ -1,7 +1,8 @@
 from datetime import datetime
-from typing import Any, Dict, Optional, Type, TypeVar
+from typing import Any, Optional, Type, TypeVar
 
 from .asset import _VALID_ANIMATED_ICON_FORMATS, _VALID_STATIC_ICON_FORMATS, Asset
+from .http import _PartialEmojiDict
 
 class _EmojiTag: ...
 
@@ -12,8 +13,8 @@ class PartialEmoji(_EmojiTag):
     name: Optional[str]
     id: Optional[int]
     @classmethod
-    def from_dict(cls: Type[_PE], data: Dict[str, Any]) -> _PE: ...
-    def to_dict(self) -> Dict[str, Any]: ...
+    def from_dict(cls: Type[_PE], data: _PartialEmojiDict) -> _PE: ...
+    def to_dict(self) -> _PartialEmojiDict: ...
     @classmethod
     def with_state(
         cls: Type[_PE],

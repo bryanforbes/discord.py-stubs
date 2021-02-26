@@ -29,6 +29,11 @@ class MessageType(Enum):
     premium_guild_tier_2: int
     premium_guild_tier_3: int
     channel_follow_add: int
+    guild_stream: int
+    guild_discovery_disqualified: int
+    guild_discovery_requalified: int
+    guild_discovery_grace_period_initial_warning: int
+    guild_discovery_grace_period_final_warning: int
 
 class VoiceRegion(Enum):
     us_west: str

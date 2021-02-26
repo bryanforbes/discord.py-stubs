@@ -16,6 +16,7 @@ class Context(discord.abc.Messageable):
     prefix: str
     command: Command[Any]
     invoked_with: Optional[str]
+    invoked_parents: List[str]
     invoked_subcommand: Optional[Command[Any]]
     subcommand_passed: Optional[str]
     command_failed: bool
