@@ -55,6 +55,7 @@ class RawBulkMessageDeleteEvent(_RawReprMixin):
 class RawMessageUpdateEvent(_RawReprMixin):
     message_id: int
     channel_id: int
+    guild_id: Optional[int]
     data: _MessageDict
     cached_message: Optional[Message]
     def __init__(self, data: _MessageDict) -> None: ...

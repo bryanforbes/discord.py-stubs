@@ -4,6 +4,7 @@ from typing import Any, Callable, ClassVar, Dict, Iterator, Optional, Tuple
 from . import enums
 from .abc import User as _ABCUser
 from .guild import Guild
+from .mixins import Hashable
 from .utils import cached_property
 
 class AuditLogDiff:
@@ -17,7 +18,7 @@ class AuditLogChanges:
     before: AuditLogDiff
     after: AuditLogDiff
 
-class AuditLogEntry:
+class AuditLogEntry(Hashable):
     id: int
     guild: Guild
     action: enums.AuditLogAction
