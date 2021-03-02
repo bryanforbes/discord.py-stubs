@@ -93,7 +93,7 @@ class BotBase(GroupMixin[_CT]):
 class Bot(BotBase[_CT], discord.Client):
     @overload
     def __init__(
-        self,
+        self: Bot[Context],
         command_prefix: _CommandPrefix,
         help_command: Optional[HelpCommand[Context]] = ...,
         description: Optional[str] = ...,
@@ -123,7 +123,7 @@ class Bot(BotBase[_CT], discord.Client):
     ) -> None: ...
     @overload
     def __init__(
-        self,
+        self: Bot[Context],
         command_prefix: _CommandPrefix,
         help_command: Optional[HelpCommand[Context]] = ...,
         description: Optional[str] = ...,
@@ -153,7 +153,7 @@ class Bot(BotBase[_CT], discord.Client):
     ) -> None: ...
     @overload
     def __init__(
-        self,
+        self: Bot[Context],
         command_prefix: _CommandPrefix,
         help_command: Optional[HelpCommand[Context]] = ...,
         description: Optional[str] = ...,
@@ -184,7 +184,7 @@ class Bot(BotBase[_CT], discord.Client):
 class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
     @overload
     def __init__(
-        self,
+        self: AutoShardedBot[Context],
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
         description: Optional[str] = ...,
@@ -214,7 +214,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
     ) -> None: ...
     @overload
     def __init__(
-        self,
+        self: AutoShardedBot[Context],
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
         description: Optional[str] = ...,
@@ -244,7 +244,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
     ) -> None: ...
     @overload
     def __init__(
-        self,
+        self: AutoShardedBot[Context],
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
         description: Optional[str] = ...,
@@ -273,7 +273,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
     ) -> None: ...
     @overload
     def __init__(
-        self,
+        self: AutoShardedBot[Context],
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
         description: Optional[str] = ...,
@@ -303,7 +303,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
     ) -> None: ...
     @overload
     def __init__(
-        self,
+        self: AutoShardedBot[Context],
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
         description: Optional[str] = ...,
@@ -333,7 +333,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
     ) -> None: ...
     @overload
     def __init__(
-        self,
+        self: AutoShardedBot[Context],
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
         description: Optional[str] = ...,
