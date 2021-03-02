@@ -92,7 +92,7 @@ class BotBase(GroupMixin[_CT]):
 
 class Bot(BotBase[_CT], discord.Client):
     @overload
-    def __new__(
+    def __init__(
         self,
         command_prefix: _CommandPrefix,
         help_command: Optional[HelpCommand[Context]] = ...,
@@ -120,9 +120,9 @@ class Bot(BotBase[_CT], discord.Client):
         guild_ready_timeout: float = ...,
         guild_subscriptions: bool = ...,
         assume_unsync_clock: bool = ...,
-    ) -> Bot[Context]: ...
+    ) -> None: ...
     @overload
-    def __new__(
+    def __init__(
         self,
         command_prefix: _CommandPrefix,
         help_command: Optional[HelpCommand[Context]] = ...,
@@ -150,9 +150,9 @@ class Bot(BotBase[_CT], discord.Client):
         guild_ready_timeout: float = ...,
         guild_subscriptions: bool = ...,
         assume_unsync_clock: bool = ...,
-    ) -> Bot[Context]: ...
+    ) -> None: ...
     @overload
-    def __new__(
+    def __init__(
         self,
         command_prefix: _CommandPrefix,
         help_command: Optional[HelpCommand[Context]] = ...,
@@ -179,11 +179,11 @@ class Bot(BotBase[_CT], discord.Client):
         guild_ready_timeout: float = ...,
         guild_subscriptions: bool = ...,
         assume_unsync_clock: bool = ...,
-    ) -> Bot[Context]: ...
+    ) -> None: ...
 
 class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
     @overload
-    def __new__(
+    def __init__(
         self,
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
@@ -211,9 +211,9 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         guild_ready_timeout: float = ...,
         guild_subscriptions: bool = ...,
         assume_unsync_clock: bool = ...,
-    ) -> AutoShardedBot[Context]: ...
+    ) -> None: ...
     @overload
-    def __new__(
+    def __init__(
         self,
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
@@ -241,9 +241,9 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         guild_ready_timeout: float = ...,
         guild_subscriptions: bool = ...,
         assume_unsync_clock: bool = ...,
-    ) -> AutoShardedBot[Context]: ...
+    ) -> None: ...
     @overload
-    def __new__(
+    def __init__(
         self,
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
@@ -270,9 +270,9 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         guild_ready_timeout: float = ...,
         guild_subscriptions: bool = ...,
         assume_unsync_clock: bool = ...,
-    ) -> AutoShardedBot[Context]: ...
+    ) -> None: ...
     @overload
-    def __new__(
+    def __init__(
         self,
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
@@ -300,9 +300,9 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         guild_ready_timeout: float = ...,
         guild_subscriptions: bool = ...,
         assume_unsync_clock: bool = ...,
-    ) -> AutoShardedBot[Context]: ...
+    ) -> None: ...
     @overload
-    def __new__(
+    def __init__(
         self,
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
@@ -330,9 +330,9 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         guild_ready_timeout: float = ...,
         guild_subscriptions: bool = ...,
         assume_unsync_clock: bool = ...,
-    ) -> AutoShardedBot[Context]: ...
+    ) -> None: ...
     @overload
-    def __new__(
+    def __init__(
         self,
         command_prefix: _CommandPrefix,
         help_command: HelpCommand[Context] = ...,
@@ -359,4 +359,4 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         guild_ready_timeout: float = ...,
         guild_subscriptions: bool = ...,
         assume_unsync_clock: bool = ...,
-    ) -> AutoShardedBot[Context]: ...
+    ) -> None: ...
