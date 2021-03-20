@@ -58,4 +58,6 @@ poetry run pre-commit install --hook-type pre-commit --hook-type post-checkout
 
 ## Version numbering scheme
 
-At this time, the version number of `discord.py-stubs` will follow the version number of `discord.py` it corresponds to and append one more version segment that indicates the sequence of releases for the stubs. For instance, if you are using `discord.py` version `1.3.4`, you would use `discord.py-stubs` version `1.3.4.X` where `X` is an integer.
+The **major** and **minor** version numbers of `discord.py-stubs` will match the **major** and **minor** version numbers of the `discord.py` release the stubs represent. For instance, if you are using `discord.py` version `1.7.4`, you would use `discord.py-stubs` version `1.7.X` where `X` is the latest **patch** version of the stubs. Using semver dependency specifications, `discord.py-stubs` version `~1.7` is designed to work with `discord.py` version `~1.7`.
+
+In addition, `discord.py-stubs` will indicate which versions of the runtime library are compatible through its dependency information (as suggested in PEP-561).
