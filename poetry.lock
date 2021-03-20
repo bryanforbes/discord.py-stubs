@@ -2,7 +2,7 @@
 name = "aiohttp"
 version = "3.6.3"
 description = "Async http client/server framework (asyncio)"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5.3"
 
@@ -30,7 +30,7 @@ python-versions = "*"
 name = "async-timeout"
 version = "3.0.1"
 description = "Timeout context manager for asyncio programs"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5.3"
 
@@ -46,7 +46,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 name = "attrs"
 version = "20.2.0"
 description = "Classes Without Boilerplate"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
@@ -91,7 +91,7 @@ python-versions = ">=3.6.1"
 name = "chardet"
 version = "3.0.4"
 description = "Universal encoding detector for Python 2 and 3"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -131,7 +131,7 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*"
 name = "discord.py"
 version = "1.6.0"
 description = "A Python wrapper for the Discord API"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5.3"
 
@@ -200,7 +200,7 @@ license = ["editdistance"]
 name = "idna"
 version = "2.10"
 description = "Internationalized Domain Names in Applications (IDNA)"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
@@ -208,7 +208,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 name = "idna-ssl"
 version = "1.1.0"
 description = "Patch ssl.match_hostname for Unicode(idna) domains support"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -277,7 +277,7 @@ python-versions = "*"
 name = "multidict"
 version = "4.7.6"
 description = "multidict implementation"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5"
 
@@ -514,7 +514,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 name = "yarl"
 version = "1.5.1"
 description = "Yet another URL library"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5"
 
@@ -538,7 +538,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.1"
-content-hash = "c57074852e92fcb08c040b4217bf9adf9dc435f1644ced068a30eaec4e53f305"
+content-hash = "1ddfebfff0dacc24411a95973246b29bcbf349ad1ab454db3bcd2662475c9009"
 
 [metadata.files]
 aiohttp = [
