@@ -1,4 +1,4 @@
-from typing import Any, Tuple, Type, TypeVar
+from typing import Any, Optional, Tuple, Type, TypeVar
 
 _C = TypeVar('_C', bound=Colour)
 
@@ -22,7 +22,7 @@ class Colour:
     @classmethod
     def default(cls: Type[_C]) -> _C: ...
     @classmethod
-    def random(cls: Type[_C]) -> _C: ...
+    def random(cls: Type[_C], *, seed: Optional[Any] = ...) -> _C: ...
     @classmethod
     def teal(cls: Type[_C]) -> _C: ...
     @classmethod

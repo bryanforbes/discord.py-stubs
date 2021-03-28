@@ -1,10 +1,17 @@
 from typing import Optional, Tuple, Type, TypeVar, Union
+from typing_extensions import Protocol
 
 from discord.enums import Enum
 from discord.message import Message
 
 _CM = TypeVar('_CM', bound=CooldownMapping)
 _MC = TypeVar('_MC', bound=MaxConcurrency)
+
+_BucketKey = Union[int, Tuple[Optional[int], int]]
+_CooldownType = Union[BucketType, _CooldownCallable]
+
+class _CooldownCallable(Protocol):
+    def __call__(self, __msg: Message) -> Optional[_BucketKey]: ...
 
 class BucketType(Enum):
     default: int
@@ -14,15 +21,14 @@ class BucketType(Enum):
     member: int
     category: int
     role: int
-    def get_key(
-        self, msg: Message
-    ) -> Optional[Union[int, Tuple[Optional[int], int]]]: ...
+    def get_key(self, msg: Message) -> Optional[_BucketKey]: ...
+    def __call__(self, msg: Message) -> Optional[_BucketKey]: ...
 
 class Cooldown:
     rate: int
     per: float
-    type: BucketType
-    def __init__(self, rate: int, per: float, type: BucketType) -> None: ...
+    type: _CooldownType
+    def __init__(self, rate: int, per: float, type: _CooldownType) -> None: ...
     def get_tokens(self, current: Optional[int] = ...) -> int: ...
     def get_retry_after(self, current: Optional[float] = ...) -> float: ...
     def update_rate_limit(self, current: Optional[float] = ...) -> Optional[float]: ...
@@ -36,7 +42,10 @@ class CooldownMapping:
     def valid(self) -> bool: ...
     @classmethod
     def from_cooldown(
-        cls: Type[_CM], rate: int, per: float, type: BucketType
+        cls: Type[_CM],
+        rate: int,
+        per: float,
+        type: _CooldownType,
     ) -> _CM: ...
     def get_bucket(
         self, message: Message, current: Optional[float] = ...
@@ -47,9 +56,9 @@ class CooldownMapping:
 
 class MaxConcurrency:
     number: int
-    per: BucketType
+    per: _CooldownType
     wait: bool
-    def __init__(self, number: int, *, per: BucketType, wait: bool) -> None: ...
+    def __init__(self, number: int, *, per: _CooldownType, wait: bool) -> None: ...
     def copy(self: _MC) -> _MC: ...
     def get_key(self, message: Message) -> Union[str, int]: ...
     async def acquire(self, message: Message) -> None: ...

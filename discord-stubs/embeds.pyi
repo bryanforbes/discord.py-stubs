@@ -70,10 +70,10 @@ class Embed:
         *,
         color: Union[int, Colour, _EmptyEmbed] = ...,
         colour: Union[int, Colour, _EmptyEmbed] = ...,
-        title: Union[str, _EmptyEmbed] = ...,
+        title: Union[object, _EmptyEmbed] = ...,
         type: str = ...,
-        url: Union[str, _EmptyEmbed] = ...,
-        description: Union[str, _EmptyEmbed] = ...,
+        url: Union[object, _EmptyEmbed] = ...,
+        description: Union[object, _EmptyEmbed] = ...,
         timestamp: Union[datetime.datetime, _EmptyEmbed] = ...,
     ) -> None: ...
     @classmethod

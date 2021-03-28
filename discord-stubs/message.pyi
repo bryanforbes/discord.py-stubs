@@ -24,7 +24,7 @@ from .utils import cached_slot_property
 
 _MR = TypeVar('_MR', bound=MessageReference)
 
-class Attachment:
+class Attachment(Hashable):
     id: int
     size: int
     height: Optional[int]
