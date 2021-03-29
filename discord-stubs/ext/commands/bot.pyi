@@ -49,6 +49,7 @@ class BotBase(GroupMixin[_CT]):
     description: str
     owner_id: Optional[int]
     owner_ids: Optional[Collection[int]]
+    strip_after_prefix: bool
     help_command: Optional[HelpCommand[_CT]]
     def __init__(
         self,
@@ -99,6 +100,7 @@ class Bot(BotBase[_CT], discord.Client):
         description: Optional[str] = ...,
         *,
         case_insensitive: bool = ...,
+        strip_after_prefix: bool = ...,
         owner_id: int,
         max_messages: Optional[int] = ...,
         loop: Optional[asyncio.AbstractEventLoop] = ...,
@@ -129,6 +131,7 @@ class Bot(BotBase[_CT], discord.Client):
         description: Optional[str] = ...,
         *,
         case_insensitive: bool = ...,
+        strip_after_prefix: bool = ...,
         owner_ids: Collection[int],
         max_messages: Optional[int] = ...,
         loop: Optional[asyncio.AbstractEventLoop] = ...,
@@ -159,6 +162,7 @@ class Bot(BotBase[_CT], discord.Client):
         description: Optional[str] = ...,
         *,
         case_insensitive: bool = ...,
+        strip_after_prefix: bool = ...,
         max_messages: Optional[int] = ...,
         loop: Optional[asyncio.AbstractEventLoop] = ...,
         connector: aiohttp.BaseConnector = ...,
@@ -193,6 +197,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         shard_ids: Union[List[int], Tuple[int]],
         shard_count: int,
         case_insensitive: bool = ...,
+        strip_after_prefix: bool = ...,
         max_messages: Optional[int] = ...,
         loop: Optional[asyncio.AbstractEventLoop] = ...,
         connector: aiohttp.BaseConnector = ...,
@@ -223,6 +228,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         shard_ids: Union[List[int], Tuple[int]],
         shard_count: int,
         case_insensitive: bool = ...,
+        strip_after_prefix: bool = ...,
         max_messages: Optional[int] = ...,
         loop: Optional[asyncio.AbstractEventLoop] = ...,
         connector: aiohttp.BaseConnector = ...,
@@ -252,6 +258,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         shard_ids: Union[List[int], Tuple[int]],
         shard_count: int,
         case_insensitive: bool = ...,
+        strip_after_prefix: bool = ...,
         max_messages: Optional[int] = ...,
         loop: Optional[asyncio.AbstractEventLoop] = ...,
         connector: aiohttp.BaseConnector = ...,
@@ -282,6 +289,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         shard_ids: None = ...,
         shard_count: Optional[int] = ...,
         case_insensitive: bool = ...,
+        strip_after_prefix: bool = ...,
         max_messages: Optional[int] = ...,
         loop: Optional[asyncio.AbstractEventLoop] = ...,
         connector: aiohttp.BaseConnector = ...,
@@ -312,6 +320,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         shard_ids: None = ...,
         shard_count: Optional[int] = ...,
         case_insensitive: bool = ...,
+        strip_after_prefix: bool = ...,
         max_messages: Optional[int] = ...,
         loop: Optional[asyncio.AbstractEventLoop] = ...,
         connector: aiohttp.BaseConnector = ...,
@@ -341,6 +350,7 @@ class AutoShardedBot(BotBase[_CT], discord.AutoShardedClient):
         shard_ids: None = ...,
         shard_count: Optional[int] = ...,
         case_insensitive: bool = ...,
+        strip_after_prefix: bool = ...,
         max_messages: Optional[int] = ...,
         loop: Optional[asyncio.AbstractEventLoop] = ...,
         connector: aiohttp.BaseConnector = ...,

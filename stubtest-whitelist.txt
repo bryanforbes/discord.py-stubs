@@ -96,6 +96,7 @@ discord.ext.commands.BadBoolArgument.__init__
 discord.ext.commands.BadColourArgument.__init__
 discord.ext.commands.BadInviteArgument.__init__
 discord.ext.commands.BucketType.get_key
+discord.ext.commands.BucketType.__call__
 discord.ext.commands.ChannelNotFound.__init__
 discord.ext.commands.ChannelNotReadable.__init__
 discord.ext.commands.CheckAnyFailure.__init__
@@ -117,6 +118,7 @@ discord.ext.commands.bot.BotBase.dispatch
 discord.ext.commands.bot.BotBase.get_context
 discord.ext.commands.cog.Cog.__new__
 discord.ext.commands.cooldowns.BucketType.get_key
+discord.ext.commands.cooldowns.BucketType.__call__
 discord.ext.commands.core.Command.__new__
 discord.ext.commands.core.Group.__init__
 discord.ext.commands.core.GroupMixin.__init__

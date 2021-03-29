@@ -75,6 +75,7 @@ class clean_content(Converter):
         fix_channel_mentions: bool = ...,
         use_nicknames: bool = ...,
         escape_markdown: bool = ...,
+        remove_markdown: bool = ...,
     ) -> None: ...
     async def convert(self, ctx: Context, argument: str) -> str: ...
 
