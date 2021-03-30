@@ -117,6 +117,46 @@ class GuildChannel:
     async def clone(
         self: _GC, *, name: Optional[str] = ..., reason: Optional[str] = ...
     ) -> _GC: ...
+    @overload
+    async def move(
+        self,
+        *,
+        beginning: bool,
+        offset: int = ...,
+        category: Optional[Snowflake] = ...,
+        sync_permissions: bool = ...,
+        reason: bool = ...,
+    ) -> None: ...
+    @overload
+    async def move(
+        self,
+        *,
+        end: bool,
+        offset: int = ...,
+        category: Optional[Snowflake] = ...,
+        sync_permissions: bool = ...,
+        reason: bool = ...,
+    ) -> None: ...
+    @overload
+    async def move(
+        self,
+        *,
+        before: Snowflake,
+        offset: int = ...,
+        category: Optional[Snowflake] = ...,
+        sync_permissions: bool = ...,
+        reason: bool = ...,
+    ) -> None: ...
+    @overload
+    async def move(
+        self,
+        *,
+        after: Snowflake,
+        offset: int = ...,
+        category: Optional[Snowflake] = ...,
+        sync_permissions: bool = ...,
+        reason: bool = ...,
+    ) -> None: ...
     async def create_invite(
         self,
         *,

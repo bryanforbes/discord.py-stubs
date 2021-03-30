@@ -59,17 +59,26 @@ class _BaseMessageReferenceDict(TypedDict):
 class _MessageReferenceDict(_BaseMessageReferenceDict, total=False):
     message_id: int
     guild_id: int
+    fail_if_not_exists: bool
 
 class MessageReference:
     message_id: Optional[int]
     channel_id: int
     guild_id: Optional[int]
+    fail_if_not_exists: bool
     resolved: Optional[Union[Message, DeletedReferencedMessage]]
     def __init__(
-        self, *, message_id: int, channel_id: int, guild_id: Optional[int]
+        self,
+        *,
+        message_id: int,
+        channel_id: int,
+        guild_id: Optional[int] = ...,
+        fail_if_not_exists: bool = ...,
     ) -> None: ...
     @classmethod
-    def from_message(cls: Type[_MR], message: Message) -> _MR: ...
+    def from_message(
+        cls: Type[_MR], message: Message, *, fail_if_not_exists: bool = ...
+    ) -> _MR: ...
     @property
     def cached_message(self) -> Optional[Message]: ...
     @property
@@ -121,7 +130,7 @@ class _MessageShared:
         allowed_mentions: Optional[AllowedMentions] = ...,
         mention_author: Optional[bool] = ...,
     ) -> Message: ...
-    def to_reference(self) -> MessageReference: ...
+    def to_reference(self, *, fail_if_not_exists: bool = ...) -> MessageReference: ...
     def to_message_reference_dict(self) -> _MessageReferenceDict: ...
 
 class Message(Hashable, _MessageShared):

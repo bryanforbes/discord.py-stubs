@@ -1,5 +1,5 @@
 import datetime
-from typing import Callable, Dict, Iterable, List, Optional, Union
+from typing import Callable, Dict, Iterable, List, Optional, Union, overload
 
 import discord.abc
 
@@ -104,6 +104,46 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
         position: int = ...,
         nsfw: bool = ...,
         overwrites: Dict[Union[Role, Member], PermissionOverwrite] = ...,
+    ) -> None: ...
+    @overload
+    async def move(
+        self,
+        *,
+        beginning: bool,
+        offset: int = ...,
+        category: Optional[discord.abc.Snowflake] = ...,
+        sync_permissions: bool = ...,
+        reason: bool = ...,
+    ) -> None: ...
+    @overload
+    async def move(
+        self,
+        *,
+        end: bool,
+        offset: int = ...,
+        category: Optional[discord.abc.Snowflake] = ...,
+        sync_permissions: bool = ...,
+        reason: bool = ...,
+    ) -> None: ...
+    @overload
+    async def move(
+        self,
+        *,
+        before: discord.abc.Snowflake,
+        offset: int = ...,
+        category: Optional[discord.abc.Snowflake] = ...,
+        sync_permissions: bool = ...,
+        reason: bool = ...,
+    ) -> None: ...
+    @overload
+    async def move(
+        self,
+        *,
+        after: discord.abc.Snowflake,
+        offset: int = ...,
+        category: Optional[discord.abc.Snowflake] = ...,
+        sync_permissions: bool = ...,
+        reason: bool = ...,
     ) -> None: ...
     @property
     def channels(self) -> List[Union[TextChannel, VoiceChannel, StoreChannel]]: ...
