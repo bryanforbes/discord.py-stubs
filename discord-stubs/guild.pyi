@@ -248,7 +248,7 @@ class Guild(Hashable):
     async def fetch_channels(
         self,
     ) -> List[Union[TextChannel, VoiceChannel, StoreChannel, CategoryChannel]]: ...
-    async def fetch_members(
+    def fetch_members(
         self,
         *,
         limit: Optional[int] = ...,
