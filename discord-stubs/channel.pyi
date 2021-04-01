@@ -68,7 +68,7 @@ class TextChannel(discord.abc.Messageable, discord.abc.GuildChannel, Hashable):
     ) -> _AsyncWebhook: ...
     def get_partial_message(self, message_id: int) -> PartialMessage: ...
 
-class VoiceChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
+class VocalGuildChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
     bitrate: int
     user_limit: int
     rtc_region: Optional[VoiceRegion]
@@ -79,6 +79,8 @@ class VoiceChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
     @property
     def voice_states(self) -> Dict[int, VoiceState]: ...
     def permissions_for(self, member: Member) -> Permissions: ...
+
+class VoiceChannel(VocalGuildChannel):
     async def edit(
         self,
         *,
@@ -91,6 +93,22 @@ class VoiceChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
         category: Optional[CategoryChannel] = ...,
         overwrites: _OverwritesDict = ...,
         rtc_region: Optional[VoiceRegion] = ...,
+    ) -> None: ...
+
+class StageChannel(VocalGuildChannel):
+    topic: str
+    @property
+    def requests_to_speak(self) -> List[Member]: ...
+    async def edit(
+        self,
+        *,
+        reason: Optional[str] = ...,
+        name: str = ...,
+        topic: str = ...,
+        position: int = ...,
+        sync_permissions: bool = ...,
+        category: Optional[CategoryChannel] = ...,
+        overwrites: _OverwritesDict = ...,
     ) -> None: ...
 
 class CategoryChannel(discord.abc.GuildChannel, Hashable):
@@ -153,6 +171,8 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
     def text_channels(self) -> List[TextChannel]: ...
     @property
     def voice_channels(self) -> List[VoiceChannel]: ...
+    @property
+    def stage_channels(self) -> List[StageChannel]: ...
     async def create_text_channel(
         self,
         name: str,
@@ -175,6 +195,15 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
         rtc_region: Optional[VoiceRegion] = ...,
         reason: Optional[str] = ...,
     ) -> VoiceChannel: ...
+    async def create_stage_channel(
+        self,
+        name: str,
+        *,
+        overwrites: Optional[Dict[Union[Role, Member], PermissionOverwrite]] = ...,
+        topic: str = ...,
+        position: int = ...,
+        reason: Optional[str] = ...,
+    ) -> StageChannel: ...
 
 class StoreChannel(discord.abc.GuildChannel, Hashable):
     nsfw: bool

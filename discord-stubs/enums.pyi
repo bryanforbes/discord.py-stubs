@@ -14,6 +14,7 @@ class ChannelType(Enum):
     category: int
     news: int
     store: int
+    stage_voice: int
 
 class MessageType(Enum):
     default: int
