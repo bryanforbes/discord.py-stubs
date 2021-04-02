@@ -16,7 +16,13 @@ from .abc import Snowflake
 from .asset import _VALID_ANIMATED_ICON_FORMATS as _VALID_ANIMATED_ICON_FORMATS
 from .asset import _VALID_STATIC_ICON_FORMATS as _VALID_STATIC_ICON_FORMATS
 from .asset import Asset
-from .channel import CategoryChannel, StageChannel, StoreChannel, TextChannel, VoiceChannel
+from .channel import (
+    CategoryChannel,
+    StageChannel,
+    StoreChannel,
+    TextChannel,
+    VoiceChannel,
+)
 from .colour import Colour
 from .emoji import Emoji
 from .enums import (
@@ -260,7 +266,9 @@ class Guild(Hashable):
     ) -> None: ...
     async def fetch_channels(
         self,
-    ) -> List[Union[TextChannel, VoiceChannel, StageChannel, StoreChannel, CategoryChannel]]: ...
+    ) -> List[
+        Union[TextChannel, VoiceChannel, StageChannel, StoreChannel, CategoryChannel]
+    ]: ...
     def fetch_members(
         self,
         *,
