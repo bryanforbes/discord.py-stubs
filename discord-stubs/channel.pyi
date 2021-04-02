@@ -4,7 +4,7 @@ from typing import Callable, Dict, Iterable, List, Optional, Union, overload
 import discord.abc
 
 from .asset import _VALID_STATIC_ICON_FORMATS, Asset
-from .enums import ChannelType
+from .enums import ChannelType, VoiceRegion
 from .member import Member, VoiceState
 from .message import Message, PartialMessage
 from .mixins import Hashable
@@ -71,6 +71,7 @@ class TextChannel(discord.abc.Messageable, discord.abc.GuildChannel, Hashable):
 class VoiceChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
     bitrate: int
     user_limit: int
+    rtc_region: Optional[VoiceRegion]
     @property
     def type(self) -> ChannelType: ...
     @property
@@ -89,6 +90,7 @@ class VoiceChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
         sync_permissions: bool = ...,
         category: Optional[CategoryChannel] = ...,
         overwrites: _OverwritesDict = ...,
+        rtc_region: Optional[VoiceRegion] = ...,
     ) -> None: ...
 
 class CategoryChannel(discord.abc.GuildChannel, Hashable):
@@ -170,6 +172,7 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
         bitrate: int = ...,
         position: int = ...,
         user_limit: int = ...,
+        rtc_region: Optional[VoiceRegion] = ...,
         reason: Optional[str] = ...,
     ) -> VoiceChannel: ...
 

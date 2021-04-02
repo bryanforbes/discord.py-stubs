@@ -735,6 +735,7 @@ class HTTPClient:
         position: Optional[int] = ...,
         permission_overwrites: Optional[List[_OverwriteDict]] = ...,
         rate_limit_per_user: Optional[int] = ...,
+        rtc_region: Optional[int] = ...,
     ) -> Coroutine[Any, Any, _ChannelDict]: ...
     def delete_channel(
         self, channel_id: int, *, reason: Optional[str] = ...

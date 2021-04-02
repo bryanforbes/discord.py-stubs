@@ -202,6 +202,7 @@ class Guild(Hashable):
         bitrate: int = ...,
         position: int = ...,
         user_limit: int = ...,
+        rtc_region: Optional[VoiceRegion] = ...,
         reason: Optional[str] = ...,
     ) -> VoiceChannel: ...
     async def create_category(
