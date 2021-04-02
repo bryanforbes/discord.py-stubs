@@ -18,6 +18,7 @@ from .channel import GroupChannel as GroupChannel  # noqa: F401
 from .channel import StoreChannel as StoreChannel  # noqa: F401
 from .channel import TextChannel as TextChannel  # noqa: F401
 from .channel import VoiceChannel as VoiceChannel  # noqa: F401
+from .channel import StageChannel as StageChannel # noqa: F401
 from .client import Client as Client  # noqa: F401
 from .colour import Color as Color  # noqa: F401
 from .colour import Colour as Colour  # noqa: F401
