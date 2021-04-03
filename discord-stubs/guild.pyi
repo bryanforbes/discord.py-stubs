@@ -217,9 +217,9 @@ class Guild(Hashable):
         self,
         name: str,
         *,
+        topic: str = ...,
         overwrites: Optional[Dict[Union[Role, Member], PermissionOverwrite]] = ...,
         category: Optional[CategoryChannel] = ...,
-        topic: str = ...,
         position: int = ...,
         reason: Optional[str] = ...,
     ) -> StageChannel: ...
