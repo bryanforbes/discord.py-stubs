@@ -21,7 +21,7 @@ class VoiceState:
     self_stream: bool
     self_video: bool
     suppress: bool
-    requested_to_speak_at: datetime.datetime
+    requested_to_speak_at: Optional[datetime.datetime]
     afk: bool
     channel: Optional[Union[GroupChannel, VoiceChannel, StageChannel]]
     session_id: str
