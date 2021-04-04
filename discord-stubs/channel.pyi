@@ -98,7 +98,7 @@ class VoiceChannel(VocalGuildChannel):
 class StageChannel(VocalGuildChannel):
     topic: str
     @property
-    def requests_to_speak(self) -> List[Member]: ...
+    def requesting_to_speak(self) -> List[Member]: ...
     async def edit(
         self,
         *,
