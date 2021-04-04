@@ -109,6 +109,7 @@ class StageChannel(VocalGuildChannel):
         sync_permissions: bool = ...,
         category: Optional[CategoryChannel] = ...,
         overwrites: _OverwritesDict = ...,
+        rtc_region: Optional[VoiceRegion] = ...,
     ) -> None: ...
 
 class CategoryChannel(discord.abc.GuildChannel, Hashable):
