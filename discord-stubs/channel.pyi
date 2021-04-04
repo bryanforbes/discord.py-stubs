@@ -203,6 +203,7 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
         overwrites: Optional[Dict[Union[Role, Member], PermissionOverwrite]] = ...,
         topic: str = ...,
         position: int = ...,
+        rtc_region: Optional[VoiceRegion] = ...,
         reason: Optional[str] = ...,
     ) -> StageChannel: ...
 
