@@ -457,10 +457,13 @@ class _CurrentUserGuildDict(TypedDict):
     permissions: int
 
 @type_check_only
-class _VoiceStateDict(TypedDict):
-    suppress: bool
+class _BaseVoiceStateDict(TypedDict):
     request_to_speak_timestamp: Optional[str]
     channel_id: int
+
+@type_check_only
+class _VoiceStateDict(_BaseVoiceStateDict, total=False):
+    suppress: bool
 
 @type_check_only
 class _WidgetChannelDict(TypedDict):
