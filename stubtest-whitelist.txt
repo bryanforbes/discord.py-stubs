@@ -62,6 +62,7 @@ discord.Team.__init__
 discord.TeamMember.__init__
 discord.Template.__init__
 discord.TextChannel.__init__
+discord.VocalGuildChannel.__init__
 discord.VoiceChannel.__init__
 discord.VoiceState.__init__
 discord.Webhook.__init__
@@ -79,6 +80,7 @@ discord.channel.GroupChannel.__init__
 discord.channel.GroupChannel.edit
 discord.channel.StoreChannel.__init__
 discord.channel.TextChannel.__init__
+discord.channel.VocalGuildChannel.__init__
 discord.channel.VoiceChannel.__init__
 discord.channel._channel_factory
 discord.client.Client.dispatch

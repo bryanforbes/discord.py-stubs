@@ -73,14 +73,14 @@ class VocalGuildChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hasha
     user_limit: int
     rtc_region: Optional[VoiceRegion]
     @property
-    def type(self) -> ChannelType: ...
-    @property
     def members(self) -> List[Member]: ...
     @property
     def voice_states(self) -> Dict[int, VoiceState]: ...
     def permissions_for(self, member: Member) -> Permissions: ...
 
 class VoiceChannel(VocalGuildChannel):
+    @property
+    def type(self) -> ChannelType: ...
     async def edit(
         self,
         *,
@@ -99,6 +99,8 @@ class StageChannel(VocalGuildChannel):
     topic: str
     @property
     def requesting_to_speak(self) -> List[Member]: ...
+    @property
+    def type(self) -> ChannelType: ...
     async def edit(
         self,
         *,

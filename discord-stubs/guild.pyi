@@ -221,7 +221,6 @@ class Guild(Hashable):
         overwrites: Optional[Dict[Union[Role, Member], PermissionOverwrite]] = ...,
         category: Optional[CategoryChannel] = ...,
         position: int = ...,
-        rtc_region: Optional[VoiceRegion] = ...,
         reason: Optional[str] = ...,
     ) -> StageChannel: ...
     async def create_category(

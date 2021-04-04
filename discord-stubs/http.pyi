@@ -727,7 +727,7 @@ class HTTPClient:
         self, guild_id: int, payload: _VoiceStateDict
     ) -> Coroutine[Any, Any, None]: ...
     def edit_voice_state(
-        self, guild_id: int, payload: _VoiceStateDict
+        self, guild_id: int, user_id: int, payload: _VoiceStateDict
     ) -> Coroutine[Any, Any, None]: ...
     def edit_channel(
         self, channel_id: int, *, reason: Optional[str] = ..., **options: Any

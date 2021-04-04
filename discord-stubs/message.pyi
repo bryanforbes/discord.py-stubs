@@ -32,6 +32,7 @@ class Attachment(Hashable):
     filename: str
     url: str
     proxy_url: str
+    content_type: Optional[str]
     def is_spoiler(self) -> bool: ...
     async def save(
         self,

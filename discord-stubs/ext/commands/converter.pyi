@@ -42,6 +42,9 @@ class StageChannelConverter(IDConverter):
 class CategoryChannelConverter(IDConverter):
     async def convert(self, ctx: Context, argument: str) -> discord.CategoryChannel: ...
 
+class StoreChannelConverter(IDConverter):
+    async def convert(self, ctx: Context, argument: str) -> discord.StoreChannel: ...
+
 class ColourConverter(Converter):
     RGB_REGEX: ClassVar[Pattern[str]]
     def parse_hex_number(self, argument: str) -> discord.Colour: ...
