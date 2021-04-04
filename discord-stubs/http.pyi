@@ -457,6 +457,15 @@ class _CurrentUserGuildDict(TypedDict):
     permissions: int
 
 @type_check_only
+class _BaseVoiceStateDict(TypedDict):
+    request_to_speak_timestamp: Optional[str]
+    channel_id: int
+
+@type_check_only
+class _VoiceStateDict(_BaseVoiceStateDict, total=False):
+    suppress: bool
+
+@type_check_only
 class _WidgetChannelDict(TypedDict):
     id: int
     name: str
@@ -713,6 +722,12 @@ class HTTPClient:
     ) -> Coroutine[Any, Any, None]: ...
     def edit_member(
         self, guild_id: int, user_id: int, *, reason: Optional[str] = ..., **fields: Any
+    ) -> Coroutine[Any, Any, None]: ...
+    def edit_my_voice_state(
+        self, guild_id: int, payload: _VoiceStateDict
+    ) -> Coroutine[Any, Any, None]: ...
+    def edit_voice_state(
+        self, guild_id: int, payload: _VoiceStateDict
     ) -> Coroutine[Any, Any, None]: ...
     def edit_channel(
         self, channel_id: int, *, reason: Optional[str] = ..., **options: Any

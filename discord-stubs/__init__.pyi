@@ -15,6 +15,7 @@ from .calls import GroupCall as GroupCall  # noqa: F401
 from .channel import CategoryChannel as CategoryChannel  # noqa: F401
 from .channel import DMChannel as DMChannel  # noqa: F401
 from .channel import GroupChannel as GroupChannel  # noqa: F401
+from .channel import StageChannel as StageChannel  # noqa: F401
 from .channel import StoreChannel as StoreChannel  # noqa: F401
 from .channel import TextChannel as TextChannel  # noqa: F401
 from .channel import VoiceChannel as VoiceChannel  # noqa: F401

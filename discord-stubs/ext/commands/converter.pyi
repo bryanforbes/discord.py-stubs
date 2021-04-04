@@ -36,6 +36,9 @@ class TextChannelConverter(IDConverter):
 class VoiceChannelConverter(IDConverter):
     async def convert(self, ctx: Context, argument: str) -> discord.VoiceChannel: ...
 
+class StageChannelConverter(IDConverter):
+    async def convert(self, ctx: Context, argument: str) -> discord.StageChannel: ...
+
 class CategoryChannelConverter(IDConverter):
     async def convert(self, ctx: Context, argument: str) -> discord.CategoryChannel: ...
 

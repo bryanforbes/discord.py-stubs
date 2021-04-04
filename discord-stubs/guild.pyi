@@ -16,7 +16,13 @@ from .abc import Snowflake
 from .asset import _VALID_ANIMATED_ICON_FORMATS as _VALID_ANIMATED_ICON_FORMATS
 from .asset import _VALID_STATIC_ICON_FORMATS as _VALID_STATIC_ICON_FORMATS
 from .asset import Asset
-from .channel import CategoryChannel, StoreChannel, TextChannel, VoiceChannel
+from .channel import (
+    CategoryChannel,
+    StageChannel,
+    StoreChannel,
+    TextChannel,
+    VoiceChannel,
+)
 from .colour import Colour
 from .emoji import Emoji
 from .enums import (
@@ -104,6 +110,8 @@ class Guild(Hashable):
     def voice_client(self) -> Optional[VoiceProtocol]: ...
     @property
     def text_channels(self) -> List[TextChannel]: ...
+    @property
+    def stage_channels(self) -> List[StageChannel]: ...
     @property
     def categories(self) -> List[CategoryChannel]: ...
     def by_category(
@@ -205,6 +213,17 @@ class Guild(Hashable):
         rtc_region: Optional[VoiceRegion] = ...,
         reason: Optional[str] = ...,
     ) -> VoiceChannel: ...
+    async def create_stage_channel(
+        self,
+        name: str,
+        *,
+        topic: str = ...,
+        overwrites: Optional[Dict[Union[Role, Member], PermissionOverwrite]] = ...,
+        category: Optional[CategoryChannel] = ...,
+        position: int = ...,
+        rtc_region: Optional[VoiceRegion] = ...,
+        reason: Optional[str] = ...,
+    ) -> StageChannel: ...
     async def create_category(
         self,
         name: str,
@@ -248,7 +267,9 @@ class Guild(Hashable):
     ) -> None: ...
     async def fetch_channels(
         self,
-    ) -> List[Union[TextChannel, VoiceChannel, StoreChannel, CategoryChannel]]: ...
+    ) -> List[
+        Union[TextChannel, VoiceChannel, StageChannel, StoreChannel, CategoryChannel]
+    ]: ...
     def fetch_members(
         self,
         *,

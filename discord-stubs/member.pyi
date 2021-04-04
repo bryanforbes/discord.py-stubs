@@ -4,7 +4,7 @@ from typing import Any, List, Optional, Tuple, Union
 import discord.abc
 
 from .activity import BaseActivity, Spotify
-from .channel import GroupChannel, VoiceChannel
+from .channel import GroupChannel, StageChannel, VoiceChannel
 from .colour import Colour
 from .enums import Status
 from .guild import Guild
@@ -20,8 +20,10 @@ class VoiceState:
     self_deaf: bool
     self_stream: bool
     self_video: bool
+    suppress: bool
+    requested_to_speak_at: Optional[datetime.datetime]
     afk: bool
-    channel: Optional[Union[GroupChannel, VoiceChannel]]
+    channel: Optional[Union[GroupChannel, VoiceChannel, StageChannel]]
     session_id: str
 
 class Member(_CommonUser, _User, discord.abc.Messageable, discord.abc.User):
@@ -77,9 +79,11 @@ class Member(_CommonUser, _User, discord.abc.Messageable, discord.abc.User):
         nick: Optional[str] = ...,
         mute: bool = ...,
         deafen: bool = ...,
+        suppress: bool = ...,
         roles: List[Role] = ...,
         voice_channel: Optional[VoiceChannel] = ...,
     ) -> None: ...
+    async def request_to_speak(self) -> None: ...
     async def move_to(
         self, channel: Optional[VoiceChannel], *, reason: Optional[str] = ...
     ) -> None: ...
