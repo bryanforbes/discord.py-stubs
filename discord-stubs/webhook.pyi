@@ -8,6 +8,7 @@ from typing import (
     Generic,
     Iterable,
     Optional,
+    Type,
     TypeVar,
     Union,
     overload,
@@ -122,6 +123,11 @@ class WebhookMessage(Message, Generic[_N]):
     ) -> _N: ...
 
 class Webhook(Hashable, Generic[_N, _M]):
+    _TWebhook = TypeVar('_TWebhook', bound='Webhook[_N, _M]')
+    _TAsyncWebhook = TypeVar(
+        '_TAsyncWebhook', bound='Webhook[_AsyncNone, _AsyncOptionalMessage]'
+    )
+
     id: int
     type: WebhookType
     token: Optional[str]
@@ -134,17 +140,17 @@ class Webhook(Hashable, Generic[_N, _M]):
     def url(self) -> str: ...
     @classmethod
     def partial(
-        cls, id: int, token: str, *, adapter: WebhookAdapter[_N, _M]
-    ) -> Webhook[_N, _M]: ...
+        cls: Type[_TWebhook], id: int, token: str, *, adapter: WebhookAdapter[_N, _M]
+    ) -> _TWebhook: ...
     @classmethod
     def from_url(
-        cls, url: str, *, adapter: WebhookAdapter[_N, _M]
-    ) -> Webhook[_N, _M]: ...
+        cls: Type[_TWebhook], url: str, *, adapter: WebhookAdapter[_N, _M]
+    ) -> _TWebhook: ...
     # NOTE: While this method is public, it should never be invoked by users.
     @classmethod
     def from_state(
-        cls, data: _WebhookDict, state: ConnectionState
-    ) -> _AsyncWebhook: ...
+        cls: Type[_TAsyncWebhook], data: _WebhookDict, state: ConnectionState
+    ) -> _TAsyncWebhook: ...
     @property
     def guild(self) -> Optional[Guild]: ...
     @property
