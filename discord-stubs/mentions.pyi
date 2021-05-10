@@ -11,7 +11,6 @@ class _FakeBool:
 
 default: _FakeBool
 
-# TODO: remove this comment when a new version of black comes out
 @type_check_only
 class _AllowedMentionsDictBase(TypedDict):
     parse: List[str]

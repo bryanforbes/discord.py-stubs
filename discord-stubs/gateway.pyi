@@ -23,7 +23,6 @@ from .client import Client
 from .enums import SpeakingState
 from .voice_client import VoiceClient
 
-# TODO: remove this comment when a new version of black comes out
 @type_check_only
 class _KeepAlivePayloadDict(TypedDict):
     op: int

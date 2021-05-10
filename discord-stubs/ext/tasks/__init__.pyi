@@ -20,7 +20,6 @@ _L = TypeVar('_L', bound=Loop[Any])
 _CoroType = Callable[..., Union[Awaitable[_T], Generator[Any, None, _T]]]
 _C = TypeVar('_C', bound=Callable[..., Awaitable[Any]])
 
-# TODO: remove this comment when a new version of black comes out
 @type_check_only
 class _LoopCallback(Protocol):
     async def __call__(self) -> Any: ...

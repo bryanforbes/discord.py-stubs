@@ -31,7 +31,6 @@ _MaybeAwaitable = Union[Awaitable[_T], _T]
 _CT = TypeVar('_CT', bound=Context)
 _HC = TypeVar('_HC', bound=HelpCommand[Any])
 
-# TODO: remove this comment when a new version of black comes out
 @type_check_only
 class _CommandAttrs(TypedDict, total=False):
     name: str

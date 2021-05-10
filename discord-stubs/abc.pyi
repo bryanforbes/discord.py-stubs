@@ -20,6 +20,7 @@ from .voice_client import VoiceClient, VoiceProtocol
 
 _GC = TypeVar('_GC', bound=GuildChannel)
 _VP = TypeVar('_VP', bound=VoiceProtocol)
+
 @runtime_checkable
 class Snowflake(Protocol):
     id: int

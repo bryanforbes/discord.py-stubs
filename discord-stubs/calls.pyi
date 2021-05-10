@@ -8,7 +8,6 @@ from .member import VoiceState
 from .message import Message
 from .user import ClientUser, User
 
-# TODO: remove this comment when a new version of black comes out
 @type_check_only
 class _BaseVoiceStateDict(TypedDict):
     channel_id: Optional[int]

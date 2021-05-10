@@ -18,7 +18,6 @@ class EmbedProxy:
 
 _E = TypeVar('_E', bound=Embed)
 
-# TODO: remove this comment when a new version of black comes out
 @type_check_only
 class _EmbedFooterData(Protocol):
     text: Union[str, _EmptyEmbed]
