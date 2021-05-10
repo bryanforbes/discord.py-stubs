@@ -1,5 +1,5 @@
-from typing import BinaryIO, Optional, Union
 from io import BytesIO, StringIO
+from typing import BinaryIO, Optional, Union
 
 class File:
     fp: Union[str, BinaryIO, BytesIO, StringIO]
