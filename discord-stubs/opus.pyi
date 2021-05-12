@@ -27,7 +27,6 @@ CTL_SET_SIGNAL: Final[int]
 CTL_SET_GAIN: Final[int]
 CTL_LAST_PACKET_DURATION: Final[int]
 
-# TODO: remove this comment when a new version of black comes out
 @type_check_only
 class _BandCtl(TypedDict):
     narrow: int

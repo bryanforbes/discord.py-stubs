@@ -6,7 +6,6 @@ from .member import Member
 from .message import Message
 from .partial_emoji import PartialEmoji
 
-# TODO: remove this comment when a new version of black comes out
 @type_check_only
 class _BaseBulkMessageDeleteDict(TypedDict, total=False):
     guild_id: str

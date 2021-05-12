@@ -20,7 +20,6 @@ from .file import File
 from .mentions import _AllowedMentionsDict
 from .message import _MessageReferenceDict
 
-# TODO: remove this comment when a new version of black comes out
 @type_check_only
 class _ApplicationDict(TypedDict):
     id: int

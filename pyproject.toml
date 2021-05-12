@@ -16,18 +16,18 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6.1"
+python = "^3.6.2"
 "discord.py" = "~1.7.0"
 mypy = ">=0.800"
 typing-extensions = "^3.7.4"
 
 [tool.poetry.dev-dependencies]
-black = "^20.8b1"
-flake8 = "^3.9.0"
+black = "^21.5b1"
+flake8 = "^3.9.2"
 flake8-pyi = "^20.10.0"
 isort = "^5.8.0"
-pre-commit = "^2.11.1"
-pytest = "^6.2.2"
+pre-commit = "^2.12.1"
+pytest = "^6.2.4"
 pytest-mypy-plugins = "^1.6.1"
 
 [tool.black]
