@@ -64,7 +64,7 @@
     There are a number of utility commands being showcased here.'''
     bot = commands.Bot(command_prefix='?', description=description)
 
-    reveal_type(bot)  # N: Revealed type is 'discord.ext.commands.bot.Bot[discord.ext.commands.context.Context]'
+    reveal_type(bot)  # N: Revealed type is "discord.ext.commands.bot.Bot[discord.ext.commands.context.Context]"
 
 
     @bot.event

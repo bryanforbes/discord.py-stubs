@@ -158,5 +158,5 @@
 
 
     client = MyClient()
-    reveal_type(client.bg_task)  # N: Revealed type is 'asyncio.tasks.Task[None]'
+    reveal_type(client.bg_task)  # N: Revealed type is "asyncio.tasks.Task[None]"
     client.run('token')

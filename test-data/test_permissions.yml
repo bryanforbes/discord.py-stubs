@@ -2,7 +2,7 @@
   main: |
     import discord
 
-    reveal_type(discord.Permissions.manage_permissions.alias)  # N: Revealed type is 'builtins.str'
+    reveal_type(discord.Permissions.manage_permissions.alias)  # N: Revealed type is "builtins.str"
 
     p = discord.Permissions(
         create_instant_invite=True,
@@ -41,10 +41,10 @@
         manage_emojis=True,
     )
 
-    reveal_type(p.create_instant_invite)  # N: Revealed type is 'builtins.bool'
-    reveal_type(p.view_channel)  # N: Revealed type is 'builtins.bool'
-    reveal_type(p.use_external_emojis)  # N: Revealed type is 'builtins.bool'
-    reveal_type(p.manage_permissions)  # N: Revealed type is 'builtins.bool'
+    reveal_type(p.create_instant_invite)  # N: Revealed type is "builtins.bool"
+    reveal_type(p.view_channel)  # N: Revealed type is "builtins.bool"
+    reveal_type(p.use_external_emojis)  # N: Revealed type is "builtins.bool"
+    reveal_type(p.manage_permissions)  # N: Revealed type is "builtins.bool"
 
 - case: permissions_update
   main: |
@@ -129,10 +129,10 @@
         manage_emojis=None,
     )
 
-    reveal_type(p.create_instant_invite)  # N: Revealed type is 'Union[builtins.bool, None]'
-    reveal_type(p.view_channel)  # N: Revealed type is 'Union[builtins.bool, None]'
-    reveal_type(p.use_external_emojis)  # N: Revealed type is 'Union[builtins.bool, None]'
-    reveal_type(p.manage_permissions)  # N: Revealed type is 'Union[builtins.bool, None]'
+    reveal_type(p.create_instant_invite)  # N: Revealed type is "Union[builtins.bool, None]"
+    reveal_type(p.view_channel)  # N: Revealed type is "Union[builtins.bool, None]"
+    reveal_type(p.use_external_emojis)  # N: Revealed type is "Union[builtins.bool, None]"
+    reveal_type(p.manage_permissions)  # N: Revealed type is "Union[builtins.bool, None]"
 
 - case: permission_overwrite_update
   main: |

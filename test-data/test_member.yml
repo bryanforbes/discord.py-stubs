@@ -3,15 +3,15 @@
     import discord
 
     def main(member: discord.Member) -> None:
-        reveal_type(member.name)  # N: Revealed type is 'builtins.str'
-        reveal_type(member.id)  # N: Revealed type is 'builtins.int'
-        reveal_type(member.discriminator)  # N: Revealed type is 'builtins.str'
-        reveal_type(member.avatar)  # N: Revealed type is 'Union[builtins.str, None]'
-        reveal_type(member.bot)  # N: Revealed type is 'builtins.bool'
-        reveal_type(member.system)  # N: Revealed type is 'builtins.bool'
-        reveal_type(member.mentioned_in)  # N: Revealed type is 'def (message: discord.message.Message) -> builtins.bool'
-        reveal_type(member.dm_channel)  # N: Revealed type is 'Union[discord.channel.DMChannel, None]'
-        reveal_type(member.create_dm)  # N: Revealed type is 'def () -> typing.Coroutine[Any, Any, discord.channel.DMChannel]'
+        reveal_type(member.name)  # N: Revealed type is "builtins.str"
+        reveal_type(member.id)  # N: Revealed type is "builtins.int"
+        reveal_type(member.discriminator)  # N: Revealed type is "builtins.str"
+        reveal_type(member.avatar)  # N: Revealed type is "Union[builtins.str, None]"
+        reveal_type(member.bot)  # N: Revealed type is "builtins.bool"
+        reveal_type(member.system)  # N: Revealed type is "builtins.bool"
+        reveal_type(member.mentioned_in)  # N: Revealed type is "def (message: discord.message.Message) -> builtins.bool"
+        reveal_type(member.dm_channel)  # N: Revealed type is "Union[discord.channel.DMChannel, None]"
+        reveal_type(member.create_dm)  # N: Revealed type is "def () -> typing.Coroutine[Any, Any, discord.channel.DMChannel]"
 
         user: discord.User = member  # E: Incompatible types in assignment (expression has type "Member", variable has type "User")
         base_user: discord.user.BaseUser = member  # E: Incompatible types in assignment (expression has type "Member", variable has type "BaseUser")
