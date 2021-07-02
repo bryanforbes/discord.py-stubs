@@ -126,7 +126,7 @@ class GuildChannel:
         offset: int = ...,
         category: Optional[Snowflake] = ...,
         sync_permissions: bool = ...,
-        reason: bool = ...,
+        reason: Optional[str] = ...,
     ) -> None: ...
     @overload
     async def move(
@@ -136,7 +136,7 @@ class GuildChannel:
         offset: int = ...,
         category: Optional[Snowflake] = ...,
         sync_permissions: bool = ...,
-        reason: bool = ...,
+        reason: Optional[str] = ...,
     ) -> None: ...
     @overload
     async def move(
@@ -146,7 +146,7 @@ class GuildChannel:
         offset: int = ...,
         category: Optional[Snowflake] = ...,
         sync_permissions: bool = ...,
-        reason: bool = ...,
+        reason: Optional[str] = ...,
     ) -> None: ...
     @overload
     async def move(
@@ -156,7 +156,7 @@ class GuildChannel:
         offset: int = ...,
         category: Optional[Snowflake] = ...,
         sync_permissions: bool = ...,
-        reason: bool = ...,
+        reason: Optional[str] = ...,
     ) -> None: ...
     async def create_invite(
         self,
