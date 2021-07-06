@@ -9,11 +9,11 @@ from typing import (
     List,
     Mapping,
     Optional,
+    Set,
     Tuple,
     Type,
     TypeVar,
     Union,
-    ValuesView,
     overload,
     type_check_only,
 )
@@ -143,7 +143,7 @@ class GroupMixin(Generic[_CT]):
     all_commands: Dict[str, Command[_CT]]
     case_insensitive: bool
     @property
-    def commands(self) -> ValuesView[Command[_CT]]: ...
+    def commands(self) -> Set[Command[_CT]]: ...
     def recursively_remove_all_commands(self) -> None: ...
     def add_command(self, command: Command[_CT]) -> None: ...
     def remove_command(self, name: str) -> Optional[Command[_CT]]: ...
