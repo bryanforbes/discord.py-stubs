@@ -137,7 +137,7 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
         offset: int = ...,
         category: Optional[discord.abc.Snowflake] = ...,
         sync_permissions: bool = ...,
-        reason: bool = ...,
+        reason: Optional[str] = ...,
     ) -> None: ...
     @overload
     async def move(
@@ -147,7 +147,7 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
         offset: int = ...,
         category: Optional[discord.abc.Snowflake] = ...,
         sync_permissions: bool = ...,
-        reason: bool = ...,
+        reason: Optional[str] = ...,
     ) -> None: ...
     @overload
     async def move(
@@ -157,7 +157,7 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
         offset: int = ...,
         category: Optional[discord.abc.Snowflake] = ...,
         sync_permissions: bool = ...,
-        reason: bool = ...,
+        reason: Optional[str] = ...,
     ) -> None: ...
     @overload
     async def move(
@@ -167,7 +167,7 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
         offset: int = ...,
         category: Optional[discord.abc.Snowflake] = ...,
         sync_permissions: bool = ...,
-        reason: bool = ...,
+        reason: Optional[str] = ...,
     ) -> None: ...
     @property
     def channels(self) -> List[Union[TextChannel, VoiceChannel, StoreChannel]]: ...
