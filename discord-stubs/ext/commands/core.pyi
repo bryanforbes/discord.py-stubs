@@ -14,7 +14,6 @@ from typing import (
     Type,
     TypeVar,
     Union,
-    ValuesView,
     overload,
     type_check_only,
 )
