@@ -32,6 +32,7 @@ from .enums import Status, VoiceRegion
 from .flags import Intents, MemberCacheFlags
 from .gateway import DiscordWebSocket
 from .guild import Guild
+from .http import HTTPClient
 from .invite import Invite
 from .iterators import GuildIterator
 from .member import Member, VoiceState
@@ -66,6 +67,7 @@ class Client:
     loop: asyncio.AbstractEventLoop
     shard_id: Optional[int]
     shard_count: Optional[int]
+    http: HTTPClient
     activity: Optional[BaseActivity]
     allowed_mentions: Optional[AllowedMentions]
     def __init__(
