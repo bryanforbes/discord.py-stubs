@@ -1,4 +1,5 @@
-from typing import Any, ClassVar, List, Optional, Pattern
+from re import Match
+from typing import Any, AnyStr, ClassVar, List, Optional, Pattern
 
 import discord
 
@@ -8,7 +9,8 @@ from .context import Context
 class Converter:
     async def convert(self, ctx: Context, argument: str) -> Any: ...
 
-class IDConverter(Converter): ...
+class IDConverter(Converter):
+    def _get_id_match(self, argument: Any) -> Match[AnyStr]: ...
 
 class MemberConverter(IDConverter):
     async def query_member_named(
