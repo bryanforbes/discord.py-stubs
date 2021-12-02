@@ -1,45 +1,13 @@
 name: Unit tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
-
-    steps:
-    - uses: actions/checkout@v2.3.4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2.2.2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Poetry
-      uses: snok/install-poetry@v1.1.8
-      with:
-        version: 1.1.4
-        virtualenvs-create: true
-        virtualenvs-in-project: true
-        virtualenvs-path: .venv
-    - name: Cache Poetry virtualenv
-      uses: actions/cache@v2.1.6
-      env:
-        cache-name: venv-cache
-      with:
-        path: .venv
-        key: venv-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
-        restore-keys: |
-          venv-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
-          venv-${{ matrix.python-version }}-
-    - name: Install dependencies
-      run: |
-        poetry install -v
-    - name: Pre-commit checks
-      run: |
-        poetry run pre-commit run --all-files
-    - name: Test with pytest
-      run: |
-        poetry run py.test
+    uses: bryanforbes/python-workflows/.github/workflows/reusable-unit-tests.yml@master
+    with:
+      python_versions: '["3.6", "3.7", "3.8", "3.9"]'
