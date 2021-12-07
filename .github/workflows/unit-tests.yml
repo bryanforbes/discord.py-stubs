@@ -11,3 +11,4 @@ jobs:
     uses: bryanforbes/python-workflows/.github/workflows/reusable-unit-tests.yml@master
     with:
       python_versions: '["3.6", "3.7", "3.8", "3.9"]'
+      post_install: './fix-site-packages.sh'
