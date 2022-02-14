@@ -19,7 +19,7 @@ classifiers = [
 python = "^3.6.2"
 "discord.py" = "~1.7.0"
 mypy = ">=0.800"
-typing-extensions = "^3.7.4"
+typing-extensions = ">=3.7.4,<5.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "^21.7b0"
