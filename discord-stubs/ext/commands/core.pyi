@@ -46,7 +46,6 @@ class _InvokeCallback(Protocol[_T_contra]):
 
 class Command(_BaseCommand, Generic[_CT]):
     name: str
-    callback: _CoroType
     help: Optional[str]
     brief: Optional[str]
     usage: Optional[str]
@@ -109,6 +108,10 @@ class Command(_BaseCommand, Generic[_CT]):
         self, ctx: _CT, converter: Any, argument: str, param: Parameter
     ) -> Any: ...
     async def transform(self, ctx: _CT, param: Parameter) -> Any: ...
+    @property
+    def callback(self) -> _CoroType: ...
+    @callback.setter
+    def callback(self, function: _CoroType): ...
     @property
     def clean_params(self) -> Mapping[str, Parameter]: ...
     @property
