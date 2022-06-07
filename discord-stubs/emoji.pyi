@@ -1,10 +1,11 @@
 import datetime
-from typing import Any, Iterator, List, Optional, Tuple
+from typing import Any, Dict, Iterator, List, Optional, Tuple
 
 from .asset import _VALID_ANIMATED_ICON_FORMATS, _VALID_STATIC_ICON_FORMATS, Asset
 from .guild import Guild
 from .partial_emoji import _EmojiTag
 from .role import Role
+from .state import ConnectionState
 from .user import User
 
 class Emoji(_EmojiTag):
@@ -16,6 +17,13 @@ class Emoji(_EmojiTag):
     guild_id: int
     available: bool
     user: Optional[User]
+    def __init__(
+        self,
+        *,
+        guild: Guild,
+        state: ConnectionState,
+        data: Dict[str, Any],
+    ) -> None: ...
     def __iter__(self) -> Iterator[Tuple[str, Any]]: ...
     def __eq__(self, other: Any) -> bool: ...
     def __ne__(self, other: Any) -> bool: ...

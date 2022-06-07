@@ -3,6 +3,7 @@ from typing import Any, Optional, Type, TypeVar
 
 from .asset import _VALID_ANIMATED_ICON_FORMATS, _VALID_STATIC_ICON_FORMATS, Asset
 from .http import _PartialEmojiDict
+from .state import ConnectionState
 
 class _EmojiTag: ...
 
@@ -18,7 +19,7 @@ class PartialEmoji(_EmojiTag):
     @classmethod
     def with_state(
         cls: Type[_PE],
-        state: Any,
+        state: ConnectionState,
         *,
         name: Optional[str],
         animated: bool = ...,
