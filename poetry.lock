@@ -149,8 +149,8 @@ python-versions = ">=3.5.3"
 aiohttp = ">=3.6.0,<3.8.0"
 
 [package.extras]
-docs = ["sphinx (==3.0.3)", "sphinxcontrib-trio (==1.1.2)", "sphinxcontrib-websupport"]
 voice = ["PyNaCl (>=1.3.0,<1.5)"]
+docs = ["sphinxcontrib-websupport", "sphinxcontrib-trio (==1.1.2)", "sphinx (==3.0.3)"]
 
 [[package]]
 name = "distlib"
@@ -170,17 +170,17 @@ python-versions = "*"
 
 [[package]]
 name = "flake8"
-version = "3.9.2"
+version = "5.0.3"
 description = "the modular source code checker: pep8 pyflakes and co"
 category = "dev"
 optional = false
-python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
+python-versions = ">=3.6.1"
 
 [package.dependencies]
-importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
-mccabe = ">=0.6.0,<0.7.0"
-pycodestyle = ">=2.7.0,<2.8.0"
-pyflakes = ">=2.3.0,<2.4.0"
+importlib-metadata = {version = "<4.3", markers = "python_version < \"3.8\""}
+mccabe = ">=0.7.0,<0.8.0"
+pycodestyle = ">=2.9.0,<2.10.0"
+pyflakes = ">=2.5.0,<2.6.0"
 
 [[package]]
 name = "flake8-pyi"
@@ -237,8 +237,8 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 zipp = ">=0.5"
 
 [package.extras]
-docs = ["sphinx", "rst.linker"]
-testing = ["packaging", "pep517", "importlib-resources (>=1.3)"]
+testing = ["importlib-resources (>=1.3)", "pep517", "packaging"]
+docs = ["rst.linker", "sphinx"]
 
 [[package]]
 name = "importlib-resources"
@@ -278,11 +278,11 @@ plugins = ["setuptools"]
 
 [[package]]
 name = "mccabe"
-version = "0.6.1"
+version = "0.7.0"
 description = "McCabe checker, plugin for flake8"
 category = "dev"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6"
 
 [[package]]
 name = "multidict"
@@ -388,19 +388,19 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
 name = "pycodestyle"
-version = "2.7.0"
+version = "2.9.0"
 description = "Python style guide checker"
 category = "dev"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+python-versions = ">=3.6"
 
 [[package]]
 name = "pyflakes"
-version = "2.3.0"
+version = "2.5.0"
 description = "passive checker of Python programs"
 category = "dev"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+python-versions = ">=3.6"
 
 [[package]]
 name = "pyparsing"
@@ -553,7 +553,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.2"
-content-hash = "a7ab7164ef5611deddea5dfa2d483dfd45afb533db3ab822af55b22cfcbc0cbe"
+content-hash = "c464d57340abb560c87b705f154291389cad57d1c3173733a086e8908cc87ab7"
 
 [metadata.files]
 aiohttp = [
@@ -632,8 +632,8 @@ filelock = [
     {file = "filelock-3.0.12.tar.gz", hash = "sha256:18d82244ee114f543149c66a6e0c14e9c4f8a1044b5cdaadd0f82159d6a6ff59"},
 ]
 flake8 = [
-    {file = "flake8-3.9.2-py2.py3-none-any.whl", hash = "sha256:bf8fd333346d844f616e8d47905ef3a3384edae6b4e9beb0c5101e25e3110907"},
-    {file = "flake8-3.9.2.tar.gz", hash = "sha256:07528381786f2a6237b061f6e96610a4167b226cb926e2aa2b6b1d78057c576b"},
+    {file = "flake8-5.0.3-py2.py3-none-any.whl", hash = "sha256:93aa565ae2f0316b95bb57a354f2b2d55ee8508e1fe1cb13b77b9c195b4a2537"},
+    {file = "flake8-5.0.3.tar.gz", hash = "sha256:b27fd7faa8d90aaae763664a489012292990388e5d3604f383b290caefbbc922"},
 ]
 flake8-pyi = [
     {file = "flake8-pyi-20.10.0.tar.gz", hash = "sha256:cee3b20a5123152c697870e7e800b60e3c95eb89e272a2b63d8cf55cafb0472c"},
@@ -667,8 +667,8 @@ isort = [
     {file = "isort-5.9.3.tar.gz", hash = "sha256:9c2ea1e62d871267b78307fe511c0838ba0da28698c5732d54e2790bf3ba9899"},
 ]
 mccabe = [
-    {file = "mccabe-0.6.1-py2.py3-none-any.whl", hash = "sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42"},
-    {file = "mccabe-0.6.1.tar.gz", hash = "sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"},
+    {file = "mccabe-0.7.0-py2.py3-none-any.whl", hash = "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"},
+    {file = "mccabe-0.7.0.tar.gz", hash = "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325"},
 ]
 multidict = [
     {file = "multidict-4.7.6-cp35-cp35m-macosx_10_14_x86_64.whl", hash = "sha256:275ca32383bc5d1894b6975bb4ca6a7ff16ab76fa622967625baeebcf8079000"},
@@ -743,12 +743,12 @@ py = [
     {file = "py-1.9.0.tar.gz", hash = "sha256:9ca6883ce56b4e8da7e79ac18787889fa5206c79dcc67fb065376cd2fe03f342"},
 ]
 pycodestyle = [
-    {file = "pycodestyle-2.7.0-py2.py3-none-any.whl", hash = "sha256:514f76d918fcc0b55c6680472f0a37970994e07bbb80725808c17089be302068"},
-    {file = "pycodestyle-2.7.0.tar.gz", hash = "sha256:c389c1d06bf7904078ca03399a4816f974a1d590090fecea0c63ec26ebaf1cef"},
+    {file = "pycodestyle-2.9.0-py2.py3-none-any.whl", hash = "sha256:289cdc0969d589d90752582bef6dff57c5fbc6949ee8b013ad6d6449a8ae9437"},
+    {file = "pycodestyle-2.9.0.tar.gz", hash = "sha256:beaba44501f89d785be791c9462553f06958a221d166c64e1f107320f839acc2"},
 ]
 pyflakes = [
-    {file = "pyflakes-2.3.0-py2.py3-none-any.whl", hash = "sha256:910208209dcea632721cb58363d0f72913d9e8cf64dc6f8ae2e02a3609aba40d"},
-    {file = "pyflakes-2.3.0.tar.gz", hash = "sha256:e59fd8e750e588358f1b8885e5a4751203a0516e0ee6d34811089ac294c8806f"},
+    {file = "pyflakes-2.5.0-py2.py3-none-any.whl", hash = "sha256:4579f67d887f804e67edb544428f264b7b24f435b263c4614f384135cea553d2"},
+    {file = "pyflakes-2.5.0.tar.gz", hash = "sha256:491feb020dca48ccc562a8c0cbe8df07ee13078df59813b83959cbdada312ea3"},
 ]
 pyparsing = [
     {file = "pyparsing-2.4.7-py2.py3-none-any.whl", hash = "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"},
